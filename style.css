@@ -1,0 +1,17 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f4f4f9;
+  margin: 0;
+}
+
+#app {
+  text-align: center;
+}
+
+#quizContainer {
+  margin-top: 20px;
+}
