@@ -115,22 +115,22 @@ function displayQuestion(filteredQuestions) {
 // Check Answer and Provide Feedback
 function checkAnswer(selectedOption, button, filteredQuestions) {
   const questionData = filteredQuestions[currentQuestionIndex];
-  const isCorrect = selectedOption === questionData.correctAnswer;
+  const isCorrect = selectedOption.trim() === questionData.correctAnswer.trim();
 
-  // Reset feedback
-  document.getElementById('feedback').textContent = '';
+  // Clear any previously selected button styles
+  document.querySelectorAll('.option').forEach(btn => btn.classList.remove('selected'));
+  
+  // Highlight the selected button
+  button.classList.add('selected');
 
-  // Display feedback immediately after selection
-  document.getElementById('feedback').textContent = isCorrect 
+  // Provide feedback based on correctness
+  const feedback = document.getElementById('feedback');
+  feedback.textContent = isCorrect 
     ? `Correct! ${questionData.explanation}` 
     : `Incorrect. ${questionData.explanation}`;
 
   // Update button color based on correctness
-  if (isCorrect) {
-    button.style.backgroundColor = '#4CAF50'; // Green for correct
-  } else {
-    button.style.backgroundColor = '#f44336'; // Red for incorrect
-  }
+  button.style.backgroundColor = isCorrect ? '#4CAF50' : '#f44336';
 
   // Update stats for correct/incorrect answers
   if (isCorrect) userStats.correct++;
