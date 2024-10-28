@@ -69,8 +69,13 @@ function showHomeScreen() {
   const screen = document.getElementById('screen');
   screen.innerHTML = `
     <h2>Select a Domain</h2>
-    ${Object.keys(domainStructure).map(domain => `<button onclick="showSubdomains('${domain}')">${domain}</button>`).join('')}
+    ${Object.keys(domainStructure).map(domain => `<button class="domain-btn">${domain}</button>`).join('')}
   `;
+
+  // Attach event listeners to domain buttons
+  document.querySelectorAll('.domain-btn').forEach((btn, index) => {
+    btn.addEventListener('click', () => showSubdomains(Object.keys(domainStructure)[index]));
+  });
 }
 
 // Show Subdomain Screen
@@ -81,8 +86,13 @@ function showSubdomains(domain) {
 
   screen.innerHTML = `
     <h2>${domain}</h2>
-    ${subdomains.map(sub => `<button onclick="showQuestions('${sub}')">${sub}</button>`).join('')}
+    ${subdomains.map(sub => `<button class="subdomain-btn">${sub}</button>`).join('')}
   `;
+
+  // Attach event listeners to subdomain buttons
+  document.querySelectorAll('.subdomain-btn').forEach((btn, index) => {
+    btn.addEventListener('click', () => showQuestions(subdomains[index]));
+  });
 }
 
 // Show Questions for Selected Subdomain
@@ -121,6 +131,7 @@ function displayQuestion(filteredQuestions) {
   questionData.options.forEach(option => {
     const button = document.createElement('button');
     button.textContent = option;
+    button.classList.add('option-btn');
     button.addEventListener('click', () => checkAnswer(option, filteredQuestions));
     optionsDiv.appendChild(button);
   });
