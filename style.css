@@ -1,7 +1,7 @@
 /* General Styling */
 body {
-  font-family: 'Comic Sans MS', 'Arial', sans-serif;
-  background-color: #1b1f3b; /* Dark background for superhero feel */
+  font-family: 'Comic Sans MS', sans-serif;
+  background-color: #1b1f3b;
   color: #ffffff;
   display: flex;
   justify-content: center;
@@ -12,18 +12,46 @@ body {
 
 #app {
   width: 100%;
-  max-width: 600px;
+  max-width: 400px;
   text-align: center;
-  margin: 0 auto;
 }
 
 /* Screen Content Styling */
 #screen {
-  margin-bottom: 80px; /* Space for footer */
   padding: 20px;
-  background: #283d5a; /* Panel background */
+  background: #283d5a;
   border-radius: 15px;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+  margin-bottom: 80px;
+}
+
+h2 {
+  font-size: 1.5em;
+  color: #ffc107;
+  margin-bottom: 15px;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.domain-button {
+  background-color: #e74c3c;
+  color: #ffffff;
+  border: none;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.domain-button:hover {
+  background-color: #c0392b;
+  transform: scale(1.05);
 }
 
 /* Footer Navigation */
@@ -40,7 +68,7 @@ body {
 
 #footer button {
   background: none;
-  color: #ffc107; /* Gold color for icons */
+  color: #ffc107;
   font-size: 1.4em;
   border: none;
   cursor: pointer;
@@ -48,52 +76,5 @@ body {
 }
 
 #footer button:hover {
-  color: #f39c12; /* Brighter gold for hover */
-}
-
-/* Button Styling for Options */
-button.option {
-  background-color: #e74c3c; /* Vibrant red */
-  color: #ffffff;
-  border: none;
-  padding: 15px;
-  margin: 10px 0;
-  border-radius: 8px;
-  font-size: 1em;
-  width: 100%;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-}
-
-button.option:hover {
-  background-color: #c0392b;
-}
-
-button.option.selected {
-  background-color: #f1c40f; /* Yellow for selected */
-  color: #333333;
-}
-
-#feedback {
-  font-size: 1.1em;
-  margin-top: 15px;
-  color: #00ff99; /* Bright feedback color */
-}
-
-/* Home Button and Practice Button */
-#homeButton, #practiceButton, #reviewButton, #flashcardButton, #randomQuizButton {
-  background: #3b5998;
-  color: #ffffff;
-  border: none;
-  padding: 10px 15px;
-  margin: 10px 5px;
-  border-radius: 8px;
-  font-size: 1em;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-#homeButton:hover, #practiceButton:hover, #reviewButton:hover, #flashcardButton:hover, #randomQuizButton:hover {
-  background-color: #536dfe;
+  color: #f39c12;
 }
