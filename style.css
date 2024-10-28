@@ -1,6 +1,6 @@
 /* General Styling */
 body {
-  font-family: 'Comic Sans MS', sans-serif;
+  font-family: 'Comic Sans MS', 'Arial', sans-serif;
   background-color: #1b1f3b;
   color: #ffffff;
   display: flex;
@@ -20,61 +20,85 @@ body {
 #screen {
   padding: 20px;
   background: #283d5a;
-  border-radius: 15px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.5);
   margin-bottom: 80px;
 }
 
 h2 {
-  font-size: 1.5em;
+  font-size: 2em;
   color: #ffc107;
+  text-shadow: 2px 2px #000;
   margin-bottom: 15px;
 }
 
+/* Button Group Styling */
 .button-group {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
 }
 
-.domain-button {
-  background-color: #e74c3c;
+.super-button {
+  background-color: #ff4c4c;
   color: #ffffff;
   border: none;
-  padding: 15px;
-  border-radius: 10px;
-  font-size: 1em;
+  padding: 15px 20px;
+  border-radius: 12px;
+  font-size: 1.2em;
   font-weight: bold;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+  text-shadow: 1px 1px #000;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.domain-button:hover {
-  background-color: #c0392b;
-  transform: scale(1.05);
-}
-
-/* Footer Navigation */
-#footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+  transition: transform 0.3s ease, background-color 0.3s ease;
   display: flex;
-  justify-content: space-around;
-  background-color: #242a40;
-  padding: 10px 0;
-  box-shadow: 0px -4px 15px rgba(0, 0, 0, 0.4);
+  align-items: center;
+  justify-content: center;
 }
 
-#footer button {
-  background: none;
-  color: #ffc107;
-  font-size: 1.4em;
-  border: none;
-  cursor: pointer;
-  transition: color 0.3s ease;
+.super-button:hover {
+  background-color: #ff6c6c;
+  transform: scale(1.1);
 }
 
-#footer button:hover {
-  color: #f39c12;
+.super-button:active {
+  transform: scale(0.9);
+}
+
+/* Additional Styling for Icons and Colors */
+#homeButton {
+  background-color: #3498db;
+}
+
+#practiceButton {
+  background-color: #e67e22;
+}
+
+#reviewButton {
+  background-color: #2ecc71;
+}
+
+#flashcardButton {
+  background-color: #f1c40f;
+}
+
+#randomQuizButton {
+  background-color: #9b59b6;
+}
+
+.super-button span {
+  margin-left: 10px;
+}
+
+/* Comic Effect Background */
+body:before {
+  content: "";
+  background: url('path-to-comic-background-pattern.png'); /* Replace with a comic-style pattern */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.2;
+  z-index: -1;
 }
