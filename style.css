@@ -16,78 +16,24 @@ body {
   color: #ffffff;
 }
 
-/* Progress Bar */
-#progressContainer {
-  width: 100%;
-  background-color: #1e3a5f;
-  height: 4px;
-  margin-bottom: 20px;
+#screen {
+  margin-bottom: 60px; /* Space for footer */
 }
 
-#progressBar {
-  width: 10%;
-  height: 100%;
-  background-color: #ffc107;
-}
-
-/* Question and Options */
-#quizContainer {
-  background-color: #1e3a5f;
-  padding: 20px;
-  border-radius: 10px;
-}
-
-#questionNumber {
-  font-weight: bold;
-  margin: 0;
-  font-size: 0.9em;
-}
-
-#questionText {
-  font-size: 1.2em;
-  margin: 20px 0;
-}
-
-#options {
-  display: flex;
-  flex-direction: column;
-}
-
-#options button {
-  background-color: #3b5998;
-  color: #ffffff;
-  border: none;
-  padding: 15px;
-  margin: 10px 0;
-  border-radius: 8px;
-  font-size: 1em;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-#options button:hover {
-  background-color: #536dfe;
-}
-
-/* Feedback */
-#feedback {
-  font-size: 0.9em;
-  color: #ffc107;
-  margin-top: 15px;
-}
-
-/* Footer Navigation */
 #footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 20px;
+  justify-content: space-around;
+  background-color: #1e3a5f;
+  padding: 10px 0;
 }
 
 #footer button {
   background: none;
   color: #ffffff;
-  font-size: 1.5em;
+  font-size: 1.2em;
   border: none;
   cursor: pointer;
   transition: color 0.3s ease;
