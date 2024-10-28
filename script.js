@@ -56,6 +56,7 @@ async function loadQuestions() {
       subdomain: cols[8].trim()
     });
   });
+  console.log("Questions Loaded:", questions); // Debugging
 }
 
 // Show Home Screen (Domain Selection)
@@ -91,6 +92,8 @@ function showQuestions(subdomain) {
     return q.domain === currentDomain && q.subdomain === currentSubdomain;
   });
 
+  console.log("Filtered Questions for Domain:", currentDomain, "Subdomain:", currentSubdomain, "->", filteredQuestions); // Debugging
+
   if (filteredQuestions.length > 0) {
     displayQuestion(filteredQuestions);
   } else {
@@ -106,31 +109,33 @@ function displayQuestion(filteredQuestions) {
   screen.innerHTML = `
     <p>Question ${currentQuestionIndex + 1} / ${filteredQuestions.length}</p>
     <p>${questionData.question}</p>
-    ${questionData.options.map((option) => `<button class="option" onclick="checkAnswer('${option}', this, filteredQuestions)">${option}</button>`).join('')}
+    ${questionData.options.map((option, index) => 
+      `<button class="option" onclick="checkAnswer('${option}', this, ${index}, filteredQuestions)">${option}</button>`).join('')}
     <p id="feedback"></p>
   `;
   updateProgressBar(filteredQuestions.length);
 }
 
 // Check Answer and Provide Feedback
-function checkAnswer(selectedOption, button, filteredQuestions) {
+function checkAnswer(selectedOption, button, index, filteredQuestions) {
   const questionData = filteredQuestions[currentQuestionIndex];
   const isCorrect = selectedOption.trim() === questionData.correctAnswer.trim();
 
-  // Clear any previously selected button styles
-  document.querySelectorAll('.option').forEach(btn => btn.classList.remove('selected'));
+  // Reset feedback and option button styles
+  document.querySelectorAll('.option').forEach(btn => {
+    btn.classList.remove('selected');
+    btn.style.backgroundColor = ''; // Reset color
+  });
   
-  // Highlight the selected button
+  // Highlight the selected button and provide feedback
   button.classList.add('selected');
+  button.style.backgroundColor = isCorrect ? '#4CAF50' : '#f44336'; // Green for correct, Red for incorrect
 
-  // Provide feedback based on correctness
+  // Display feedback based on correctness
   const feedback = document.getElementById('feedback');
   feedback.textContent = isCorrect 
     ? `Correct! ${questionData.explanation}` 
     : `Incorrect. ${questionData.explanation}`;
-
-  // Update button color based on correctness
-  button.style.backgroundColor = isCorrect ? '#4CAF50' : '#f44336';
 
   // Update stats for correct/incorrect answers
   if (isCorrect) userStats.correct++;
@@ -138,7 +143,6 @@ function checkAnswer(selectedOption, button, filteredQuestions) {
 
   // Move to next question automatically after a delay
   setTimeout(() => {
-    button.style.backgroundColor = ''; // Reset color for the next question
     currentQuestionIndex++;
     if (currentQuestionIndex < filteredQuestions.length) {
       displayQuestion(filteredQuestions);
