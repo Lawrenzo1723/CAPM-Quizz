@@ -15,6 +15,27 @@ document.addEventListener('DOMContentLoaded', () => {
   practiceButton.id = "practiceButton";
   practiceButton.addEventListener('click', showMissedQuestions);
   document.body.appendChild(practiceButton);
+
+  // Create Review Mode Button
+  const reviewButton = document.createElement('button');
+  reviewButton.textContent = "Review All Questions";
+  reviewButton.id = "reviewButton";
+  reviewButton.addEventListener('click', showReviewMode);
+  document.body.appendChild(reviewButton);
+
+  // Create Flashcard Mode Button
+  const flashcardButton = document.createElement('button');
+  flashcardButton.textContent = "Flashcard Mode";
+  flashcardButton.id = "flashcardButton";
+  flashcardButton.addEventListener('click', showFlashcardMode);
+  document.body.appendChild(flashcardButton);
+
+  // Create Random Quiz Mode Button
+  const randomQuizButton = document.createElement('button');
+  randomQuizButton.textContent = "Random Quiz";
+  randomQuizButton.id = "randomQuizButton";
+  randomQuizButton.addEventListener('click', showRandomQuiz);
+  document.body.appendChild(randomQuizButton);
 });
 
 let questions = [];
@@ -23,6 +44,7 @@ let currentSubdomain = "";
 let currentQuestionIndex = 0;
 let userStats = { correct: 0, incorrect: 0 };
 let missedQuestions = []; // Array to store incorrectly answered questions
+let sessionAnswers = []; // Array to store answers from current session for review mode
 
 const domainStructure = {
   "Project Management Fundamentals and Core Concepts": [
@@ -114,6 +136,7 @@ function showSubdomains(domain) {
 function showQuestions(subdomain) {
   currentSubdomain = subdomain;
   currentQuestionIndex = 0;
+  sessionAnswers = []; // Clear session answers for new session
   const filteredQuestions = questions.filter(q => q.domain === currentDomain && q.subdomain === currentSubdomain);
 
   console.log("Filtered Questions:", filteredQuestions);
@@ -176,12 +199,8 @@ function checkAnswer(selectedOption, filteredQuestions) {
   console.log("Is Correct:", isCorrect);
 
   // Update stats and add to missedQuestions if incorrect
-  if (isCorrect) {
-    userStats.correct++;
-  } else {
-    userStats.incorrect++;
-    missedQuestions.push(questionData); // Store the missed question
-  }
+  sessionAnswers.push({ ...questionData, userAnswer: selectedOption, isCorrect });
+  if (!isCorrect) missedQuestions.push(questionData);
 }
 
 // Go to the Previous Question
@@ -208,4 +227,92 @@ function showMissedQuestions() {
   } else {
     document.getElementById('screen').innerHTML = `<p>No missed questions to review!</p>`;
   }
+}
+
+// Show Review Mode with All Questions and Explanations
+function showReviewMode() {
+  if (sessionAnswers.length > 0) {
+    currentQuestionIndex = 0;
+    displayReviewQuestion();
+  } else {
+    document.getElementById('screen').innerHTML = `<p>No session data to review!</p>`;
+  }
+}
+
+function displayReviewQuestion() {
+  const screen = document.getElementById('screen');
+  const questionData = sessionAnswers[currentQuestionIndex];
+
+  screen.innerHTML = `
+    <p>Question ${currentQuestionIndex + 1} of ${sessionAnswers.length}</p>
+    <p>${questionData.question}</p>
+    <p>Your Answer: ${questionData.userAnswer} - ${questionData.isCorrect ? "Correct" : "Incorrect"}</p>
+    <p>Explanation: ${questionData.explanation}</p>
+    <div id="navigation">
+      <button id="prevButton">Previous</button>
+      <button id="nextButton">Next</button>
+    </div>
+  `;
+
+  document.getElementById('prevButton').addEventListener('click', () => {
+    if (currentQuestionIndex > 0) {
+      currentQuestionIndex--;
+      displayReviewQuestion();
+    }
+  });
+
+  document.getElementById('nextButton').addEventListener('click', () => {
+    if (currentQuestionIndex < sessionAnswers.length - 1) {
+      currentQuestionIndex++;
+      displayReviewQuestion();
+    }
+  });
+}
+
+// Show Flashcard Mode
+function showFlashcardMode() {
+  currentQuestionIndex = 0;
+  displayFlashcard();
+}
+
+function displayFlashcard() {
+  const screen = document.getElementById('screen');
+  const questionData = questions[currentQuestionIndex];
+
+  screen.innerHTML = `
+    <div id="flashcard" style="padding: 20px; text-align: center;">
+      <p>Question: ${questionData.question}</p>
+      <button id="revealAnswer">Reveal Answer</button>
+      <p id="answer" style="display:none;">Answer: ${questionData.correctAnswer}<br>Explanation: ${questionData.explanation}</p>
+      <div id="navigation">
+        <button id="prevFlashcard">Previous</button>
+        <button id="nextFlashcard">Next</button>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('revealAnswer').addEventListener('click', () => {
+    document.getElementById('answer').style.display = 'block';
+  });
+
+  document.getElementById('prevFlashcard').addEventListener('click', () => {
+    if (currentQuestionIndex > 0) {
+      currentQuestionIndex--;
+      displayFlashcard();
+    }
+  });
+
+  document.getElementById('nextFlashcard').addEventListener('click', () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      currentQuestionIndex++;
+      displayFlashcard();
+    }
+  });
+}
+
+// Show Random Quiz Mode
+function showRandomQuiz() {
+  const shuffledQuestions = [...questions].sort(() => Math.random() - 0.5); // Shuffle questions
+  currentQuestionIndex = 0;
+  displayQuestion(shuffledQuestions);
 }
