@@ -73,10 +73,6 @@ button.option:hover {
   background-color: #536dfe;
 }
 
-button.option.selected {
-  background-color: #2e72d7;
-}
-
 #feedback {
   font-size: 1em;
   margin-top: 15px;
