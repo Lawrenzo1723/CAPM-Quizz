@@ -105,3 +105,8 @@ body {
 #footer button:hover {
   color: #f39c12;
 }
+
+/* Hidden initially for the footer */
+#footer.hidden {
+  display: none;
+}
