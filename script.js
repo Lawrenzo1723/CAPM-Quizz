@@ -105,9 +105,11 @@ function displayQuestion(filteredQuestions) {
   const screen = document.getElementById('screen');
   const questionData = filteredQuestions[currentQuestionIndex];
 
+  // Render question and options
   screen.innerHTML = `
     <p>${questionData.question}</p>
-    ${questionData.options.map((option) => `<button onclick="checkAnswer('${option}', this, filteredQuestions)">${option}</button>`).join('')}
+    ${questionData.options.map((option) => 
+      `<button onclick="checkAnswer('${option}', this, ${JSON.stringify(filteredQuestions)})">${option}</button>`).join('')}
     <p id="feedback"></p>
   `;
 }
