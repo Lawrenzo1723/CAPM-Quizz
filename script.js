@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  loadQuestions(); // Load questions once
+  loadQuestions();
   showHomeScreen();
 });
 
@@ -41,27 +41,31 @@ const domainStructure = {
 
 // Load questions from Google Sheets
 async function loadQuestions() {
-  const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vRyL8ZTnjPNQ0NabBoTUGhQI3m5zIoe7XI3HWzLfxbwcP1gYhsL4s11XGYCYzi2fLPKQ6M4ONri45a7/pub?output=csv');
-  const data = await response.text();
+  try {
+    const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vRyL8ZTnjPNQ0NabBoTUGhQI3m5zIoe7XI3HWzLfxbwcP1gYhsL4s11XGYCYzi2fLPKQ6M4ONri45a7/pub?output=csv');
+    const data = await response.text();
 
-  const rows = data.split('\n');
-  rows.forEach(row => {
-    const cols = row.split(',');
-    questions.push({
-      question: cols[0],
-      options: [cols[1], cols[2], cols[3], cols[4]],
-      correctAnswer: cols[5].trim(),
-      explanation: cols[6],
-      domain: cols[7].trim(),
-      subdomain: cols[8].trim()
+    const rows = data.split('\n');
+    rows.forEach(row => {
+      const cols = row.split(',');
+      questions.push({
+        question: cols[0],
+        options: [cols[1], cols[2], cols[3], cols[4]],
+        correctAnswer: cols[5].trim(),
+        explanation: cols[6],
+        domain: cols[7].trim(),
+        subdomain: cols[8].trim()
+      });
     });
-  });
-  console.log("Questions Loaded:", questions); // Debugging
+    console.log("Questions Loaded:", questions);
+  } catch (error) {
+    console.error("Error loading questions:", error);
+  }
 }
 
 // Show Home Screen (Domain Selection)
 function showHomeScreen() {
-  document.getElementById('progressContainer').style.display = 'none'; // Hide progress bar
+  document.getElementById('progressContainer').style.display = 'none';
   const screen = document.getElementById('screen');
   screen.innerHTML = `
     <h2>Select a Domain</h2>
@@ -85,14 +89,10 @@ function showSubdomains(domain) {
 function showQuestions(subdomain) {
   currentSubdomain = subdomain;
   currentQuestionIndex = 0;
-  document.getElementById('progressContainer').style.display = 'block'; // Show progress bar during questions
+  document.getElementById('progressContainer').style.display = 'block';
 
-  // Filter questions based on exact Domain and Subdomain match
-  const filteredQuestions = questions.filter(q => {
-    return q.domain === currentDomain && q.subdomain === currentSubdomain;
-  });
-
-  console.log("Filtered Questions for Domain:", currentDomain, "Subdomain:", currentSubdomain, "->", filteredQuestions); // Debugging
+  const filteredQuestions = questions.filter(q => q.domain === currentDomain && q.subdomain === currentSubdomain);
+  console.log("Filtered Questions:", filteredQuestions);
 
   if (filteredQuestions.length > 0) {
     displayQuestion(filteredQuestions);
@@ -110,51 +110,51 @@ function displayQuestion(filteredQuestions) {
     <p>Question ${currentQuestionIndex + 1} / ${filteredQuestions.length}</p>
     <p>${questionData.question}</p>
     ${questionData.options.map((option, index) => 
-      `<button class="option" onclick="checkAnswer('${option}', this, ${index}, filteredQuestions)">${option}</button>`).join('')}
+      `<button class="option" onclick="checkAnswer('${option}', this, filteredQuestions)">${option}</button>`).join('')}
     <p id="feedback"></p>
   `;
   updateProgressBar(filteredQuestions.length);
 }
 
 // Check Answer and Provide Feedback
-function checkAnswer(selectedOption, button, index, filteredQuestions) {
+function checkAnswer(selectedOption, button, filteredQuestions) {
   const questionData = filteredQuestions[currentQuestionIndex];
   const isCorrect = selectedOption.trim() === questionData.correctAnswer.trim();
 
-  // Reset feedback and option button styles
+  // Remove "selected" state and reset colors
   document.querySelectorAll('.option').forEach(btn => {
     btn.classList.remove('selected');
-    btn.style.backgroundColor = ''; // Reset color
+    btn.style.backgroundColor = ''; 
   });
   
-  // Highlight the selected button and provide feedback
+  // Highlight selected button with feedback
   button.classList.add('selected');
-  button.style.backgroundColor = isCorrect ? '#4CAF50' : '#f44336'; // Green for correct, Red for incorrect
+  button.style.backgroundColor = isCorrect ? '#4CAF50' : '#f44336';
 
-  // Display feedback based on correctness
+  // Display immediate feedback
   const feedback = document.getElementById('feedback');
   feedback.textContent = isCorrect 
     ? `Correct! ${questionData.explanation}` 
     : `Incorrect. ${questionData.explanation}`;
 
-  // Update stats for correct/incorrect answers
+  // Update stats
   if (isCorrect) userStats.correct++;
   else userStats.incorrect++;
 
-  // Move to next question automatically after a delay
+  // Proceed to the next question after a delay
   setTimeout(() => {
     currentQuestionIndex++;
     if (currentQuestionIndex < filteredQuestions.length) {
       displayQuestion(filteredQuestions);
     } else {
-      showHomeScreen(); // Return to home screen or end of subdomain questions
+      showHomeScreen();
     }
-  }, 2000); // 2-second delay to show feedback
+  }, 2000);
 }
 
 // Show Profile Screen (Stats)
 function showProfile() {
-  document.getElementById('progressContainer').style.display = 'none'; // Hide progress bar in profile
+  document.getElementById('progressContainer').style.display = 'none';
   const screen = document.getElementById('screen');
   screen.innerHTML = `
     <h2>Your Profile</h2>
@@ -167,6 +167,7 @@ function showProfile() {
 function updateProgressBar(totalQuestions) {
   const progressBar = document.getElementById('progressBar');
   const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
+  progress
   progressBar.style.width = `${progress}%`;
 }
 
