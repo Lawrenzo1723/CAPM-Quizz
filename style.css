@@ -8,6 +8,7 @@ body {
   align-items: center;
   min-height: 100vh;
   margin: 0;
+  flex-direction: column;
 }
 
 #app {
@@ -16,89 +17,91 @@ body {
   text-align: center;
 }
 
-/* Screen Content Styling */
-#screen {
+/* Domain Section Styling */
+#domain-section {
   padding: 20px;
-  background: #283d5a;
-  border-radius: 20px;
-  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.5);
-  margin-bottom: 80px;
+  background-color: #283d5a;
+  border-radius: 10px;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
 }
 
-h2 {
-  font-size: 2em;
+#domain-section h2 {
+  font-size: 1.5em;
   color: #ffc107;
-  text-shadow: 2px 2px #000;
   margin-bottom: 15px;
 }
 
-/* Button Group Styling */
-.button-group {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.super-button {
+.domain-button {
   background-color: #ff4c4c;
   color: #ffffff;
   border: none;
-  padding: 15px 20px;
-  border-radius: 12px;
-  font-size: 1.2em;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 10px;
+  font-size: 1em;
   font-weight: bold;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
-  text-shadow: 1px 1px #000;
   cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
-.super-button:hover {
-  background-color: #ff6c6c;
-  transform: scale(1.1);
+.domain-button:hover {
+  background-color: #c0392b;
+  transform: scale(1.05);
 }
 
-.super-button:active {
-  transform: scale(0.9);
+/* Quiz Mode Section Styling */
+#mode-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 20px;
+  background-color: #3c4a6b;
+  border-radius: 10px;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.5);
+  margin-bottom: 80px;
 }
 
-/* Additional Styling for Icons and Colors */
-#homeButton {
+.mode-button {
   background-color: #3498db;
+  color: #ffffff;
+  border: none;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
-#practiceButton {
-  background-color: #e67e22;
+.mode-button:hover {
+  background-color: #2980b9;
+  transform: scale(1.05);
 }
 
-#reviewButton {
-  background-color: #2ecc71;
-}
-
-#flashcardButton {
-  background-color: #f1c40f;
-}
-
-#randomQuizButton {
-  background-color: #9b59b6;
-}
-
-.super-button span {
-  margin-left: 10px;
-}
-
-/* Comic Effect Background */
-body:before {
-  content: "";
-  background: url('path-to-comic-background-pattern.png'); /* Replace with a comic-style pattern */
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+/* Footer Navigation Styling */
+#footer {
+  position: fixed;
   bottom: 0;
-  opacity: 0.2;
-  z-index: -1;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  background-color: #242a40;
+  padding: 10px 0;
+  box-shadow: 0px -4px 15px rgba(0, 0, 0, 0.4);
+}
+
+#footer button {
+  background: none;
+  color: #ffc107;
+  font-size: 1.4em;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+#footer button:hover {
+  color: #f39c12;
 }
