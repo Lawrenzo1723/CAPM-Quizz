@@ -11,13 +11,15 @@ body {
 }
 
 #app {
-  width: 90%;
+  width: 100%;
   max-width: 600px;
   text-align: center;
+  margin: 0 auto;
 }
 
-/* Progress Bar */
+/* Hide progress bar initially */
 #progressContainer {
+  display: none;
   width: 100%;
   height: 5px;
   background-color: #1e3a5f;
@@ -25,20 +27,35 @@ body {
 }
 
 #progressBar {
-  width: 10%; /* This will dynamically update */
   height: 100%;
   background-color: #ffc107; /* Highlight color */
 }
 
-/* Question and Options */
+/* Center screen and add button styling */
 #screen {
   margin-bottom: 60px; /* Space for footer */
 }
 
-h2, p {
+button.domain,
+button.subdomain {
+  background-color: #3b5998;
   color: #ffffff;
+  border: none;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 8px;
+  font-size: 1em;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
+button.domain:hover,
+button.subdomain:hover {
+  background-color: #536dfe;
+}
+
+/* Question options styling */
 button.option {
   background-color: #3b5998;
   color: #ffffff;
