@@ -58,7 +58,7 @@ async function loadQuestions() {
         });
       }
     });
-    console.log("Questions Loaded:", questions);
+    console.log("Questions Loaded:", questions); // Debugging
   } catch (error) {
     console.error("Error loading questions:", error);
   }
@@ -117,7 +117,7 @@ function checkAnswer(selectedOption, button, filteredQuestions) {
   const questionData = filteredQuestions[currentQuestionIndex];
   const isCorrect = selectedOption.trim() === questionData.correctAnswer.trim();
 
-  // Provide feedback and log output for debugging
+  // Display feedback immediately
   const feedback = document.getElementById('feedback');
   feedback.textContent = isCorrect ? `Correct! ${questionData.explanation}` : `Incorrect. ${questionData.explanation}`;
 
@@ -129,10 +129,13 @@ function checkAnswer(selectedOption, button, filteredQuestions) {
   if (isCorrect) userStats.correct++;
   else userStats.incorrect++;
 
-  // Move to the next question or back to home screen
+  // Automatically move to the next question after 2 seconds
   setTimeout(() => {
     currentQuestionIndex++;
-    if (currentQuestionIndex < filteredQuestions.length) displayQuestion(filteredQuestions);
-    else showHomeScreen();
+    if (currentQuestionIndex < filteredQuestions.length) {
+      displayQuestion(filteredQuestions);
+    } else {
+      showHomeScreen();
+    }
   }, 2000);
 }
