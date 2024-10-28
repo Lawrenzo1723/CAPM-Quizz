@@ -111,8 +111,8 @@ function displayQuestion(filteredQuestions) {
     <div id="options"></div>
     <p id="feedback"></p>
     <div id="navigation">
-      <button id="prevButton" onclick="prevQuestion(${JSON.stringify(filteredQuestions)})" ${currentQuestionIndex === 0 ? 'disabled' : ''}>Previous</button>
-      <button id="nextButton" onclick="nextQuestion(${JSON.stringify(filteredQuestions)})" ${currentQuestionIndex === filteredQuestions.length - 1 ? 'disabled' : ''}>Next</button>
+      <button id="prevButton">Previous</button>
+      <button id="nextButton">Next</button>
     </div>
   `;
 
@@ -124,6 +124,16 @@ function displayQuestion(filteredQuestions) {
     button.addEventListener('click', () => checkAnswer(option, filteredQuestions));
     optionsDiv.appendChild(button);
   });
+
+  // Add event listeners for Previous and Next buttons
+  document.getElementById('prevButton').addEventListener('click', () => prevQuestion(filteredQuestions));
+  document.getElementById('nextButton').addEventListener('click', () => nextQuestion(filteredQuestions));
+
+  // Disable Previous button if on the first question
+  document.getElementById('prevButton').disabled = currentQuestionIndex === 0;
+
+  // Disable Next button if on the last question
+  document.getElementById('nextButton').disabled = currentQuestionIndex === filteredQuestions.length - 1;
 }
 
 // Check Answer and Provide Feedback
