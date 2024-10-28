@@ -69,19 +69,26 @@ function displayQuestion() {
   const questionData = questions.filter(q => q.domain === currentDomain && q.subdomain === currentSubdomain)[currentQuestionIndex];
 
   screen.innerHTML = `
+    <p>Question ${currentQuestionIndex + 1} / ${questions.length}</p>
     <p>${questionData.question}</p>
-    ${questionData.options.map((option, index) => `<button onclick="checkAnswer('${option}')">${option}</button>`).join('')}
+    ${questionData.options.map((option) => `<button class="option" onclick="checkAnswer('${option}', this)">${option}</button>`).join('')}
     <p id="feedback"></p>
   `;
+  updateProgressBar();
 }
 
 // Check Answer and Provide Feedback
-function checkAnswer(selectedOption) {
+function checkAnswer(selectedOption, button) {
   const questionData = questions.filter(q => q.domain === currentDomain && q.subdomain === currentSubdomain)[currentQuestionIndex];
   const isCorrect = selectedOption === questionData.correctAnswer;
   
+  // Highlight selected button
+  document.querySelectorAll('.option').forEach(btn => btn.classList.remove('selected'));
+  button.classList.add('selected');
+
+  // Display feedback and explanation
   document.getElementById('feedback').textContent = isCorrect ? `Correct! ${questionData.explanation}` : `Incorrect. ${questionData.explanation}`;
-  
+
   // Update stats
   if (isCorrect) userStats.correct++;
   else userStats.incorrect++;
@@ -95,6 +102,13 @@ function showProfile() {
     <p>Questions Correct: ${userStats.correct}</p>
     <p>Questions Incorrect: ${userStats.incorrect}</p>
   `;
+}
+
+// Update Progress Bar
+function updateProgressBar() {
+  const progressBar = document.getElementById('progressBar');
+  const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+  progressBar.style.width = `${progress}%`;
 }
 
 // Navigation Handlers
