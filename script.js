@@ -50,7 +50,7 @@ async function loadQuestions() {
     questions.push({
       question: cols[0],
       options: [cols[1], cols[2], cols[3], cols[4]],
-      correctAnswer: cols[5],
+      correctAnswer: cols[5].trim(),
       explanation: cols[6],
       domain: cols[7].trim(),
       subdomain: cols[8].trim()
@@ -86,7 +86,7 @@ function showQuestions(subdomain) {
   currentQuestionIndex = 0;
   document.getElementById('progressContainer').style.display = 'block'; // Show progress bar during questions
 
-  // Explicitly filter questions by checking Domain and Subdomain columns
+  // Filter questions based on exact Domain and Subdomain match
   const filteredQuestions = questions.filter(q => {
     return q.domain === currentDomain && q.subdomain === currentSubdomain;
   });
@@ -121,16 +121,28 @@ function checkAnswer(selectedOption, button, filteredQuestions) {
   const questionData = filteredQuestions[currentQuestionIndex];
   const isCorrect = selectedOption === questionData.correctAnswer;
 
-  // Highlight selected button
+  // Highlight selected button and provide feedback
   document.querySelectorAll('.option').forEach(btn => btn.classList.remove('selected'));
   button.classList.add('selected');
 
-  // Display feedback and explanation
-  document.getElementById('feedback').textContent = isCorrect ? `Correct! ${questionData.explanation}` : `Incorrect. ${questionData.explanation}`;
+  // Display feedback immediately after selection
+  document.getElementById('feedback').textContent = isCorrect 
+    ? `Correct! ${questionData.explanation}` 
+    : `Incorrect. ${questionData.explanation}`;
 
-  // Update stats
+  // Update stats for correct/incorrect answers
   if (isCorrect) userStats.correct++;
   else userStats.incorrect++;
+
+  // Move to next question automatically after a delay
+  setTimeout(() => {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < filteredQuestions.length) {
+      displayQuestion(filteredQuestions);
+    } else {
+      showHomeScreen(); // Return to home screen or end of subdomain questions
+    }
+  }, 2000); // 2-second delay to show feedback
 }
 
 // Show Profile Screen (Stats)
