@@ -1,10 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
   loadQuestions();
+  showHomeScreen();
 });
 
 let questions = [];
 let currentQuestionIndex = 0;
+let userStats = { correct: 0, incorrect: 0 };
+let currentDomain = "";
+let currentSubdomain = "";
 
+// Load questions from Google Sheets
 async function loadQuestions() {
   const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vRyL8ZTnjPNQ0NabBoTUGhQI3m5zIoe7XI3HWzLfxbwcP1gYhsL4s11XGYCYzi2fLPKQ6M4ONri45a7/pub?output=csv');
   const data = await response.text();
@@ -16,58 +21,82 @@ async function loadQuestions() {
       question: cols[0],
       options: [cols[1], cols[2], cols[3], cols[4]],
       correctAnswer: cols[5],
-      explanation: cols[6]
+      explanation: cols[6],
+      domain: cols[7],
+      subdomain: cols[8]
     });
   });
-
-  showQuestion();
 }
 
-function showQuestion() {
-  const questionData = questions[currentQuestionIndex];
-  document.getElementById('questionNumber').textContent = `Question ${currentQuestionIndex + 1} / ${questions.length}`;
-  document.getElementById('questionText').textContent = questionData.question;
-
-  const optionsContainer = document.getElementById('options');
-  optionsContainer.innerHTML = '';
-
-  questionData.options.forEach((option) => {
-    const button = document.createElement('button');
-    button.textContent = option;
-    button.onclick = () => checkAnswer(option);
-    optionsContainer.appendChild(button);
-  });
-
-  document.getElementById('feedback').textContent = '';
-  updateProgressBar();
+// Show Home Screen (Domain Selection)
+function showHomeScreen() {
+  const screen = document.getElementById('screen');
+  screen.innerHTML = `
+    <h2>Select a Domain</h2>
+    <ul>
+      <li onclick="showSubdomains('Project Management Fundamentals and Core Concepts')">Domain 1: Project Management Fundamentals and Core Concepts</li>
+      <li onclick="showSubdomains('Predictive, Plan-Based Methodologies')">Domain 2: Predictive, Plan-Based Methodologies</li>
+      <li onclick="showSubdomains('Agile Frameworks/Methodologies')">Domain 3: Agile Frameworks/Methodologies</li>
+      <li onclick="showSubdomains('Business Analysis Frameworks')">Domain 4: Business Analysis Frameworks</li>
+    </ul>
+  `;
 }
 
-function checkAnswer(selectedOptionText) {
-  const questionData = questions[currentQuestionIndex];
-  const isCorrect = selectedOptionText === questionData.correctAnswer;
+// Show Subdomain Screen
+function showSubdomains(domain) {
+  currentDomain = domain;
+  const screen = document.getElementById('screen');
+  const subdomains = [...new Set(questions.filter(q => q.domain === domain).map(q => q.subdomain))];
 
-  // Display whether the answer is correct or incorrect, along with the explanation
-  document.getElementById('feedback').textContent = isCorrect 
-    ? `Correct! ${questionData.explanation}` 
-    : `Incorrect. ${questionData.explanation}`;
+  screen.innerHTML = `
+    <h2>${domain}</h2>
+    <ul>
+      ${subdomains.map(sub => `<li onclick="showQuestions('${sub}')">${sub}</li>`).join('')}
+    </ul>
+  `;
 }
 
-function nextQuestion() {
-  if (currentQuestionIndex < questions.length - 1) {
-    currentQuestionIndex++;
-    showQuestion();
-  }
+// Show Questions for Selected Subdomain
+function showQuestions(subdomain) {
+  currentSubdomain = subdomain;
+  currentQuestionIndex = 0;
+  displayQuestion();
 }
 
-function prevQuestion() {
-  if (currentQuestionIndex > 0) {
-    currentQuestionIndex--;
-    showQuestion();
-  }
+// Display a Question
+function displayQuestion() {
+  const screen = document.getElementById('screen');
+  const questionData = questions.filter(q => q.domain === currentDomain && q.subdomain === currentSubdomain)[currentQuestionIndex];
+
+  screen.innerHTML = `
+    <p>${questionData.question}</p>
+    ${questionData.options.map((option, index) => `<button onclick="checkAnswer('${option}')">${option}</button>`).join('')}
+    <p id="feedback"></p>
+  `;
 }
 
-function updateProgressBar() {
-  const progressBar = document.getElementById('progressBar');
-  const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
-  progressBar.style.width = `${progress}%`;
+// Check Answer and Provide Feedback
+function checkAnswer(selectedOption) {
+  const questionData = questions.filter(q => q.domain === currentDomain && q.subdomain === currentSubdomain)[currentQuestionIndex];
+  const isCorrect = selectedOption === questionData.correctAnswer;
+  
+  document.getElementById('feedback').textContent = isCorrect ? `Correct! ${questionData.explanation}` : `Incorrect. ${questionData.explanation}`;
+  
+  // Update stats
+  if (isCorrect) userStats.correct++;
+  else userStats.incorrect++;
 }
+
+// Show Profile Screen (Stats)
+function showProfile() {
+  const screen = document.getElementById('screen');
+  screen.innerHTML = `
+    <h2>Your Profile</h2>
+    <p>Questions Correct: ${userStats.correct}</p>
+    <p>Questions Incorrect: ${userStats.incorrect}</p>
+  `;
+}
+
+// Navigation Handlers
+document.getElementById('homeButton').addEventListener('click', showHomeScreen);
+document.getElementById('profileButton').addEventListener('click', showProfile);
