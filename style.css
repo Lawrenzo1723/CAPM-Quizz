@@ -6,7 +6,7 @@ body {
   align-items: center;
   min-height: 100vh;
   margin: 0;
-  background-color: #0d1b2a; /* Dark background */
+  background-color: #0d1b2a;
   color: #ffffff;
 }
 
@@ -17,7 +17,6 @@ body {
   margin: 0 auto;
 }
 
-/* Hide progress bar initially */
 #progressContainer {
   display: none;
   width: 100%;
@@ -28,34 +27,15 @@ body {
 
 #progressBar {
   height: 100%;
-  background-color: #ffc107; /* Highlight color */
+  background-color: #ffc107;
 }
 
-/* Center screen and add button styling */
 #screen {
-  margin-bottom: 60px; /* Space for footer */
+  margin-bottom: 60px;
 }
 
 button.domain,
-button.subdomain {
-  background-color: #3b5998;
-  color: #ffffff;
-  border: none;
-  padding: 15px;
-  margin: 10px 0;
-  border-radius: 8px;
-  font-size: 1em;
-  width: 100%;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button.domain:hover,
-button.subdomain:hover {
-  background-color: #536dfe;
-}
-
-/* Question options styling */
+button.subdomain,
 button.option {
   background-color: #3b5998;
   color: #ffffff;
@@ -69,17 +49,26 @@ button.option {
   transition: background-color 0.3s ease;
 }
 
+button.domain:hover,
+button.subdomain:hover,
 button.option:hover {
   background-color: #536dfe;
+}
+
+button.option.correct {
+  background-color: #4CAF50;
+}
+
+button.option.incorrect {
+  background-color: #f44336;
 }
 
 #feedback {
   font-size: 1em;
   margin-top: 15px;
-  color: #ffc107; /* Yellow color for feedback */
+  color: #ffc107;
 }
 
-/* Footer Navigation */
 #footer {
   position: fixed;
   bottom: 0;
