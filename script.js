@@ -1,15 +1,9 @@
-document.getElementById('startButton').addEventListener('click', startQuiz);
+document.addEventListener('DOMContentLoaded', () => {
+  loadQuestions();
+});
 
 let questions = [];
 let currentQuestionIndex = 0;
-
-async function startQuiz() {
-  document.getElementById('startButton').style.display = 'none';
-  document.getElementById('quizContainer').style.display = 'block';
-
-  await loadQuestions();
-  showQuestion();
-}
 
 async function loadQuestions() {
   const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vRyL8ZTnjPNQ0NabBoTUGhQI3m5zIoe7XI3HWzLfxbwcP1gYhsL4s11XGYCYzi2fLPKQ6M4ONri45a7/pub?output=csv');
@@ -22,15 +16,17 @@ async function loadQuestions() {
       question: cols[0],
       options: [cols[1], cols[2], cols[3], cols[4]],
       correctAnswer: cols[5],
-      explanation: cols[6],
-      domain: cols[7]
+      explanation: cols[6]
     });
   });
+
+  showQuestion();
 }
 
 function showQuestion() {
   const questionData = questions[currentQuestionIndex];
-  document.getElementById('question').textContent = questionData.question;
+  document.getElementById('questionNumber').textContent = `Question ${currentQuestionIndex + 1} / ${questions.length}`;
+  document.getElementById('questionText').textContent = questionData.question;
 
   const optionsContainer = document.getElementById('options');
   optionsContainer.innerHTML = '';
@@ -43,7 +39,7 @@ function showQuestion() {
   });
 
   document.getElementById('feedback').textContent = '';
-  document.getElementById('nextButton').style.display = 'none';
+  updateProgressBar();
 }
 
 function checkAnswer(selectedIndex) {
@@ -51,16 +47,24 @@ function checkAnswer(selectedIndex) {
   const isCorrect = questionData.options[selectedIndex] === questionData.correctAnswer;
 
   document.getElementById('feedback').textContent = isCorrect ? 'Correct!' : `Incorrect. ${questionData.explanation}`;
-  document.getElementById('nextButton').style.display = 'inline';
-
-  document.getElementById('nextButton').onclick = nextQuestion;
 }
 
 function nextQuestion() {
-  currentQuestionIndex++;
-  if (currentQuestionIndex < questions.length) {
+  if (currentQuestionIndex < questions.length - 1) {
+    currentQuestionIndex++;
     showQuestion();
-  } else {
-    document.getElementById('quizContainer').innerHTML = '<p>Quiz complete!</p>';
   }
+}
+
+function prevQuestion() {
+  if (currentQuestionIndex > 0) {
+    currentQuestionIndex--;
+    showQuestion();
+  }
+}
+
+function updateProgressBar() {
+  const progressBar = document.getElementById('progressBar');
+  const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+  progressBar.style.width = `${progress}%`;
 }
