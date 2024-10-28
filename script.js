@@ -8,6 +8,13 @@ document.addEventListener('DOMContentLoaded', () => {
   homeButton.id = "homeButton";
   homeButton.addEventListener('click', showHomeScreen);
   document.body.appendChild(homeButton);
+
+  // Create Practice Mistakes Button
+  const practiceButton = document.createElement('button');
+  practiceButton.textContent = "Practice Mistakes";
+  practiceButton.id = "practiceButton";
+  practiceButton.addEventListener('click', showMissedQuestions);
+  document.body.appendChild(practiceButton);
 });
 
 let questions = [];
@@ -15,6 +22,7 @@ let currentDomain = "";
 let currentSubdomain = "";
 let currentQuestionIndex = 0;
 let userStats = { correct: 0, incorrect: 0 };
+let missedQuestions = []; // Array to store incorrectly answered questions
 
 const domainStructure = {
   "Project Management Fundamentals and Core Concepts": [
@@ -167,9 +175,13 @@ function checkAnswer(selectedOption, filteredQuestions) {
   console.log("Correct Answer:", questionData.correctAnswer);
   console.log("Is Correct:", isCorrect);
 
-  // Update stats
-  if (isCorrect) userStats.correct++;
-  else userStats.incorrect++;
+  // Update stats and add to missedQuestions if incorrect
+  if (isCorrect) {
+    userStats.correct++;
+  } else {
+    userStats.incorrect++;
+    missedQuestions.push(questionData); // Store the missed question
+  }
 }
 
 // Go to the Previous Question
@@ -185,5 +197,15 @@ function nextQuestion(filteredQuestions) {
   if (currentQuestionIndex < filteredQuestions.length - 1) {
     currentQuestionIndex++;
     displayQuestion(filteredQuestions);
+  }
+}
+
+// Show Missed Questions for Practice
+function showMissedQuestions() {
+  if (missedQuestions.length > 0) {
+    currentQuestionIndex = 0; // Reset to the beginning
+    displayQuestion(missedQuestions);
+  } else {
+    document.getElementById('screen').innerHTML = `<p>No missed questions to review!</p>`;
   }
 }
