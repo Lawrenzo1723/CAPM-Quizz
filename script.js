@@ -1,6 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
   loadQuestions();
   showHomeScreen();
+
+  // Create Home Button that stays at the bottom of the screen
+  const homeButton = document.createElement('button');
+  homeButton.textContent = "Home";
+  homeButton.id = "homeButton";
+  homeButton.addEventListener('click', showHomeScreen);
+  document.body.appendChild(homeButton);
 });
 
 let questions = [];
