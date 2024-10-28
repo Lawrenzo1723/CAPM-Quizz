@@ -105,17 +105,24 @@ function displayQuestion(filteredQuestions) {
   const screen = document.getElementById('screen');
   const questionData = filteredQuestions[currentQuestionIndex];
 
-  // Render question and options
   screen.innerHTML = `
     <p>${questionData.question}</p>
-    ${questionData.options.map((option) => 
-      `<button onclick="checkAnswer('${option}', this, ${JSON.stringify(filteredQuestions)})">${option}</button>`).join('')}
+    <div id="options"></div>
     <p id="feedback"></p>
   `;
+
+  // Display options with event listeners
+  const optionsDiv = document.getElementById('options');
+  questionData.options.forEach(option => {
+    const button = document.createElement('button');
+    button.textContent = option;
+    button.addEventListener('click', () => checkAnswer(option, filteredQuestions));
+    optionsDiv.appendChild(button);
+  });
 }
 
 // Check Answer and Provide Feedback
-function checkAnswer(selectedOption, button, filteredQuestions) {
+function checkAnswer(selectedOption, filteredQuestions) {
   const questionData = filteredQuestions[currentQuestionIndex];
   const isCorrect = selectedOption.trim() === questionData.correctAnswer.trim();
 
