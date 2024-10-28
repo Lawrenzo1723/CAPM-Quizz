@@ -1,93 +1,16 @@
-/* General Styling */
-body {
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  margin: 0;
-  background-color: #0d1b2a;
-  color: #ffffff;
-}
-
-#app {
-  width: 100%;
-  max-width: 600px;
-  text-align: center;
-  margin: 0 auto;
-}
-
-#progressContainer {
-  display: none;
-  width: 100%;
-  height: 5px;
-  background-color: #1e3a5f;
-  margin-bottom: 20px;
-}
-
-#progressBar {
-  height: 100%;
-  background-color: #ffc107;
-}
-
-#screen {
-  margin-bottom: 60px;
-}
-
-button.domain,
-button.subdomain,
-button.option {
-  background-color: #3b5998;
-  color: #ffffff;
-  border: none;
-  padding: 15px;
-  margin: 10px 0;
-  border-radius: 8px;
-  font-size: 1em;
-  width: 100%;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button.domain:hover,
-button.subdomain:hover,
-button.option:hover {
-  background-color: #536dfe;
-}
-
-button.option.correct {
-  background-color: #4CAF50;
-}
-
-button.option.incorrect {
-  background-color: #f44336;
-}
-
-#feedback {
-  font-size: 1em;
-  margin-top: 15px;
-  color: #ffc107;
-}
-
-#footer {
+#homeButton {
   position: fixed;
-  bottom: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  background-color: #1e3a5f;
-  padding: 10px 0;
-}
-
-#footer button {
-  background: none;
-  color: #ffffff;
-  font-size: 1.2em;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  font-size: 1em;
+  background-color: #4CAF50;
+  color: white;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
-  transition: color 0.3s ease;
 }
-
-#footer button:hover {
-  color: #ffc107;
+#homeButton:hover {
+  background-color: #45a049;
 }
