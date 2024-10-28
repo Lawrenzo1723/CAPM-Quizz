@@ -8,13 +8,19 @@
 </head>
 <body>
   <div id="app">
-    <h1>CAPM Quiz</h1>
-    <button id="startButton">Start Quiz</button>
-    <div id="quizContainer" style="display:none;">
-      <p id="question"></p>
+    <div id="progressContainer">
+      <div id="progressBar"></div>
+    </div>
+    <div id="quizContainer">
+      <p id="questionNumber">Question 1 / 10</p>
+      <p id="questionText"></p>
       <div id="options"></div>
-      <button id="nextButton" style="display:none;">Next</button>
       <p id="feedback"></p>
+    </div>
+    <div id="footer">
+      <button id="prevButton" onclick="prevQuestion()">&#x276E;</button>
+      <button id="flagButton">&#x1F6A9;</button>
+      <button id="nextButton" onclick="nextQuestion()">&#x276F;</button>
     </div>
   </div>
   <script src="script.js"></script>
