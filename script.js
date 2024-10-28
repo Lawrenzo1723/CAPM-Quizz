@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  loadQuestions();
+  loadQuestions(); // Load questions once
   showHomeScreen();
 });
 
@@ -8,6 +8,36 @@ let currentQuestionIndex = 0;
 let userStats = { correct: 0, incorrect: 0 };
 let currentDomain = "";
 let currentSubdomain = "";
+
+// Hardcoded domains and their subdomains
+const domainStructure = {
+  "Project Management Fundamentals and Core Concepts": [
+    "Project Life Cycles and Processes",
+    "Project Management Planning",
+    "Project Roles and Responsibilities",
+    "Following and Executing Planned Strategies or Frameworks"
+  ],
+  "Predictive, Plan-Based Methodologies": [
+    "When to Use a Predictive, Plan-Based Approach",
+    "Project Management Plan Scheduling",
+    "Documentation and Controls for Predictive, Plan-Based Projects"
+  ],
+  "Agile Frameworks/Methodologies": [
+    "Timing for Adaptive Approaches",
+    "Planning Project Iterations",
+    "Documentation and Controls for Adaptive Projects",
+    "Components of an Adaptive Plan",
+    "Task Management Preparation and Execution Steps"
+  ],
+  "Business Analysis Frameworks": [
+    "Business Analysis (BA) Roles and Responsibilities",
+    "Conducting Stakeholder Communication",
+    "Gathering Requirements",
+    "Product Roadmaps",
+    "Influence of Project Methodologies on Business Analysis Processes",
+    "Validating Requirements through Product Delivery"
+  ]
+};
 
 // Load questions from Google Sheets
 async function loadQuestions() {
@@ -34,8 +64,7 @@ function showHomeScreen() {
   const screen = document.getElementById('screen');
   screen.innerHTML = `
     <h2>Select a Domain</h2>
-    ${['Project Management Fundamentals and Core Concepts', 'Predictive, Plan-Based Methodologies', 'Agile Frameworks/Methodologies', 'Business Analysis Frameworks']
-      .map(domain => `<button class="domain" onclick="showSubdomains('${domain}')">${domain}</button>`).join('')}
+    ${Object.keys(domainStructure).map(domain => `<button class="domain" onclick="showSubdomains('${domain}')">${domain}</button>`).join('')}
   `;
 }
 
@@ -43,7 +72,7 @@ function showHomeScreen() {
 function showSubdomains(domain) {
   currentDomain = domain;
   const screen = document.getElementById('screen');
-  const subdomains = [...new Set(questions.filter(q => q.domain === domain).map(q => q.subdomain))];
+  const subdomains = domainStructure[domain];
 
   screen.innerHTML = `
     <h2>${domain}</h2>
@@ -56,28 +85,36 @@ function showQuestions(subdomain) {
   currentSubdomain = subdomain;
   currentQuestionIndex = 0;
   document.getElementById('progressContainer').style.display = 'block'; // Show progress bar during questions
-  displayQuestion();
+
+  // Filter questions for the selected domain and subdomain
+  const filteredQuestions = questions.filter(q => q.domain === currentDomain && q.subdomain === currentSubdomain);
+  
+  if (filteredQuestions.length > 0) {
+    displayQuestion(filteredQuestions);
+  } else {
+    document.getElementById('screen').innerHTML = `<p>No questions available for this subdomain.</p>`;
+  }
 }
 
 // Display a Question
-function displayQuestion() {
+function displayQuestion(filteredQuestions) {
   const screen = document.getElementById('screen');
-  const questionData = questions.filter(q => q.domain === currentDomain && q.subdomain === currentSubdomain)[currentQuestionIndex];
+  const questionData = filteredQuestions[currentQuestionIndex];
 
   screen.innerHTML = `
-    <p>Question ${currentQuestionIndex + 1} / ${questions.length}</p>
+    <p>Question ${currentQuestionIndex + 1} / ${filteredQuestions.length}</p>
     <p>${questionData.question}</p>
-    ${questionData.options.map((option) => `<button class="option" onclick="checkAnswer('${option}', this)">${option}</button>`).join('')}
+    ${questionData.options.map((option) => `<button class="option" onclick="checkAnswer('${option}', this, filteredQuestions)">${option}</button>`).join('')}
     <p id="feedback"></p>
   `;
-  updateProgressBar();
+  updateProgressBar(filteredQuestions.length);
 }
 
 // Check Answer and Provide Feedback
-function checkAnswer(selectedOption, button) {
-  const questionData = questions.filter(q => q.domain === currentDomain && q.subdomain === currentSubdomain)[currentQuestionIndex];
+function checkAnswer(selectedOption, button, filteredQuestions) {
+  const questionData = filteredQuestions[currentQuestionIndex];
   const isCorrect = selectedOption === questionData.correctAnswer;
-  
+
   // Highlight selected button
   document.querySelectorAll('.option').forEach(btn => btn.classList.remove('selected'));
   button.classList.add('selected');
@@ -102,9 +139,8 @@ function showProfile() {
 }
 
 // Update Progress Bar
-function updateProgressBar() {
+function updateProgressBar(totalQuestions) {
   const progressBar = document.getElementById('progressBar');
-  const totalQuestions = questions.filter(q => q.domain === currentDomain && q.subdomain === currentSubdomain).length;
   const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
   progressBar.style.width = `${progress}%`;
 }
