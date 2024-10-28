@@ -31,10 +31,10 @@ function showQuestion() {
   const optionsContainer = document.getElementById('options');
   optionsContainer.innerHTML = '';
 
-  questionData.options.forEach((option, index) => {
+  questionData.options.forEach((option) => {
     const button = document.createElement('button');
     button.textContent = option;
-    button.onclick = () => checkAnswer(index);
+    button.onclick = () => checkAnswer(option);
     optionsContainer.appendChild(button);
   });
 
@@ -42,12 +42,9 @@ function showQuestion() {
   updateProgressBar();
 }
 
-function checkAnswer(selectedIndex) {
+function checkAnswer(selectedOptionText) {
   const questionData = questions[currentQuestionIndex];
-  const selectedAnswer = questionData.options[selectedIndex].trim().toLowerCase();
-  const correctAnswer = questionData.correctAnswer.trim().toLowerCase();
-
-  const isCorrect = selectedAnswer === correctAnswer;
+  const isCorrect = selectedOptionText === questionData.correctAnswer;
 
   document.getElementById('feedback').textContent = isCorrect ? 'Correct!' : `Incorrect. ${questionData.explanation}`;
 }
