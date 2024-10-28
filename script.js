@@ -52,8 +52,8 @@ async function loadQuestions() {
       options: [cols[1], cols[2], cols[3], cols[4]],
       correctAnswer: cols[5],
       explanation: cols[6],
-      domain: cols[7],
-      subdomain: cols[8]
+      domain: cols[7].trim(),
+      subdomain: cols[8].trim()
     });
   });
 }
@@ -86,9 +86,15 @@ function showQuestions(subdomain) {
   currentQuestionIndex = 0;
   document.getElementById('progressContainer').style.display = 'block'; // Show progress bar during questions
 
-  // Filter questions for the selected domain and subdomain
-  const filteredQuestions = questions.filter(q => q.domain === currentDomain && q.subdomain === currentSubdomain);
-  
+  // Explicitly filter questions by checking Domain and Subdomain columns
+  const filteredQuestions = questions.filter(q => {
+    return q.domain === currentDomain && q.subdomain === currentSubdomain;
+  });
+
+  console.log("Current Domain:", currentDomain); // Debugging
+  console.log("Current Subdomain:", currentSubdomain); // Debugging
+  console.log("Filtered Questions:", filteredQuestions); // Debugging
+
   if (filteredQuestions.length > 0) {
     displayQuestion(filteredQuestions);
   } else {
