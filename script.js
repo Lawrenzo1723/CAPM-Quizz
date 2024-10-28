@@ -30,15 +30,12 @@ async function loadQuestions() {
 
 // Show Home Screen (Domain Selection)
 function showHomeScreen() {
+  document.getElementById('progressContainer').style.display = 'none'; // Hide progress bar
   const screen = document.getElementById('screen');
   screen.innerHTML = `
     <h2>Select a Domain</h2>
-    <ul>
-      <li onclick="showSubdomains('Project Management Fundamentals and Core Concepts')">Domain 1: Project Management Fundamentals and Core Concepts</li>
-      <li onclick="showSubdomains('Predictive, Plan-Based Methodologies')">Domain 2: Predictive, Plan-Based Methodologies</li>
-      <li onclick="showSubdomains('Agile Frameworks/Methodologies')">Domain 3: Agile Frameworks/Methodologies</li>
-      <li onclick="showSubdomains('Business Analysis Frameworks')">Domain 4: Business Analysis Frameworks</li>
-    </ul>
+    ${['Project Management Fundamentals and Core Concepts', 'Predictive, Plan-Based Methodologies', 'Agile Frameworks/Methodologies', 'Business Analysis Frameworks']
+      .map(domain => `<button class="domain" onclick="showSubdomains('${domain}')">${domain}</button>`).join('')}
   `;
 }
 
@@ -50,9 +47,7 @@ function showSubdomains(domain) {
 
   screen.innerHTML = `
     <h2>${domain}</h2>
-    <ul>
-      ${subdomains.map(sub => `<li onclick="showQuestions('${sub}')">${sub}</li>`).join('')}
-    </ul>
+    ${subdomains.map(sub => `<button class="subdomain" onclick="showQuestions('${sub}')">${sub}</button>`).join('')}
   `;
 }
 
@@ -60,6 +55,7 @@ function showSubdomains(domain) {
 function showQuestions(subdomain) {
   currentSubdomain = subdomain;
   currentQuestionIndex = 0;
+  document.getElementById('progressContainer').style.display = 'block'; // Show progress bar during questions
   displayQuestion();
 }
 
@@ -96,6 +92,7 @@ function checkAnswer(selectedOption, button) {
 
 // Show Profile Screen (Stats)
 function showProfile() {
+  document.getElementById('progressContainer').style.display = 'none'; // Hide progress bar in profile
   const screen = document.getElementById('screen');
   screen.innerHTML = `
     <h2>Your Profile</h2>
@@ -107,7 +104,8 @@ function showProfile() {
 // Update Progress Bar
 function updateProgressBar() {
   const progressBar = document.getElementById('progressBar');
-  const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+  const totalQuestions = questions.filter(q => q.domain === currentDomain && q.subdomain === currentSubdomain).length;
+  const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
   progressBar.style.width = `${progress}%`;
 }
 
