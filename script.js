@@ -9,7 +9,6 @@ let currentSubdomain = "";
 let currentQuestionIndex = 0;
 let userStats = { correct: 0, incorrect: 0 };
 
-// Define domain and subdomain structure
 const domainStructure = {
   "Project Management Fundamentals and Core Concepts": [
     "Project Life Cycles and Processes",
@@ -59,7 +58,7 @@ async function loadQuestions() {
         });
       }
     });
-    console.log("Questions Loaded:", questions); // Debugging
+    console.log("Questions Loaded:", questions);
   } catch (error) {
     console.error("Error loading questions:", error);
   }
@@ -70,7 +69,7 @@ function showHomeScreen() {
   const screen = document.getElementById('screen');
   screen.innerHTML = `
     <h2>Select a Domain</h2>
-    ${Object.keys(domainStructure).map(domain => `<button class="domain" onclick="showSubdomains('${domain}')">${domain}</button>`).join('')}
+    ${Object.keys(domainStructure).map(domain => `<button onclick="showSubdomains('${domain}')">${domain}</button>`).join('')}
   `;
 }
 
@@ -82,7 +81,7 @@ function showSubdomains(domain) {
 
   screen.innerHTML = `
     <h2>${domain}</h2>
-    ${subdomains.map(sub => `<button class="subdomain" onclick="showQuestions('${sub}')">${sub}</button>`).join('')}
+    ${subdomains.map(sub => `<button onclick="showQuestions('${sub}')">${sub}</button>`).join('')}
   `;
 }
 
@@ -91,6 +90,8 @@ function showQuestions(subdomain) {
   currentSubdomain = subdomain;
   currentQuestionIndex = 0;
   const filteredQuestions = questions.filter(q => q.domain === currentDomain && q.subdomain === currentSubdomain);
+
+  console.log("Filtered Questions:", filteredQuestions);
 
   if (filteredQuestions.length > 0) {
     displayQuestion(filteredQuestions);
@@ -106,7 +107,7 @@ function displayQuestion(filteredQuestions) {
 
   screen.innerHTML = `
     <p>${questionData.question}</p>
-    ${questionData.options.map((option) => `<button class="option" onclick="checkAnswer('${option}', this, filteredQuestions)">${option}</button>`).join('')}
+    ${questionData.options.map((option) => `<button onclick="checkAnswer('${option}', this, filteredQuestions)">${option}</button>`).join('')}
     <p id="feedback"></p>
   `;
 }
@@ -116,10 +117,19 @@ function checkAnswer(selectedOption, button, filteredQuestions) {
   const questionData = filteredQuestions[currentQuestionIndex];
   const isCorrect = selectedOption.trim() === questionData.correctAnswer.trim();
 
-  button.classList.add(isCorrect ? 'correct' : 'incorrect');
-  document.getElementById('feedback').textContent = isCorrect ? `Correct! ${questionData.explanation}` : `Incorrect. ${questionData.explanation}`;
+  // Provide feedback and log output for debugging
+  const feedback = document.getElementById('feedback');
+  feedback.textContent = isCorrect ? `Correct! ${questionData.explanation}` : `Incorrect. ${questionData.explanation}`;
 
-  userStats[isCorrect ? 'correct' : 'incorrect']++;
+  console.log("Selected Option:", selectedOption);
+  console.log("Correct Answer:", questionData.correctAnswer);
+  console.log("Is Correct:", isCorrect);
+
+  // Update stats
+  if (isCorrect) userStats.correct++;
+  else userStats.incorrect++;
+
+  // Move to the next question or back to home screen
   setTimeout(() => {
     currentQuestionIndex++;
     if (currentQuestionIndex < filteredQuestions.length) displayQuestion(filteredQuestions);
