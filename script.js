@@ -46,7 +46,10 @@ function checkAnswer(selectedOptionText) {
   const questionData = questions[currentQuestionIndex];
   const isCorrect = selectedOptionText === questionData.correctAnswer;
 
-  document.getElementById('feedback').textContent = isCorrect ? 'Correct!' : `Incorrect. ${questionData.explanation}`;
+  // Display whether the answer is correct or incorrect, along with the explanation
+  document.getElementById('feedback').textContent = isCorrect 
+    ? `Correct! ${questionData.explanation}` 
+    : `Incorrect. ${questionData.explanation}`;
 }
 
 function nextQuestion() {
