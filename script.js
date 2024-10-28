@@ -4,12 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 let questions = [];
-let currentQuestionIndex = 0;
-let userStats = { correct: 0, incorrect: 0 };
 let currentDomain = "";
 let currentSubdomain = "";
+let currentQuestionIndex = 0;
+let userStats = { correct: 0, incorrect: 0 };
 
-// Hardcoded domains and their subdomains
+// Define domain and subdomain structure
 const domainStructure = {
   "Project Management Fundamentals and Core Concepts": [
     "Project Life Cycles and Processes",
@@ -44,11 +44,11 @@ async function loadQuestions() {
   try {
     const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vRyL8ZTnjPNQ0NabBoTUGhQI3m5zIoe7XI3HWzLfxbwcP1gYhsL4s11XGYCYzi2fLPKQ6M4ONri45a7/pub?output=csv');
     const data = await response.text();
-
     const rows = data.split('\n');
+
     rows.forEach(row => {
       const cols = row.split(',');
-      if (cols.length >= 9) { // Make sure there are enough columns in each row
+      if (cols.length >= 9) {
         questions.push({
           question: cols[0],
           options: [cols[1], cols[2], cols[3], cols[4]],
@@ -65,9 +65,8 @@ async function loadQuestions() {
   }
 }
 
-// Show Home Screen (Domain Selection)
+// Show Home Screen
 function showHomeScreen() {
-  document.getElementById('progressContainer').style.display = 'none';
   const screen = document.getElementById('screen');
   screen.innerHTML = `
     <h2>Select a Domain</h2>
@@ -91,10 +90,7 @@ function showSubdomains(domain) {
 function showQuestions(subdomain) {
   currentSubdomain = subdomain;
   currentQuestionIndex = 0;
-  document.getElementById('progressContainer').style.display = 'block';
-
   const filteredQuestions = questions.filter(q => q.domain === currentDomain && q.subdomain === currentSubdomain);
-  console.log("Filtered Questions for Domain:", currentDomain, "Subdomain:", currentSubdomain, "->", filteredQuestions); // Debugging
 
   if (filteredQuestions.length > 0) {
     displayQuestion(filteredQuestions);
@@ -109,75 +105,24 @@ function displayQuestion(filteredQuestions) {
   const questionData = filteredQuestions[currentQuestionIndex];
 
   screen.innerHTML = `
-    <p>Question ${currentQuestionIndex + 1} / ${filteredQuestions.length}</p>
     <p>${questionData.question}</p>
-    ${questionData.options.map((option) => 
-      `<button class="option" onclick="checkAnswer('${option}', this, filteredQuestions)">${option}</button>`).join('')}
+    ${questionData.options.map((option) => `<button class="option" onclick="checkAnswer('${option}', this, filteredQuestions)">${option}</button>`).join('')}
     <p id="feedback"></p>
   `;
-  updateProgressBar(filteredQuestions.length);
 }
 
 // Check Answer and Provide Feedback
 function checkAnswer(selectedOption, button, filteredQuestions) {
   const questionData = filteredQuestions[currentQuestionIndex];
-  
-  // Debugging: Show correct answer and selected option
-  console.log("Selected Option:", selectedOption);
-  console.log("Correct Answer:", questionData.correctAnswer);
-
   const isCorrect = selectedOption.trim() === questionData.correctAnswer.trim();
-  console.log("Is Answer Correct?", isCorrect); // Debugging
 
-  // Reset feedback and button colors
-  document.querySelectorAll('.option').forEach(btn => {
-    btn.classList.remove('selected');
-    btn.style.backgroundColor = ''; // Reset color
-  });
+  button.classList.add(isCorrect ? 'correct' : 'incorrect');
+  document.getElementById('feedback').textContent = isCorrect ? `Correct! ${questionData.explanation}` : `Incorrect. ${questionData.explanation}`;
 
-  // Highlight selected button with feedback
-  button.classList.add('selected');
-  button.style.backgroundColor = isCorrect ? '#4CAF50' : '#f44336';
-
-  // Display feedback
-  const feedback = document.getElementById('feedback');
-  feedback.textContent = isCorrect 
-    ? `Correct! ${questionData.explanation}` 
-    : `Incorrect. ${questionData.explanation}`;
-
-  // Update stats
-  if (isCorrect) userStats.correct++;
-  else userStats.incorrect++;
-
-  // Move to the next question after a delay
+  userStats[isCorrect ? 'correct' : 'incorrect']++;
   setTimeout(() => {
     currentQuestionIndex++;
-    if (currentQuestionIndex < filteredQuestions.length) {
-      displayQuestion(filteredQuestions);
-    } else {
-      showHomeScreen();
-    }
+    if (currentQuestionIndex < filteredQuestions.length) displayQuestion(filteredQuestions);
+    else showHomeScreen();
   }, 2000);
 }
-
-// Show Profile Screen (Stats)
-function showProfile() {
-  document.getElementById('progressContainer').style.display = 'none';
-  const screen = document.getElementById('screen');
-  screen.innerHTML = `
-    <h2>Your Profile</h2>
-    <p>Questions Correct: ${userStats.correct}</p>
-    <p>Questions Incorrect: ${userStats.incorrect}</p>
-  `;
-}
-
-// Update Progress Bar
-function updateProgressBar(totalQuestions) {
-  const progressBar = document.getElementById('progressBar');
-  const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
-  progressBar.style.width = `${progress}%`;
-}
-
-// Navigation Handlers
-document.getElementById('homeButton').addEventListener('click', showHomeScreen);
-document.getElementById('profileButton').addEventListener('click', showProfile);
