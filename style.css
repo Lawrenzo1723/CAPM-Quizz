@@ -6,20 +6,67 @@ body {
   align-items: center;
   min-height: 100vh;
   margin: 0;
-  background-color: #0d1b2a;
+  background-color: #0d1b2a; /* Dark background */
+  color: #ffffff;
 }
 
 #app {
   width: 90%;
   max-width: 600px;
   text-align: center;
-  color: #ffffff;
 }
 
+/* Progress Bar */
+#progressContainer {
+  width: 100%;
+  height: 5px;
+  background-color: #1e3a5f;
+  margin-bottom: 20px;
+}
+
+#progressBar {
+  width: 10%; /* This will dynamically update */
+  height: 100%;
+  background-color: #ffc107; /* Highlight color */
+}
+
+/* Question and Options */
 #screen {
   margin-bottom: 60px; /* Space for footer */
 }
 
+h2, p {
+  color: #ffffff;
+}
+
+button.option {
+  background-color: #3b5998;
+  color: #ffffff;
+  border: none;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 8px;
+  font-size: 1em;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.option:hover {
+  background-color: #536dfe;
+}
+
+button.option.selected {
+  background-color: #2e72d7;
+}
+
+#feedback {
+  font-size: 1em;
+  margin-top: 15px;
+  color: #ffc107; /* Yellow color for feedback */
+}
+
+/* Footer Navigation */
 #footer {
   position: fixed;
   bottom: 0;
