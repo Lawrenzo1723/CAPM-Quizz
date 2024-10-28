@@ -44,7 +44,10 @@ function showQuestion() {
 
 function checkAnswer(selectedIndex) {
   const questionData = questions[currentQuestionIndex];
-  const isCorrect = questionData.options[selectedIndex] === questionData.correctAnswer;
+  const selectedAnswer = questionData.options[selectedIndex].trim().toLowerCase();
+  const correctAnswer = questionData.correctAnswer.trim().toLowerCase();
+
+  const isCorrect = selectedAnswer === correctAnswer;
 
   document.getElementById('feedback').textContent = isCorrect ? 'Correct!' : `Incorrect. ${questionData.explanation}`;
 }
