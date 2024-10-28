@@ -2,6 +2,20 @@ document.addEventListener('DOMContentLoaded', () => {
   loadQuestions();
   showHomeScreen();
 
+  // Navigation Buttons (add this part)
+  const homeButton = document.getElementById('homeButton');
+  const practiceButton = document.getElementById('practiceButton');
+  const reviewButton = document.getElementById('reviewButton');
+  const flashcardButton = document.getElementById('flashcardButton');
+  const randomQuizButton = document.getElementById('randomQuizButton');
+
+  homeButton.addEventListener('click', showHomeScreen);
+  practiceButton.addEventListener('click', showMissedQuestions);
+  reviewButton.addEventListener('click', showReviewMode);
+  flashcardButton.addEventListener('click', showFlashcardMode);
+  randomQuizButton.addEventListener('click', showRandomQuiz);
+});
+
   // Create Home Button that stays at the bottom of the screen
   const homeButton = document.createElement('button');
   homeButton.textContent = "Home";
