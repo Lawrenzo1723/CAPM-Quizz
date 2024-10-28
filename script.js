@@ -9,6 +9,36 @@ let userStats = { correct: 0, incorrect: 0 };
 let currentDomain = "";
 let currentSubdomain = "";
 
+// Hardcoded domains and their subdomains
+const domainStructure = {
+  "Project Management Fundamentals and Core Concepts": [
+    "Project Life Cycles and Processes",
+    "Project Management Planning",
+    "Project Roles and Responsibilities",
+    "Following and Executing Planned Strategies or Frameworks"
+  ],
+  "Predictive, Plan-Based Methodologies": [
+    "When to Use a Predictive, Plan-Based Approach",
+    "Project Management Plan Scheduling",
+    "Documentation and Controls for Predictive, Plan-Based Projects"
+  ],
+  "Agile Frameworks/Methodologies": [
+    "Timing for Adaptive Approaches",
+    "Planning Project Iterations",
+    "Documentation and Controls for Adaptive Projects",
+    "Components of an Adaptive Plan",
+    "Task Management Preparation and Execution Steps"
+  ],
+  "Business Analysis Frameworks": [
+    "Business Analysis (BA) Roles and Responsibilities",
+    "Conducting Stakeholder Communication",
+    "Gathering Requirements",
+    "Product Roadmaps",
+    "Influence of Project Methodologies on Business Analysis Processes",
+    "Validating Requirements through Product Delivery"
+  ]
+};
+
 // Load questions from Google Sheets
 async function loadQuestions() {
   const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vRyL8ZTnjPNQ0NabBoTUGhQI3m5zIoe7XI3HWzLfxbwcP1gYhsL4s11XGYCYzi2fLPKQ6M4ONri45a7/pub?output=csv');
@@ -87,14 +117,20 @@ function checkAnswer(selectedOption, button, filteredQuestions) {
   const questionData = filteredQuestions[currentQuestionIndex];
   const isCorrect = selectedOption === questionData.correctAnswer;
 
-  // Highlight selected button and provide feedback
-  document.querySelectorAll('.option').forEach(btn => btn.classList.remove('selected'));
-  button.classList.add('selected');
+  // Reset feedback
+  document.getElementById('feedback').textContent = '';
 
   // Display feedback immediately after selection
   document.getElementById('feedback').textContent = isCorrect 
     ? `Correct! ${questionData.explanation}` 
     : `Incorrect. ${questionData.explanation}`;
+
+  // Update button color based on correctness
+  if (isCorrect) {
+    button.style.backgroundColor = '#4CAF50'; // Green for correct
+  } else {
+    button.style.backgroundColor = '#f44336'; // Red for incorrect
+  }
 
   // Update stats for correct/incorrect answers
   if (isCorrect) userStats.correct++;
@@ -102,6 +138,7 @@ function checkAnswer(selectedOption, button, filteredQuestions) {
 
   // Move to next question automatically after a delay
   setTimeout(() => {
+    button.style.backgroundColor = ''; // Reset color for the next question
     currentQuestionIndex++;
     if (currentQuestionIndex < filteredQuestions.length) {
       displayQuestion(filteredQuestions);
