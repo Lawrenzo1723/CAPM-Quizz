@@ -48,16 +48,18 @@ async function loadQuestions() {
     const rows = data.split('\n');
     rows.forEach(row => {
       const cols = row.split(',');
-      questions.push({
-        question: cols[0],
-        options: [cols[1], cols[2], cols[3], cols[4]],
-        correctAnswer: cols[5].trim(),
-        explanation: cols[6],
-        domain: cols[7].trim(),
-        subdomain: cols[8].trim()
-      });
+      if (cols.length >= 9) { // Make sure there are enough columns in each row
+        questions.push({
+          question: cols[0],
+          options: [cols[1], cols[2], cols[3], cols[4]],
+          correctAnswer: cols[5].trim(),
+          explanation: cols[6],
+          domain: cols[7].trim(),
+          subdomain: cols[8].trim()
+        });
+      }
     });
-    console.log("Questions Loaded:", questions);
+    console.log("Questions Loaded:", questions); // Debugging
   } catch (error) {
     console.error("Error loading questions:", error);
   }
@@ -92,7 +94,7 @@ function showQuestions(subdomain) {
   document.getElementById('progressContainer').style.display = 'block';
 
   const filteredQuestions = questions.filter(q => q.domain === currentDomain && q.subdomain === currentSubdomain);
-  console.log("Filtered Questions:", filteredQuestions);
+  console.log("Filtered Questions for Domain:", currentDomain, "Subdomain:", currentSubdomain, "->", filteredQuestions); // Debugging
 
   if (filteredQuestions.length > 0) {
     displayQuestion(filteredQuestions);
@@ -109,7 +111,7 @@ function displayQuestion(filteredQuestions) {
   screen.innerHTML = `
     <p>Question ${currentQuestionIndex + 1} / ${filteredQuestions.length}</p>
     <p>${questionData.question}</p>
-    ${questionData.options.map((option, index) => 
+    ${questionData.options.map((option) => 
       `<button class="option" onclick="checkAnswer('${option}', this, filteredQuestions)">${option}</button>`).join('')}
     <p id="feedback"></p>
   `;
@@ -119,19 +121,25 @@ function displayQuestion(filteredQuestions) {
 // Check Answer and Provide Feedback
 function checkAnswer(selectedOption, button, filteredQuestions) {
   const questionData = filteredQuestions[currentQuestionIndex];
-  const isCorrect = selectedOption.trim() === questionData.correctAnswer.trim();
+  
+  // Debugging: Show correct answer and selected option
+  console.log("Selected Option:", selectedOption);
+  console.log("Correct Answer:", questionData.correctAnswer);
 
-  // Remove "selected" state and reset colors
+  const isCorrect = selectedOption.trim() === questionData.correctAnswer.trim();
+  console.log("Is Answer Correct?", isCorrect); // Debugging
+
+  // Reset feedback and button colors
   document.querySelectorAll('.option').forEach(btn => {
     btn.classList.remove('selected');
-    btn.style.backgroundColor = ''; 
+    btn.style.backgroundColor = ''; // Reset color
   });
-  
+
   // Highlight selected button with feedback
   button.classList.add('selected');
   button.style.backgroundColor = isCorrect ? '#4CAF50' : '#f44336';
 
-  // Display immediate feedback
+  // Display feedback
   const feedback = document.getElementById('feedback');
   feedback.textContent = isCorrect 
     ? `Correct! ${questionData.explanation}` 
@@ -141,7 +149,7 @@ function checkAnswer(selectedOption, button, filteredQuestions) {
   if (isCorrect) userStats.correct++;
   else userStats.incorrect++;
 
-  // Proceed to the next question after a delay
+  // Move to the next question after a delay
   setTimeout(() => {
     currentQuestionIndex++;
     if (currentQuestionIndex < filteredQuestions.length) {
@@ -167,7 +175,6 @@ function showProfile() {
 function updateProgressBar(totalQuestions) {
   const progressBar = document.getElementById('progressBar');
   const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
-  progress
   progressBar.style.width = `${progress}%`;
 }
 
