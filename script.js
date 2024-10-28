@@ -100,15 +100,20 @@ function showQuestions(subdomain) {
   }
 }
 
-// Display a Question
+// Display a Question with Previous and Next Buttons
 function displayQuestion(filteredQuestions) {
   const screen = document.getElementById('screen');
   const questionData = filteredQuestions[currentQuestionIndex];
 
   screen.innerHTML = `
+    <p>Question ${currentQuestionIndex + 1} of ${filteredQuestions.length}</p>
     <p>${questionData.question}</p>
     <div id="options"></div>
     <p id="feedback"></p>
+    <div id="navigation">
+      <button id="prevButton" onclick="prevQuestion(${JSON.stringify(filteredQuestions)})" ${currentQuestionIndex === 0 ? 'disabled' : ''}>Previous</button>
+      <button id="nextButton" onclick="nextQuestion(${JSON.stringify(filteredQuestions)})" ${currentQuestionIndex === filteredQuestions.length - 1 ? 'disabled' : ''}>Next</button>
+    </div>
   `;
 
   // Display options with event listeners
@@ -137,14 +142,20 @@ function checkAnswer(selectedOption, filteredQuestions) {
   // Update stats
   if (isCorrect) userStats.correct++;
   else userStats.incorrect++;
+}
 
-  // Automatically move to the next question after 2 seconds
-  setTimeout(() => {
+// Go to the Previous Question
+function prevQuestion(filteredQuestions) {
+  if (currentQuestionIndex > 0) {
+    currentQuestionIndex--;
+    displayQuestion(filteredQuestions);
+  }
+}
+
+// Go to the Next Question
+function nextQuestion(filteredQuestions) {
+  if (currentQuestionIndex < filteredQuestions.length - 1) {
     currentQuestionIndex++;
-    if (currentQuestionIndex < filteredQuestions.length) {
-      displayQuestion(filteredQuestions);
-    } else {
-      showHomeScreen();
-    }
-  }, 2000);
+    displayQuestion(filteredQuestions);
+  }
 }
