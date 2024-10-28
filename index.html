@@ -8,18 +8,33 @@
 </head>
 <body>
   <div id="app">
-    <!-- Screen Content -->
-    <div id="screen">
-      <h2>Quiz Up</h2>
-      <div class="button-group">
-        <button class="super-button" id="homeButton">🏠 Home</button>
-        <button class="super-button" id="practiceButton">💪 Practice Mistakes</button>
-        <button class="super-button" id="reviewButton">🔍 Review Mode</button>
-        <button class="super-button" id="flashcardButton">📖 Flashcards</button>
-        <button class="super-button" id="randomQuizButton">🎲 Random Quiz</button>
-      </div>
+    <!-- Top Part: Select a Domain -->
+    <div id="domain-section">
+      <h2>Select a Domain</h2>
+      <button class="domain-button">Project Management Fundamentals</button>
+      <button class="domain-button">Predictive, Plan-Based Methodologies</button>
+      <button class="domain-button">Agile Frameworks/Methodologies</button>
+      <button class="domain-button">Business Analysis Frameworks</button>
+    </div>
+
+    <!-- Bottom Part: Quiz Modes -->
+    <div id="mode-section">
+      <button class="mode-button">Practice Mistakes</button>
+      <button class="mode-button">Review Mode</button>
+      <button class="mode-button">Flashcard</button>
+      <button class="mode-button">Random Question</button>
     </div>
   </div>
+
+  <!-- Footer Navigation -->
+  <div id="footer">
+    <button id="homeButton">🏠 Home</button>
+    <button id="practiceButton">💪 Practice</button>
+    <button id="reviewButton">🔍 Review</button>
+    <button id="flashcardButton">📖 Flashcards</button>
+    <button id="randomQuizButton">🎲 Random</button>
+  </div>
+  
   <script src="script.js"></script>
 </body>
 </html>
