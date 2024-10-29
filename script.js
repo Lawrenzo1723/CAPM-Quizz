@@ -56,7 +56,8 @@ const domainStructure = {
 // Load questions from Google Sheets
 async function loadQuestions() {
     try {
-        const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vRyL8ZTnjPNQ0NabBoTUGhQI3m5zIoe7XI3HWzLfxbwcP1gYhsL4s11XGYCYzi2fLPKQ6M4ONri45a7/pub?output=csv');
+        const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vTHFZbEP3N63P_HFyXaFW0NWp8X23NznNQi-3_Af1-Vsfxkam1lotbybOKi0RzhY-vV7iOW3HSISMUa/pub?output=csv
+');
         const data = await response.text();
         const rows = data.split('\n');
 
