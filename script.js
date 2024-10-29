@@ -59,8 +59,6 @@ async function loadQuestions() {
         const response = await fetch('https://raw.githubusercontent.com/Lawrenzo1723/CAPM-Quizz/refs/heads/main/question%20in%20Json.json');
         const data = await response.json();
 
-        console.log("Raw data from fetch:", data); // Debug line
-
         // Process the JSON data directly
         questions = data.map(row => ({
             question: row["Question"],
@@ -77,18 +75,6 @@ async function loadQuestions() {
     }
 }
 
-// Placeholder function to avoid "not defined" error
-function showMissedQuestions() {
-    console.log("showMissedQuestions called");
-    const screen = document.getElementById('screen');
-    if (missedQuestions.length > 0) {
-        currentQuestionIndex = 0;
-        displayQuestion(missedQuestions);
-    } else {
-        screen.innerHTML = `<p>No missed questions to review!</p>`;
-    }
-}
-
 function showHomeScreen() {
     const screen = document.getElementById('screen');
     screen.innerHTML = `<h2>Select a Domain</h2>
@@ -96,7 +82,7 @@ function showHomeScreen() {
     document.querySelectorAll('.domain-btn').forEach((btn, index) => {
         btn.addEventListener('click', () => showSubdomains(Object.keys(domainStructure)[index]));
     });
-    document.getElementById('footer').style.display = 'flex'; // Show footer on the home screen
+    document.getElementById('footer').style.display = 'flex';
 }
 
 function showSubdomains(domain) {
@@ -119,12 +105,7 @@ function showQuestions(subdomain) {
     currentSubdomain = subdomain;
     currentQuestionIndex = 0;
 
-    // Filter questions based on current domain and subdomain
     const filteredQuestions = questions.filter(q => q.domain === currentDomain && q.subdomain === currentSubdomain);
-
-    console.log("Current Domain:", currentDomain); // Debug line
-    console.log("Current Subdomain:", currentSubdomain); // Debug line
-    console.log("Filtered Questions:", filteredQuestions); // Debug line
 
     if (filteredQuestions.length > 0) {
         displayQuestion(filteredQuestions);
@@ -136,12 +117,6 @@ function showQuestions(subdomain) {
 function displayQuestion(filteredQuestions) {
     const screen = document.getElementById('screen');
     const questionData = filteredQuestions[currentQuestionIndex];
-
-    if (!questionData) {
-        console.error("No question data found at index", currentQuestionIndex); // Debug line
-        screen.innerHTML = `<p>Question data not found.</p>`;
-        return;
-    }
 
     screen.innerHTML = `
         <p>Question ${currentQuestionIndex + 1} of ${filteredQuestions.length}</p>
@@ -159,7 +134,7 @@ function displayQuestion(filteredQuestions) {
         const button = document.createElement('button');
         button.textContent = option;
         button.classList.add('option-btn');
-        button.addEventListener('click', () => checkAnswer(option, filteredQuestions));
+        button.addEventListener('click', () => checkAnswer(option, questionData));
         optionsDiv.appendChild(button);
     });
 
@@ -168,4 +143,70 @@ function displayQuestion(filteredQuestions) {
 
     document.getElementById('prevButton').disabled = currentQuestionIndex === 0;
     document.getElementById('nextButton').disabled = currentQuestionIndex === filteredQuestions.length - 1;
+}
+
+function checkAnswer(selectedOption, questionData) {
+    const isCorrect = selectedOption.trim() === questionData.correctAnswer.trim();
+    const feedback = document.getElementById('feedback');
+    feedback.textContent = isCorrect ? `Correct! ${questionData.explanation}` : `Incorrect. ${questionData.explanation}`;
+
+    if (!isCorrect) missedQuestions.push(questionData);
+}
+
+function prevQuestion(filteredQuestions) {
+    if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        displayQuestion(filteredQuestions);
+    }
+}
+
+function nextQuestion(filteredQuestions) {
+    if (currentQuestionIndex < filteredQuestions.length - 1) {
+        currentQuestionIndex++;
+        displayQuestion(filteredQuestions);
+    }
+}
+
+function showFlashcardMode() {
+    currentQuestionIndex = 0;
+    displayFlashcard();
+}
+
+function displayFlashcard() {
+    const screen = document.getElementById('screen');
+    const questionData = questions[currentQuestionIndex];
+
+    screen.innerHTML = `
+        <div id="flashcard">
+            <p>Question: ${questionData.question}</p>
+            <button id="revealAnswer">Reveal Answer</button>
+            <p id="answer" style="display:none;">Answer: ${questionData.correctAnswer}<br>Explanation: ${questionData.explanation}</p>
+            <div id="navigation">
+                <button id="prevFlashcard">Previous</button>
+                <button id="nextFlashcard">Next</button>
+            </div>
+        </div>
+    `;
+    document.getElementById('revealAnswer').addEventListener('click', () => {
+        document.getElementById('answer').style.display = 'block';
+    });
+
+    document.getElementById('prevFlashcard').addEventListener('click', () => {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            displayFlashcard();
+        }
+    });
+    document.getElementById('nextFlashcard').addEventListener('click', () => {
+        if (currentQuestionIndex < questions.length - 1) {
+            currentQuestionIndex++;
+            displayFlashcard();
+        }
+    });
+}
+
+function showRandomQuiz() {
+    const shuffledQuestions = [...questions].sort(() => Math.random() - 0.5);
+    currentQuestionIndex = 0;
+    displayQuestion(shuffledQuestions);
 }
