@@ -20,26 +20,36 @@ let questions = [];
 let currentDomain = "";
 let currentSubdomain = "";
 let currentQuestionIndex = 0;
-let missedQuestions = []; // Array to store incorrectly answered questions
-let sessionAnswers = []; // Array to store answers from the current session for review
+let missedQuestions = [];
+let sessionAnswers = [];
 
+// Updated domain structure based on user input
 const domainStructure = {
-    "Project Management Fundamentals": [
-        "Project Life Cycles",
+    "Project Management Fundamentals and Core Concepts": [
+        "Project Life Cycles and Processes",
         "Project Management Planning",
-        "Project Roles"
+        "Project Roles and Responsibilities",
+        "Following and Executing Planned Strategies or Frameworks"
     ],
     "Predictive, Plan-Based Methodologies": [
-        "Project Scheduling",
-        "Controls for Plan-Based Projects"
+        "When to Use a Predictive, Plan-Based Approach",
+        "Project Management Plan Scheduling",
+        "Documentation and Controls for Predictive, Plan-Based Projects"
     ],
     "Agile Frameworks/Methodologies": [
-        "Project Iterations",
-        "Components of an Adaptive Plan"
+        "Timing for Adaptive Approaches",
+        "Planning Project Iterations",
+        "Documentation and Controls for Adaptive Projects",
+        "Components of an Adaptive Plan",
+        "Task Management Preparation and Execution Steps"
     ],
     "Business Analysis Frameworks": [
-        "Business Analysis Roles",
-        "Stakeholder Communication"
+        "Business Analysis (BA) Roles and Responsibilities",
+        "Conducting Stakeholder Communication",
+        "Gathering Requirements",
+        "Product Roadmaps",
+        "Influence of Project Methodologies on Business Analysis Processes",
+        "Validating Requirements through Product Delivery"
     ]
 };
 
@@ -63,7 +73,7 @@ async function loadQuestions() {
                 });
             }
         });
-        console.log("Questions Loaded:", questions); // Debugging
+        console.log("Questions Loaded:", questions);
     } catch (error) {
         console.error("Error loading questions:", error);
     }
@@ -77,7 +87,6 @@ function showHomeScreen() {
         ${Object.keys(domainStructure).map(domain => `<button class="domain-btn">${domain}</button>`).join('')}
     `;
 
-    // Attach event listeners to domain buttons
     document.querySelectorAll('.domain-btn').forEach((btn, index) => {
         btn.addEventListener('click', () => showSubdomains(Object.keys(domainStructure)[index]));
     });
@@ -96,7 +105,6 @@ function showSubdomains(domain) {
         ${subdomains.map(sub => `<button class="subdomain-btn">${sub}</button>`).join('')}
     `;
 
-    // Attach event listeners to subdomain buttons
     document.querySelectorAll('.subdomain-btn').forEach((btn, index) => {
         btn.addEventListener('click', () => showQuestions(subdomains[index]));
     });
@@ -131,7 +139,6 @@ function displayQuestion(filteredQuestions) {
         </div>
     `;
 
-    // Display options with event listeners
     const optionsDiv = document.getElementById('options');
     questionData.options.forEach(option => {
         const button = document.createElement('button');
@@ -141,14 +148,10 @@ function displayQuestion(filteredQuestions) {
         optionsDiv.appendChild(button);
     });
 
-    // Add event listeners for Previous and Next buttons
     document.getElementById('prevButton').addEventListener('click', () => prevQuestion(filteredQuestions));
     document.getElementById('nextButton').addEventListener('click', () => nextQuestion(filteredQuestions));
 
-    // Disable Previous button if on the first question
     document.getElementById('prevButton').disabled = currentQuestionIndex === 0;
-
-    // Disable Next button if on the last question
     document.getElementById('nextButton').disabled = currentQuestionIndex === filteredQuestions.length - 1;
 }
 
@@ -160,7 +163,7 @@ function checkAnswer(selectedOption, filteredQuestions) {
     const feedback = document.getElementById('feedback');
     feedback.textContent = isCorrect ? `Correct! ${questionData.explanation}` : `Incorrect. ${questionData.explanation}`;
 
-    if (!isCorrect) missedQuestions.push(questionData); // Add to missedQuestions if incorrect
+    if (!isCorrect) missedQuestions.push(questionData);
 }
 
 // Navigation functions
@@ -186,4 +189,16 @@ function showMissedQuestions() {
     } else {
         document.getElementById('screen').innerHTML = `<p>No missed questions to review!</p>`;
     }
+}
+
+function showReviewMode() {
+    // Review Mode Logic
+}
+
+function showFlashcardMode() {
+    // Flashcard Mode Logic
+}
+
+function showRandomQuiz() {
+    // Random Quiz Mode Logic
 }
