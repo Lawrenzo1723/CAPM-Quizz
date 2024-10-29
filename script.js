@@ -58,6 +58,9 @@ async function loadQuestions() {
     try {
         const response = await fetch('https://script.google.com/macros/s/AKfycbx74zavGBC63Jinhzc9hjTcJ7mj-hB-jM19vGBUDs2wZgvlmm2Ft1eQ0-XixNxo4fM/exec');
         const data = await response.text();
+
+        console.log("Raw data from fetch:", data); // Debug line
+
         const rows = data.split('\n');
 
         rows.forEach(row => {
@@ -73,10 +76,22 @@ async function loadQuestions() {
                 });
             }
         });
-        
+
         console.log("Questions Loaded:", questions);
     } catch (error) {
         console.error("Error loading questions:", error);
+    }
+}
+
+// Placeholder function to avoid "not defined" error
+function showMissedQuestions() {
+    console.log("showMissedQuestions called");
+    const screen = document.getElementById('screen');
+    if (missedQuestions.length > 0) {
+        currentQuestionIndex = 0;
+        displayQuestion(missedQuestions);
+    } else {
+        screen.innerHTML = `<p>No missed questions to review!</p>`;
     }
 }
 
@@ -109,13 +124,13 @@ function showSubdomains(domain) {
 function showQuestions(subdomain) {
     currentSubdomain = subdomain;
     currentQuestionIndex = 0;
-    
+
     // Filter questions based on current domain and subdomain
     const filteredQuestions = questions.filter(q => q.domain === currentDomain && q.subdomain === currentSubdomain);
-    
-    console.log("Current Domain:", currentDomain);
-    console.log("Current Subdomain:", currentSubdomain);
-    console.log("Filtered Questions:", filteredQuestions);
+
+    console.log("Current Domain:", currentDomain); // Debug line
+    console.log("Current Subdomain:", currentSubdomain); // Debug line
+    console.log("Filtered Questions:", filteredQuestions); // Debug line
 
     if (filteredQuestions.length > 0) {
         displayQuestion(filteredQuestions);
@@ -127,6 +142,12 @@ function showQuestions(subdomain) {
 function displayQuestion(filteredQuestions) {
     const screen = document.getElementById('screen');
     const questionData = filteredQuestions[currentQuestionIndex];
+
+    if (!questionData) {
+        console.error("No question data found at index", currentQuestionIndex); // Debug line
+        screen.innerHTML = `<p>Question data not found.</p>`;
+        return;
+    }
 
     screen.innerHTML = `
         <p>Question ${currentQuestionIndex + 1} of ${filteredQuestions.length}</p>
