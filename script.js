@@ -1,6 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const screen = document.getElementById('screen');
+  const footer = document.getElementById('footer');
+
+  if (!screen || !footer) {
+    console.error("Required elements with IDs 'screen' or 'footer' are missing from the HTML.");
+    return;
+  }
+
   showHomeScreen();
-  loadQuestions(); // Load all questions into the questions array once
+  loadQuestions();
 });
 
 let questions = [];
@@ -16,23 +24,18 @@ const questionData = {
     "Project Life Cycles": [
       { question: "What is a project charter?", options: ["Document goals", "Define scope", "Authorize PM", "Approve resources"], correctAnswer: "Authorize PM" },
       { question: "What is the project scope?", options: ["Define goals", "Set boundaries", "Authorize PM", "Schedule tasks"], correctAnswer: "Set boundaries" },
-      // Additional questions for this subdomain
     ],
     "Project Management Planning": [
       { question: "What is project management?", options: ["Setting tasks", "Organizing plans", "Defining goals", "Monitoring progress"], correctAnswer: "Defining goals" }
-      // Additional questions
     ]
   },
   "Predictive, Plan-Based Methodologies": {
     "Predictive Approach": [
       { question: "When is predictive approach used?", options: ["Dynamic requirements", "Fixed requirements", "Adaptive changes", "Small teams"], correctAnswer: "Fixed requirements" }
-      // Additional questions
     ]
   },
-  // Add remaining domains and subdomains with questions here
 };
 
-// Load questions from the data structure
 function loadQuestions() {
   for (let domain in questionData) {
     for (let subdomain in questionData[domain]) {
@@ -41,40 +44,48 @@ function loadQuestions() {
   }
 }
 
-// Display the main home screen with domain options
 function showHomeScreen() {
-  document.getElementById('screen').innerHTML = `
+  const screen = document.getElementById('screen');
+  if (!screen) return;
+
+  screen.innerHTML = `
     <h2>Select a Domain</h2>
     ${Object.keys(questionData).map(domain => `<button class="domain-btn" onclick="showSubdomains('${domain}')">${domain}</button>`).join('')}
   `;
-  document.getElementById('footer').style.display = 'none'; // Hide footer on home screen
+  document.getElementById('footer').style.display = 'none';
 }
 
-// Display the subdomains of a selected domain
 function showSubdomains(domain) {
+  const screen = document.getElementById('screen');
+  if (!screen) return;
+
   currentDomain = domain;
   const subdomains = Object.keys(questionData[domain]);
 
-  document.getElementById('screen').innerHTML = `
+  screen.innerHTML = `
     <h2>${domain}</h2>
     <h3>Select a Subdomain</h3>
     ${subdomains.map(subdomain => `<button class="subdomain-btn" onclick="loadQuestionsForSubdomain('${domain}', '${subdomain}')">${subdomain}</button>`).join('')}
   `;
-  document.getElementById('footer').style.display = 'flex'; // Show footer after domain selection
+  document.getElementById('footer').style.display = 'flex';
 }
 
-// Load questions for the selected subdomain
 function loadQuestionsForSubdomain(domain, subdomain) {
+  const screen = document.getElementById('screen');
+  if (!screen) return;
+
   currentSubdomain = subdomain;
   currentSubdomainQuestions = questionData[domain][subdomain];
   currentQuestionIndex = 0;
   displayQuestion();
 }
 
-// Display the current question with navigation buttons
 function displayQuestion() {
+  const screen = document.getElementById('screen');
+  if (!screen || currentQuestionIndex >= currentSubdomainQuestions.length) return;
+
   const questionData = currentSubdomainQuestions[currentQuestionIndex];
-  document.getElementById('screen').innerHTML = `
+  screen.innerHTML = `
     <p>Question ${currentQuestionIndex + 1} of ${currentSubdomainQuestions.length}</p>
     <p>${questionData.question}</p>
     ${questionData.options.map(option => `<button onclick="checkAnswer('${option}')">${option}</button>`).join('')}
@@ -87,11 +98,10 @@ function displayQuestion() {
   `;
 }
 
-// Check if selected answer is correct, then provide feedback
 function checkAnswer(selectedOption) {
   const questionData = currentSubdomainQuestions[currentQuestionIndex];
   const feedback = document.getElementById('feedback');
-  
+
   if (selectedOption === questionData.correctAnswer) {
     feedback.textContent = "Correct!";
   } else {
@@ -100,7 +110,6 @@ function checkAnswer(selectedOption) {
   }
 }
 
-// Go to the previous question
 function prevQuestion() {
   if (currentQuestionIndex > 0) {
     currentQuestionIndex--;
@@ -108,7 +117,6 @@ function prevQuestion() {
   }
 }
 
-// Go to the next question
 function nextQuestion() {
   if (currentQuestionIndex < currentSubdomainQuestions.length - 1) {
     currentQuestionIndex++;
@@ -116,7 +124,6 @@ function nextQuestion() {
   }
 }
 
-// Functions for footer navigation (Practice Mistakes, Review Mode, Flashcards, Random Quiz)
 function showPracticeMistakes() {
   if (missedQuestions.length > 0) {
     currentSubdomainQuestions = missedQuestions;
@@ -138,8 +145,11 @@ function showFlashcards() {
 }
 
 function displayFlashcard() {
+  const screen = document.getElementById('screen');
+  if (!screen) return;
+
   const questionData = currentSubdomainQuestions[currentQuestionIndex];
-  document.getElementById('screen').innerHTML = `
+  screen.innerHTML = `
     <p>Flashcard: ${questionData.question}</p>
     <button onclick="revealAnswer()">Reveal Answer</button>
     <p id="answer" style="display:none;">Answer: ${questionData.correctAnswer}</p>
