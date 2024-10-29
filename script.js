@@ -20,23 +20,36 @@ let questions = [];
 let currentDomain = "";
 let currentSubdomain = "";
 let currentQuestionIndex = 0;
-let userStats = { correct: 0, incorrect: 0 };
-let missedQuestions = [];
-let sessionAnswers = [];
+let missedQuestions = []; // Array to store incorrectly answered questions
+let sessionAnswers = []; // Array to store answers from the current session for review
 
 const domainStructure = {
-    "Project Management Fundamentals": ["Project Life Cycles", "Project Management Planning", "Project Roles"],
-    "Predictive, Plan-Based Methodologies": ["When to Use a Predictive Approach", "Project Plan Scheduling"],
-    "Agile Frameworks/Methodologies": ["Adaptive Approaches", "Planning Iterations"],
-    "Business Analysis Frameworks": ["Business Analysis Roles", "Stakeholder Communication"]
+    "Project Management Fundamentals": [
+        "Project Life Cycles",
+        "Project Management Planning",
+        "Project Roles"
+    ],
+    "Predictive, Plan-Based Methodologies": [
+        "Project Scheduling",
+        "Controls for Plan-Based Projects"
+    ],
+    "Agile Frameworks/Methodologies": [
+        "Project Iterations",
+        "Components of an Adaptive Plan"
+    ],
+    "Business Analysis Frameworks": [
+        "Business Analysis Roles",
+        "Stakeholder Communication"
+    ]
 };
 
+// Load questions from Google Sheets
 async function loadQuestions() {
     try {
         const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vRyL8ZTnjPNQ0NabBoTUGhQI3m5zIoe7XI3HWzLfxbwcP1gYhsL4s11XGYCYzi2fLPKQ6M4ONri45a7/pub?output=csv');
         const data = await response.text();
         const rows = data.split('\n');
-        
+
         rows.forEach(row => {
             const cols = row.split(',');
             if (cols.length >= 9) {
@@ -50,12 +63,13 @@ async function loadQuestions() {
                 });
             }
         });
-        console.log("Questions Loaded:", questions);
+        console.log("Questions Loaded:", questions); // Debugging
     } catch (error) {
         console.error("Error loading questions:", error);
     }
 }
 
+// Show Home Screen
 function showHomeScreen() {
     const screen = document.getElementById('screen');
     screen.innerHTML = `
@@ -63,36 +77,37 @@ function showHomeScreen() {
         ${Object.keys(domainStructure).map(domain => `<button class="domain-btn">${domain}</button>`).join('')}
     `;
 
+    // Attach event listeners to domain buttons
     document.querySelectorAll('.domain-btn').forEach((btn, index) => {
         btn.addEventListener('click', () => showSubdomains(Object.keys(domainStructure)[index]));
     });
-
-    document.getElementById('footer').style.display = 'none';
+    document.getElementById('footer').style.display = 'none'; // Hide footer on Home Screen
 }
 
+// Show Subdomain Screen
 function showSubdomains(domain) {
     currentDomain = domain;
     const screen = document.getElementById('screen');
     const subdomains = domainStructure[domain];
+
     screen.innerHTML = `
         <h2>${domain}</h2>
-        <p>Select a Subdomain</p>
+        <h3>Select a Subdomain</h3>
         ${subdomains.map(sub => `<button class="subdomain-btn">${sub}</button>`).join('')}
     `;
 
+    // Attach event listeners to subdomain buttons
     document.querySelectorAll('.subdomain-btn').forEach((btn, index) => {
         btn.addEventListener('click', () => showQuestions(subdomains[index]));
     });
-
-    document.getElementById('footer').style.display = 'block';
 }
 
+// Show Questions for Selected Subdomain
 function showQuestions(subdomain) {
     currentSubdomain = subdomain;
     currentQuestionIndex = 0;
-    sessionAnswers = [];
     const filteredQuestions = questions.filter(q => q.domain === currentDomain && q.subdomain === currentSubdomain);
-    
+
     if (filteredQuestions.length > 0) {
         displayQuestion(filteredQuestions);
     } else {
@@ -100,6 +115,7 @@ function showQuestions(subdomain) {
     }
 }
 
+// Display a Question with Previous and Next Buttons
 function displayQuestion(filteredQuestions) {
     const screen = document.getElementById('screen');
     const questionData = filteredQuestions[currentQuestionIndex];
@@ -109,10 +125,13 @@ function displayQuestion(filteredQuestions) {
         <p>${questionData.question}</p>
         <div id="options"></div>
         <p id="feedback"></p>
-        <button id="prevButton">Previous</button>
-        <button id="nextButton">Next</button>
+        <div id="navigation">
+            <button id="prevButton">Previous</button>
+            <button id="nextButton">Next</button>
+        </div>
     `;
 
+    // Display options with event listeners
     const optionsDiv = document.getElementById('options');
     questionData.options.forEach(option => {
         const button = document.createElement('button');
@@ -122,22 +141,29 @@ function displayQuestion(filteredQuestions) {
         optionsDiv.appendChild(button);
     });
 
+    // Add event listeners for Previous and Next buttons
     document.getElementById('prevButton').addEventListener('click', () => prevQuestion(filteredQuestions));
     document.getElementById('nextButton').addEventListener('click', () => nextQuestion(filteredQuestions));
 
+    // Disable Previous button if on the first question
     document.getElementById('prevButton').disabled = currentQuestionIndex === 0;
+
+    // Disable Next button if on the last question
     document.getElementById('nextButton').disabled = currentQuestionIndex === filteredQuestions.length - 1;
 }
 
+// Check Answer and Provide Feedback
 function checkAnswer(selectedOption, filteredQuestions) {
     const questionData = filteredQuestions[currentQuestionIndex];
     const isCorrect = selectedOption.trim() === questionData.correctAnswer.trim();
+
     const feedback = document.getElementById('feedback');
     feedback.textContent = isCorrect ? `Correct! ${questionData.explanation}` : `Incorrect. ${questionData.explanation}`;
-    sessionAnswers.push({ ...questionData, userAnswer: selectedOption, isCorrect });
-    if (!isCorrect) missedQuestions.push(questionData);
+
+    if (!isCorrect) missedQuestions.push(questionData); // Add to missedQuestions if incorrect
 }
 
+// Navigation functions
 function prevQuestion(filteredQuestions) {
     if (currentQuestionIndex > 0) {
         currentQuestionIndex--;
@@ -152,4 +178,12 @@ function nextQuestion(filteredQuestions) {
     }
 }
 
-// Other mode functions can follow similarly (e.g., showFlashcardMode, showRandomQuiz, etc.)
+// Show Missed Questions
+function showMissedQuestions() {
+    if (missedQuestions.length > 0) {
+        currentQuestionIndex = 0;
+        displayQuestion(missedQuestions);
+    } else {
+        document.getElementById('screen').innerHTML = `<p>No missed questions to review!</p>`;
+    }
+}
