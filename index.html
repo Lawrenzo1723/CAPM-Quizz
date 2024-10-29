@@ -1,58 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Superhero Quiz App</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="app">
-    <!-- Home Screen Content -->
-    <div id="home-screen">
-      <!-- Top Part: Select a Domain -->
-      <div id="domain-section">
-        <h2>Select a Domain</h2>
-        <button class="domain-button" onclick="showSubdomains('Project Management Fundamentals')">Project Management Fundamentals</button>
-        <button class="domain-button" onclick="showSubdomains('Predictive, Plan-Based Methodologies')">Predictive, Plan-Based Methodologies</button>
-        <button class="domain-button" onclick="showSubdomains('Agile Frameworks/Methodologies')">Agile Frameworks/Methodologies</button>
-        <button class="domain-button" onclick="showSubdomains('Business Analysis Frameworks')">Business Analysis Frameworks</button>
-      </div>
-
-      <!-- Bottom Part: Quiz Modes -->
-      <div id="mode-section">
-        <button class="mode-button" onclick="navigateTo('practice')">Practice Mistakes</button>
-        <button class="mode-button" onclick="navigateTo('review')">Review Mode</button>
-        <button class="mode-button" onclick="navigateTo('flashcard')">Flashcard</button>
-        <button class="mode-button" onclick="navigateTo('random')">Random Question</button>
-      </div>
+    <div id="screen"></div> <!-- This is where content will be loaded -->
+    <div id="footer" style="display: none;">
+        <!-- Footer Navigation Buttons -->
+        <button id="homeButton">Home</button>
+        <button id="practiceButton">Practice Mistakes</button>
+        <button id="reviewButton">Review Mode</button>
+        <button id="flashcardButton">Flashcards</button>
+        <button id="randomQuizButton">Random Quiz</button>
     </div>
 
-    <!-- Quiz Content Screen -->
-    <div id="quiz-screen" style="display: none;">
-      <h2 id="quiz-title">Quiz Section</h2>
-      <div id="quiz-content">
-        <!-- Dynamic Content for Quiz Section Goes Here -->
-      </div>
-      <div id="navigation">
-        <button id="prevButton" onclick="prevQuestion()">Previous</button>
-        <button id="nextButton" onclick="nextQuestion()">Next</button>
-      </div>
-      <div id="progress">
-        <p id="progress-count">Question 1 of 10</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Footer Navigation (Initially Hidden) -->
-  <div id="footer" style="display: none;">
-    <button id="homeButton" onclick="showHome()">🏠 Home</button>
-    <button id="practiceButton" onclick="navigateTo('practice')">💪 Practice</button>
-    <button id="reviewButton" onclick="navigateTo('review')">🔍 Review</button>
-    <button id="flashcardButton" onclick="navigateTo('flashcard')">📖 Flashcards</button>
-    <button id="randomQuizButton" onclick="navigateTo('random')">🎲 Random</button>
-  </div>
-  
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
