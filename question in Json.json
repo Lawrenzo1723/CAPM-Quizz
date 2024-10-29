@@ -218,5 +218,115 @@
     "Explanation": "Programs are collections of related projects for joint benefits, while portfolios are strategic groupings to achieve organizational goals.",
     "Domain": "Project Management Fundamentals and Core Concepts",
     "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "In a project utilizing an adaptive life cycle, which phase is most likely to involve regular stakeholder feedback?",
+    "Option A": "Feasibility",
+    "Option B": "Development",
+    "Option C": "Test",
+    "Option D": "Close",
+    "Correct Answer": "Development",
+    "Explanation": "Adaptive life cycles, such as agile, prioritize continuous feedback during development, allowing iterative adjustments to meet stakeholder needs.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "What is the primary purpose of a phase gate review at the end of each phase?",
+    "Option A": "To define requirements for the next phase",
+    "Option B": "To confirm deliverables meet predefined exit criteria before moving to the next phase",
+    "Option C": "To adjust project funding and resources",
+    "Option D": "To evaluate project risks in isolation",
+    "Correct Answer": "To confirm deliverables meet predefined exit criteria before moving to the next phase",
+    "Explanation": "Phase gate reviews ensure that specific deliverable criteria are met before advancing, supporting project quality and alignment with objectives.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "When using a hybrid approach, what is typically true about the project’s deliverables?",
+    "Option A": "They are released only at project completion.",
+    "Option B": "They may be partially adaptive, where some parts are iterative, and others follow a predictive approach.",
+    "Option C": "They must follow an incremental release pattern.",
+    "Option D": "They avoid any iteration in development.",
+    "Correct Answer": "They may be partially adaptive, where some parts are iterative, and others follow a predictive approach.",
+    "Explanation": "Hybrid approaches combine adaptive and predictive methods, allowing parts of the deliverable to be completed iteratively while other parts follow a fixed schedule.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "In which project phase would a construction project most likely include initial quality assurance activities?",
+    "Option A": "Feasibility",
+    "Option B": "Design",
+    "Option C": "Build",
+    "Option D": "Deploy",
+    "Correct Answer": "Build",
+    "Explanation": "In construction projects, quality assurance is integral to the Build phase to ensure standards are met as the physical deliverable is created.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "How does PMBOK define 'incremental' delivery in a project life cycle?",
+    "Option A": "Releasing the full deliverable at the end of the project",
+    "Option B": "Dividing deliverables into distinct components, adding functionality iteratively",
+    "Option C": "Delivering each iteration independently",
+    "Option D": "Executing all phases concurrently",
+    "Correct Answer": "Dividing deliverables into distinct components, adding functionality iteratively",
+    "Explanation": "Incremental delivery adds functionality through successive builds, creating partial deliverables until the final version is complete.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "What distinguishes 'periodic delivery' from 'multiple delivery' as described by PMBOK?",
+    "Option A": "Periodic delivery releases outputs at fixed intervals, while multiple delivery has flexible timelines.",
+    "Option B": "Multiple delivery is used only in adaptive life cycles.",
+    "Option C": "Periodic delivery implies each release is identical in scope.",
+    "Option D": "Both terms are used interchangeably.",
+    "Correct Answer": "Periodic delivery releases outputs at fixed intervals, while multiple delivery has flexible timelines.",
+    "Explanation": "Periodic delivery schedules releases at fixed intervals, unlike multiple deliveries, which may occur at variable times.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "Which deliverable development approach does PMBOK recommend for high-risk projects requiring early validation?",
+    "Option A": "Predictive",
+    "Option B": "Hybrid",
+    "Option C": "Incremental",
+    "Option D": "Adaptive",
+    "Correct Answer": "Adaptive",
+    "Explanation": "Adaptive approaches allow for early feedback, which is essential in high-risk projects to validate project outcomes progressively.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "In PMBOK, what role does the 'Test' phase play in the context of deliverables?",
+    "Option A": "To generate project requirements",
+    "Option B": "To finalize and ensure deliverable quality before deployment",
+    "Option C": "To gather stakeholder requirements",
+    "Option D": "To monitor resources",
+    "Correct Answer": "To finalize and ensure deliverable quality before deployment",
+    "Explanation": "The Test phase is crucial for quality assurance, confirming that deliverables meet standards prior to deployment.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "How is a 'phase gate' different from a 'milestone' in project management terms?",
+    "Option A": "A phase gate assesses completion of a specific deliverable; a milestone is a significant event.",
+    "Option B": "Phase gates are only in predictive approaches, while milestones are only in adaptive approaches.",
+    "Option C": "Milestones require detailed deliverable criteria, unlike phase gates.",
+    "Option D": "There is no significant difference between the two.",
+    "Correct Answer": "A phase gate assesses completion of a specific deliverable; a milestone is a significant event.",
+    "Explanation": "Phase gates are used for reviewing phase completion based on deliverable criteria, whereas milestones denote major project events or achievements.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "What purpose does the 'Close' phase serve when individual deliverables are periodically completed?",
+    "Option A": "To archive all project data immediately after project start",
+    "Option B": "To review and document lessons learned and assess overall project performance",
+    "Option C": "To deploy incremental deliverables to stakeholders",
+    "Option D": "To eliminate remaining project risks",
+    "Correct Answer": "To review and document lessons learned and assess overall project performance",
+    "Explanation": "The Close phase includes documenting lessons learned and evaluating project performance against objectives before final archiving.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
   }
 ]
