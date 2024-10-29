@@ -108,6 +108,8 @@ function showSubdomains(domain) {
     document.querySelectorAll('.subdomain-btn').forEach((btn, index) => {
         btn.addEventListener('click', () => showQuestions(subdomains[index]));
     });
+
+    document.getElementById('footer').style.display = 'block'; // Show footer on Subdomain Screen
 }
 
 // Show Questions for Selected Subdomain
@@ -191,14 +193,17 @@ function showMissedQuestions() {
     }
 }
 
+// Show Review Mode (Placeholder)
 function showReviewMode() {
-    // Review Mode Logic
+    document.getElementById('screen').innerHTML = "<p>Review Mode: Feature under construction.</p>";
 }
 
+// Show Flashcard Mode (Placeholder)
 function showFlashcardMode() {
-    // Flashcard Mode Logic
+    document.getElementById('screen').innerHTML = "<p>Flashcard Mode: Feature under construction.</p>";
 }
 
+// Show Random Quiz (Placeholder)
 function showRandomQuiz() {
-    // Random Quiz Mode Logic
+    document.getElementById('screen').innerHTML = "<p>Random Quiz: Feature under construction.</p>";
 }
