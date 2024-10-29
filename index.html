@@ -13,7 +13,7 @@
       <!-- Top Part: Select a Domain -->
       <div id="domain-section">
         <h2>Select a Domain</h2>
-        <button class="domain-button" onclick="showSubdomains('Project Management Fundamentals and Core Concepts')">Project Management Fundamentals</button>
+        <button class="domain-button" onclick="showSubdomains('Project Management Fundamentals')">Project Management Fundamentals</button>
         <button class="domain-button" onclick="showSubdomains('Predictive, Plan-Based Methodologies')">Predictive, Plan-Based Methodologies</button>
         <button class="domain-button" onclick="showSubdomains('Agile Frameworks/Methodologies')">Agile Frameworks/Methodologies</button>
         <button class="domain-button" onclick="showSubdomains('Business Analysis Frameworks')">Business Analysis Frameworks</button>
@@ -33,6 +33,13 @@
       <h2 id="quiz-title">Quiz Section</h2>
       <div id="quiz-content">
         <!-- Dynamic Content for Quiz Section Goes Here -->
+      </div>
+      <div id="navigation">
+        <button id="prevButton" onclick="prevQuestion()">Previous</button>
+        <button id="nextButton" onclick="nextQuestion()">Next</button>
+      </div>
+      <div id="progress">
+        <p id="progress-count">Question 1 of 10</p>
       </div>
     </div>
   </div>
