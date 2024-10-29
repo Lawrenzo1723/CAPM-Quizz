@@ -108,5 +108,115 @@
     "Explanation": "The PMBOK Guide emphasizes continuous feedback from operations, which helps projects adjust to operational realities, ensuring better integration and alignment.",
     "Domain": "Project Management Fundamentals and Core Concepts",
     "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "How does the PMBOK Guide define the role of a 'system for value delivery' within an organization?",
+    "Option A": "As a structured approach limited to delivering project outputs",
+    "Option B": "As a framework for delivering value through coordinated projects, programs, and portfolios",
+    "Option C": "A set of methodologies that guarantee project success",
+    "Option D": "A strategy that replaces traditional project management practices",
+    "Correct Answer": "As a framework for delivering value through coordinated projects, programs, and portfolios",
+    "Explanation": "A 'system for value delivery' in PMBOK is a structure encompassing portfolios, programs, projects, products, and operations that together aim to achieve an organization’s strategic objectives.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "In the context of PMBOK, what distinguishes a project from ongoing operations?",
+    "Option A": "Projects have fixed budgets, while operations are indefinite",
+    "Option B": "Projects aim to produce a unique product or result and are temporary, while operations are ongoing",
+    "Option C": "Projects are only initiated by executive teams",
+    "Option D": "Operations generate unique products on a repeating basis",
+    "Correct Answer": "Projects aim to produce a unique product or result and are temporary, while operations are ongoing",
+    "Explanation": "A project is defined as a temporary endeavor with a specific purpose to deliver a unique product or result, unlike operations which are ongoing and repetitive.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "According to PMBOK, what best describes the relationship between project outcomes and organizational value?",
+    "Option A": "Project outcomes provide immediate financial value to the organization",
+    "Option B": "Project outcomes contribute indirectly by aligning with strategic objectives",
+    "Option C": "Project outcomes are always measurable in financial terms",
+    "Option D": "Organizational value is based on the number of projects completed",
+    "Correct Answer": "Project outcomes contribute indirectly by aligning with strategic objectives",
+    "Explanation": "Projects are undertaken to achieve outcomes that contribute to broader organizational goals and value, which can be measured in terms other than financial metrics.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "What is a key purpose of governance in project management as per PMBOK?",
+    "Option A": "To provide a system for controlling project decisions",
+    "Option B": "To standardize all project management approaches across an organization",
+    "Option C": "To ensure project teams make independent decisions",
+    "Option D": "To support workflows, manage issues, and guide strategic decision-making",
+    "Correct Answer": "To support workflows, manage issues, and guide strategic decision-making",
+    "Explanation": "Governance frameworks in PMBOK establish oversight, control, and support decision-making processes essential to project success and alignment with organizational strategy.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "How does PMBOK differentiate between a 'product' and a 'project'?",
+    "Option A": "A product is an output of a project and can be a component or an end item",
+    "Option B": "A product is created to manage a project",
+    "Option C": "Projects are permanent while products are temporary",
+    "Option D": "Products must be completed before the project can start",
+    "Correct Answer": "A product is an output of a project and can be a component or an end item",
+    "Explanation": "Products, as per PMBOK, are quantifiable outputs that may be complete in themselves or part of a larger project outcome.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "Which component is NOT typically part of a project’s internal environment according to PMBOK?",
+    "Option A": "Employee capability and skills",
+    "Option B": "External regulatory requirements",
+    "Option C": "Organizational culture and governance",
+    "Option D": "Process assets and governance documentation",
+    "Correct Answer": "External regulatory requirements",
+    "Explanation": "External regulatory requirements are part of the external environment, whereas the internal environment includes elements within the organization such as process assets, culture, and skills.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "In a value delivery system, what role does feedback from operations typically play?",
+    "Option A": "It directs project funding exclusively",
+    "Option B": "It enables adjustments and supports iterative improvement for alignment with strategy",
+    "Option C": "It only measures performance outcomes after project completion",
+    "Option D": "It minimizes project team engagement",
+    "Correct Answer": "It enables adjustments and supports iterative improvement for alignment with strategy",
+    "Explanation": "Feedback in a value delivery system flows back to align projects with organizational strategy, allowing for dynamic adjustments to support outcome realization.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "What is the primary focus of project management according to the PMBOK Guide’s definition?",
+    "Option A": "Ensuring all stakeholders are satisfied",
+    "Option B": "Delivering project requirements to meet intended outcomes",
+    "Option C": "Managing resource availability",
+    "Option D": "Minimizing project scope for efficiency",
+    "Correct Answer": "Delivering project requirements to meet intended outcomes",
+    "Explanation": "Project management is the application of knowledge, skills, and techniques to meet project requirements and ensure outcomes that align with stakeholder and organizational needs.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "According to PMBOK, which of the following does NOT fall under the functions associated with projects?",
+    "Option A": "Governance to approve project changes",
+    "Option B": "Regulatory compliance enforcement",
+    "Option C": "Oversight to coordinate project work",
+    "Option D": "Providing business direction and insights",
+    "Correct Answer": "Regulatory compliance enforcement",
+    "Explanation": "While governance is part of project functions, regulatory compliance enforcement is typically an external factor rather than a direct project function.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "What is an essential distinction between a portfolio and a program in project management?",
+    "Option A": "Portfolios consist only of completed projects, while programs are ongoing",
+    "Option B": "Programs are groupings of related projects managed together, whereas portfolios align projects with strategic objectives",
+    "Option C": "Portfolios focus solely on resource allocation",
+    "Option D": "Programs operate independently from project managers",
+    "Correct Answer": "Programs are groupings of related projects managed together, whereas portfolios align projects with strategic objectives",
+    "Explanation": "Programs are collections of related projects for joint benefits, while portfolios are strategic groupings to achieve organizational goals.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
   }
 ]
