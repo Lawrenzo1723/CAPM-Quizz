@@ -2,6 +2,13 @@ document.addEventListener('DOMContentLoaded', () => {
   showHome();
 });
 
+const subdomains = {
+  "Project Management Fundamentals and Core Concepts": ["Project Life Cycles", "Project Management Planning"],
+  "Predictive, Plan-Based Methodologies": ["Predictive Approach", "Plan-Based Scheduling"],
+  "Agile Frameworks/Methodologies": ["Adaptive Approaches", "Project Iterations"],
+  "Business Analysis Frameworks": ["BA Roles", "Stakeholder Communication"]
+};
+
 function showHome() {
   document.getElementById('home-screen').style.display = 'block';
   document.getElementById('quiz-screen').style.display = 'none';
@@ -29,17 +36,17 @@ function showSubdomains(domain) {
   document.getElementById('quiz-screen').style.display = 'block';
   document.getElementById('footer').style.display = 'flex';
 
+  const domainSubdomains = subdomains[domain];
   document.getElementById('quiz-content').innerHTML = `
-    <p>Select a subdomain in ${domain}</p>
-    <button onclick="showQuestions()">Subdomain 1</button>
-    <button onclick="showQuestions()">Subdomain 2</button>
+    <h3>Select a Subdomain</h3>
+    ${domainSubdomains.map(sub => `<button onclick="showQuestions('${sub}')">${sub}</button>`).join('')}
   `;
 }
 
-function showQuestions() {
-  document.getElementById('quiz-title').textContent = 'Question 1';
+function showQuestions(subdomain) {
+  document.getElementById('quiz-title').textContent = `Questions on ${subdomain}`;
   document.getElementById('quiz-content').innerHTML = `
-    <p>What is a key benefit of agile methodologies?</p>
+    <p>Sample question for ${subdomain}: What is a key benefit of this approach?</p>
     <button onclick="showAnswer(true)">Flexibility</button>
     <button onclick="showAnswer(false)">Cost-saving</button>
   `;
@@ -47,13 +54,15 @@ function showQuestions() {
 
 function showAnswer(isCorrect) {
   document.getElementById('quiz-content').innerHTML = isCorrect 
-    ? '<p>Correct! Agile offers flexibility in changing requirements.</p>' 
-    : '<p>Incorrect. The key benefit of agile is flexibility.</p>';
+    ? '<p>Correct! The key benefit is flexibility.</p>' 
+    : '<p>Incorrect. The key benefit is flexibility.</p>';
 }
 
 function displayRandomQuestion() {
   document.getElementById('quiz-title').textContent = 'Random Question';
   document.getElementById('quiz-content').innerHTML = `
-    <p>Randomly selected question goes here.</p>
+    <p>Randomly selected question: What is a key benefit of agile methodologies?</p>
+    <button onclick="showAnswer(true)">Flexibility</button>
+    <button onclick="showAnswer(false)">Cost-saving</button>
   `;
 }
