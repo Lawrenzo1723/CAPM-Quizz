@@ -1,0 +1,134 @@
+[
+  {
+    "Question": "What is a project, according to the PMBOK Guide?",
+    "Option A": "A continuous process to achieve goals.",
+    "Option B": "A temporary endeavor undertaken to create a unique product, service, or result.",
+    "Option C": "An activity repeated at regular intervals.",
+    "Option D": "A component of routine operations.",
+    "Correct Answer": "A temporary endeavor undertaken to create a unique product, service, or result.",
+    "Explanation": "Projects are defined as temporary, aiming to achieve unique goals and outcomes, unlike ongoing operations.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "Which of the following best describes a key characteristic of a project?",
+    "Option A": "Projects are indefinite and recurring.",
+    "Option B": "Projects produce unique outcomes or deliverables.",
+    "Option C": "Projects are routine tasks.",
+    "Option D": "Projects always have a single, unchanging scope.",
+    "Correct Answer": "Projects produce unique outcomes or deliverables.",
+    "Explanation": "Projects are meant to deliver unique outputs, differentiating them from routine, operational tasks that are repetitive.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "What makes a project different from an operation?",
+    "Option A": "A project is a temporary and unique endeavor.",
+    "Option B": "A project has continuous and repeated tasks.",
+    "Option C": "A project has no defined objectives.",
+    "Option D": "A project has an indefinite timeline.",
+    "Correct Answer": "A project is a temporary and unique endeavor.",
+    "Explanation": "Projects are temporary and designed to accomplish specific, unique results, while operations are ongoing and consistent.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "How does the PMBOK Guide define the temporary nature of a project?",
+    "Option A": "Projects do not require a set budget.",
+    "Option B": "Projects have a defined start and end.",
+    "Option C": "Projects continue indefinitely.",
+    "Option D": "Projects focus only on fixed objectives.",
+    "Correct Answer": "Projects have a defined start and end.",
+    "Explanation": "Projects are established with specific start and end dates, unlike ongoing operations that lack defined timelines.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "Why are projects created in organizations?",
+    "Option A": "To conduct daily operations.",
+    "Option B": "To meet unique goals and objectives.",
+    "Option C": "To repeat standard processes.",
+    "Option D": "To create indefinite activities.",
+    "Correct Answer": "To meet unique goals and objectives.",
+    "Explanation": "Projects are initiated to achieve specific objectives and outcomes, often addressing unique requirements within an organization.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "How does a project’s uniqueness specifically affect its planning approach?",
+    "Option A": "Unique projects allow for minimal planning.",
+    "Option B": "Unique projects require adaptable and tailored planning approaches.",
+    "Option C": "Uniqueness reduces complexity, simplifying planning.",
+    "Option D": "Uniqueness means no formal planning is needed.",
+    "Correct Answer": "Unique projects require adaptable and tailored planning approaches.",
+    "Explanation": "Projects often involve unique requirements, meaning standard planning approaches may need customization to address specific needs effectively.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "Which factor distinguishes a project from a program in complex environments?",
+    "Option A": "Projects are limited to fixed outcomes.",
+    "Option B": "Projects do not align with organizational strategy.",
+    "Option C": "Projects do not rely on stakeholder engagement.",
+    "Option D": "Projects are independent, temporary endeavors delivering specific results.",
+    "Correct Answer": "Projects are independent, temporary endeavors delivering specific results.",
+    "Explanation": "Unlike programs, projects are temporary, independent, and outcome-focused; they are not structured to provide ongoing benefits like programs are.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "How does the PMBOK Guide suggest balancing flexibility and control within a unique project?",
+    "Option A": "By adhering strictly to traditional methodologies.",
+    "Option B": "By using a flexible life cycle tailored to project requirements.",
+    "Option C": "By using only predefined, repeatable processes.",
+    "Option D": "By limiting flexibility to avoid change.",
+    "Correct Answer": "By using a flexible life cycle tailored to project requirements.",
+    "Explanation": "The PMBOK Guide suggests tailoring project life cycles and processes to the specific needs of the project to balance control with adaptability.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "In what way can the temporary nature of a project create challenges for value delivery?",
+    "Option A": "Projects end before achieving full value.",
+    "Option B": "Projects have less impact on organizational growth.",
+    "Option C": "Projects must deliver value within their limited time frame.",
+    "Option D": "Projects lack stakeholder engagement for value delivery.",
+    "Correct Answer": "Projects must deliver value within their limited time frame.",
+    "Explanation": "The temporary nature of a project requires value delivery within a limited period, which may restrict long-term benefit realization and complicate value measurement.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "Which approach does the PMBOK Guide recommend for projects that require integration with existing operations?",
+    "Option A": "Implementing without integration to avoid disruption.",
+    "Option B": "Integrating project outcomes post-closure to ensure continuity.",
+    "Option C": "Incorporating an ongoing operations team within the project team.",
+    "Option D": "Using continuous feedback loops from operations to inform project adjustments.",
+    "Correct Answer": "Using continuous feedback loops from operations to inform project adjustments.",
+    "Explanation": "The PMBOK Guide emphasizes continuous feedback from operations, which helps projects adjust to operational realities, ensuring better integration and alignment.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "brajasjd",
+    "Option A": "brajasjd",
+    "Option B": "brajasjd",
+    "Option C": "brajasjd",
+    "Option D": "brajasjd",
+    "Correct Answer": "brajasjd",
+    "Explanation": "brajasjd",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "mklsadlsa",
+    "Option A": "mklsadlsa",
+    "Option B": "mklsadlsa",
+    "Option C": "mklsadlsa",
+    "Option D": "mklsadlsa",
+    "Correct Answer": "mklsadlsa",
+    "Explanation": "mklsadlsa",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  }
+]
