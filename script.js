@@ -118,6 +118,11 @@ function displayQuestion(filteredQuestions) {
     const screen = document.getElementById('screen');
     const questionData = filteredQuestions[currentQuestionIndex];
 
+    if (!questionData) {
+        screen.innerHTML = `<p>Question data not found.</p>`;
+        return;
+    }
+
     screen.innerHTML = `
         <p>Question ${currentQuestionIndex + 1} of ${filteredQuestions.length}</p>
         <p>${questionData.question}</p>
@@ -151,6 +156,7 @@ function checkAnswer(selectedOption, questionData) {
     feedback.textContent = isCorrect ? `Correct! ${questionData.explanation}` : `Incorrect. ${questionData.explanation}`;
 
     if (!isCorrect) missedQuestions.push(questionData);
+    sessionAnswers.push({ ...questionData, userAnswer: selectedOption, isCorrect });
 }
 
 function prevQuestion(filteredQuestions) {
@@ -167,6 +173,56 @@ function nextQuestion(filteredQuestions) {
     }
 }
 
+// Practice Mistakes Mode
+function showMissedQuestions() {
+    if (missedQuestions.length > 0) {
+        currentQuestionIndex = 0;
+        displayQuestion(missedQuestions);
+    } else {
+        document.getElementById('screen').innerHTML = `<p>No missed questions to review!</p>`;
+    }
+}
+
+// Review Mode
+function showReviewMode() {
+    if (sessionAnswers.length > 0) {
+        currentQuestionIndex = 0;
+        displayReviewQuestion();
+    } else {
+        document.getElementById('screen').innerHTML = `<p>No session data to review!</p>`;
+    }
+}
+
+function displayReviewQuestion() {
+    const screen = document.getElementById('screen');
+    const questionData = sessionAnswers[currentQuestionIndex];
+
+    screen.innerHTML = `
+        <p>Question ${currentQuestionIndex + 1} of ${sessionAnswers.length}</p>
+        <p>${questionData.question}</p>
+        <p>Your Answer: ${questionData.userAnswer} - ${questionData.isCorrect ? "Correct" : "Incorrect"}</p>
+        <p>Explanation: ${questionData.explanation}</p>
+        <div id="navigation">
+            <button id="prevButton">Previous</button>
+            <button id="nextButton">Next</button>
+        </div>
+    `;
+    
+    document.getElementById('prevButton').addEventListener('click', () => {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            displayReviewQuestion();
+        }
+    });
+    document.getElementById('nextButton').addEventListener('click', () => {
+        if (currentQuestionIndex < sessionAnswers.length - 1) {
+            currentQuestionIndex++;
+            displayReviewQuestion();
+        }
+    });
+}
+
+// Flashcard Mode
 function showFlashcardMode() {
     currentQuestionIndex = 0;
     displayFlashcard();
@@ -205,6 +261,7 @@ function displayFlashcard() {
     });
 }
 
+// Random Quiz Mode
 function showRandomQuiz() {
     const shuffledQuestions = [...questions].sort(() => Math.random() - 0.5);
     currentQuestionIndex = 0;
