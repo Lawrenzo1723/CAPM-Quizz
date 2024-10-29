@@ -85,7 +85,7 @@ function showHomeScreen() {
     document.querySelectorAll('.domain-btn').forEach((btn, index) => {
         btn.addEventListener('click', () => showSubdomains(Object.keys(domainStructure)[index]));
     });
-    document.getElementById('footer').style.display = 'none';
+    document.getElementById('footer').style.display = 'flex'; // Show footer on the home screen
 }
 
 function showSubdomains(domain) {
