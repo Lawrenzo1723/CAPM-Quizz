@@ -56,7 +56,7 @@ const domainStructure = {
 // Load questions from Google Sheets
 async function loadQuestions() {
     try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbwSwd1G_yr6YwNuGOAIPknPFbhrgEZfRGHesvebp_NEgnktbeiw0o9aVZib30U6Sw/exec');
+        const response = await fetch('https://raw.githubusercontent.com/Lawrenzo1723/CAPM-Quizz/refs/heads/main/question%20in%20Json.json');
         const data = await response.text();
 
         console.log("Raw data from fetch:", data); // Debug line
