@@ -101,6 +101,7 @@ function showSubdomains(domain) {
     document.querySelectorAll('.subdomain-btn').forEach((btn, index) => {
         btn.addEventListener('click', () => showQuestions(subdomains[index]));
     });
+    document.getElementById('footer').style.display = 'flex'; // Show footer on all other screens
 }
 
 function showQuestions(subdomain) {
@@ -177,6 +178,7 @@ function showMissedQuestions() {
     } else {
         document.getElementById('screen').innerHTML = `<p>No missed questions to review!</p>`;
     }
+    document.getElementById('footer').style.display = 'flex';
 }
 
 function showReviewMode() {
@@ -187,17 +189,20 @@ function showReviewMode() {
     } else {
         screen.innerHTML = `<p>No session data to review!</p>`;
     }
+    document.getElementById('footer').style.display = 'flex';
 }
 
 function showFlashcardMode() {
     currentQuestionIndex = 0;
     displayFlashcard();
+    document.getElementById('footer').style.display = 'flex';
 }
 
 function showRandomQuiz() {
     const shuffledQuestions = [...questions].sort(() => Math.random() - 0.5);
     currentQuestionIndex = 0;
     displayQuestion(shuffledQuestions);
+    document.getElementById('footer').style.display = 'flex';
 }
 
 function displayReviewQuestion() {
