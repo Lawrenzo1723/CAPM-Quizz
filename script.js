@@ -23,7 +23,6 @@ let currentQuestionIndex = 0;
 let missedQuestions = [];
 let sessionAnswers = [];
 
-// Updated domain structure based on user input
 const domainStructure = {
     "Project Management Fundamentals and Core Concepts": [
         "Project Life Cycles and Processes",
@@ -79,21 +78,16 @@ async function loadQuestions() {
     }
 }
 
-// Show Home Screen
 function showHomeScreen() {
     const screen = document.getElementById('screen');
-    screen.innerHTML = `
-        <h2>Select a Domain</h2>
-        ${Object.keys(domainStructure).map(domain => `<button class="domain-btn">${domain}</button>`).join('')}
-    `;
-
+    screen.innerHTML = `<h2>Select a Domain</h2>
+        ${Object.keys(domainStructure).map(domain => `<button class="domain-btn">${domain}</button>`).join('')}`;
     document.querySelectorAll('.domain-btn').forEach((btn, index) => {
         btn.addEventListener('click', () => showSubdomains(Object.keys(domainStructure)[index]));
     });
-    document.getElementById('footer').style.display = 'none'; // Hide footer on Home Screen
+    document.getElementById('footer').style.display = 'none';
 }
 
-// Show Subdomain Screen
 function showSubdomains(domain) {
     currentDomain = domain;
     const screen = document.getElementById('screen');
@@ -104,15 +98,11 @@ function showSubdomains(domain) {
         <h3>Select a Subdomain</h3>
         ${subdomains.map(sub => `<button class="subdomain-btn">${sub}</button>`).join('')}
     `;
-
     document.querySelectorAll('.subdomain-btn').forEach((btn, index) => {
         btn.addEventListener('click', () => showQuestions(subdomains[index]));
     });
-
-    document.getElementById('footer').style.display = 'block'; // Show footer on Subdomain Screen
 }
 
-// Show Questions for Selected Subdomain
 function showQuestions(subdomain) {
     currentSubdomain = subdomain;
     currentQuestionIndex = 0;
@@ -125,7 +115,6 @@ function showQuestions(subdomain) {
     }
 }
 
-// Display a Question with Previous and Next Buttons
 function displayQuestion(filteredQuestions) {
     const screen = document.getElementById('screen');
     const questionData = filteredQuestions[currentQuestionIndex];
@@ -157,7 +146,6 @@ function displayQuestion(filteredQuestions) {
     document.getElementById('nextButton').disabled = currentQuestionIndex === filteredQuestions.length - 1;
 }
 
-// Check Answer and Provide Feedback
 function checkAnswer(selectedOption, filteredQuestions) {
     const questionData = filteredQuestions[currentQuestionIndex];
     const isCorrect = selectedOption.trim() === questionData.correctAnswer.trim();
@@ -168,7 +156,6 @@ function checkAnswer(selectedOption, filteredQuestions) {
     if (!isCorrect) missedQuestions.push(questionData);
 }
 
-// Navigation functions
 function prevQuestion(filteredQuestions) {
     if (currentQuestionIndex > 0) {
         currentQuestionIndex--;
@@ -183,7 +170,6 @@ function nextQuestion(filteredQuestions) {
     }
 }
 
-// Show Missed Questions
 function showMissedQuestions() {
     if (missedQuestions.length > 0) {
         currentQuestionIndex = 0;
@@ -193,17 +179,81 @@ function showMissedQuestions() {
     }
 }
 
-// Show Review Mode (Placeholder)
 function showReviewMode() {
-    document.getElementById('screen').innerHTML = "<p>Review Mode: Feature under construction.</p>";
+    const screen = document.getElementById('screen');
+    if (sessionAnswers.length > 0) {
+        currentQuestionIndex = 0;
+        displayReviewQuestion();
+    } else {
+        screen.innerHTML = `<p>No session data to review!</p>`;
+    }
 }
 
-// Show Flashcard Mode (Placeholder)
 function showFlashcardMode() {
-    document.getElementById('screen').innerHTML = "<p>Flashcard Mode: Feature under construction.</p>";
+    currentQuestionIndex = 0;
+    displayFlashcard();
 }
 
-// Show Random Quiz (Placeholder)
 function showRandomQuiz() {
-    document.getElementById('screen').innerHTML = "<p>Random Quiz: Feature under construction.</p>";
+    const shuffledQuestions = [...questions].sort(() => Math.random() - 0.5);
+    currentQuestionIndex = 0;
+    displayQuestion(shuffledQuestions);
+}
+
+function displayReviewQuestion() {
+    const screen = document.getElementById('screen');
+    const questionData = sessionAnswers[currentQuestionIndex];
+    screen.innerHTML = `
+        <p>Question ${currentQuestionIndex + 1} of ${sessionAnswers.length}</p>
+        <p>${questionData.question}</p>
+        <p>Your Answer: ${questionData.userAnswer} - ${questionData.isCorrect ? "Correct" : "Incorrect"}</p>
+        <p>Explanation: ${questionData.explanation}</p>
+        <div id="navigation">
+            <button id="prevButton">Previous</button>
+            <button id="nextButton">Next</button>
+        </div>
+    `;
+    document.getElementById('prevButton').addEventListener('click', () => {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            displayReviewQuestion();
+        }
+    });
+    document.getElementById('nextButton').addEventListener('click', () => {
+        if (currentQuestionIndex < sessionAnswers.length - 1) {
+            currentQuestionIndex++;
+            displayReviewQuestion();
+        }
+    });
+}
+
+function displayFlashcard() {
+    const screen = document.getElementById('screen');
+    const questionData = questions[currentQuestionIndex];
+    screen.innerHTML = `
+        <div id="flashcard" style="padding: 20px; text-align: center;">
+            <p>Question: ${questionData.question}</p>
+            <button id="revealAnswer">Reveal Answer</button>
+            <p id="answer" style="display:none;">Answer: ${questionData.correctAnswer}<br>Explanation: ${questionData.explanation}</p>
+            <div id="navigation">
+                <button id="prevFlashcard">Previous</button>
+                <button id="nextFlashcard">Next</button>
+            </div>
+        </div>
+    `;
+    document.getElementById('revealAnswer').addEventListener('click', () => {
+        document.getElementById('answer').style.display = 'block';
+    });
+    document.getElementById('prevFlashcard').addEventListener('click', () => {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            displayFlashcard();
+        }
+    });
+    document.getElementById('nextFlashcard').addEventListener('click', () => {
+        if (currentQuestionIndex < questions.length - 1) {
+            currentQuestionIndex++;
+            displayFlashcard();
+        }
+    });
 }
