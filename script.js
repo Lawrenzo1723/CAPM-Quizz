@@ -56,7 +56,7 @@ const domainStructure = {
 // Load questions from Google Sheets
 async function loadQuestions() {
     try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbx74zavGBC63Jinhzc9hjTcJ7mj-hB-jM19vGBUDs2wZgvlmm2Ft1eQ0-XixNxo4fM/exec');
+        const response = await fetch('https://script.google.com/macros/s/AKfycbwSwd1G_yr6YwNuGOAIPknPFbhrgEZfRGHesvebp_NEgnktbeiw0o9aVZib30U6Sw/exec');
         const data = await response.text();
 
         console.log("Raw data from fetch:", data); // Debug line
