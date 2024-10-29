@@ -28,7 +28,8 @@ const domainStructure = {
         "Project Life Cycles and Processes",
         "Project Management Planning",
         "Project Roles and Responsibilities",
-        "Following and Executing Planned Strategies or Frameworks"
+        "Following and Executing Planned Strategies or Frameworks",
+        "Common Problem-Solving Tools and Techniques"
     ],
     "Predictive, Plan-Based Methodologies": [
         "When to Use a Predictive, Plan-Based Approach",
