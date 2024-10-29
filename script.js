@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  showHome();
+  showHomeScreen();
   loadQuestions(); // Load all questions into the questions array once
 });
 
@@ -8,52 +8,31 @@ let currentQuestionIndex = 0;
 let missedQuestions = [];
 let sessionAnswers = [];
 let currentSubdomainQuestions = [];
+let currentDomain = '';
+let currentSubdomain = '';
 
-// Sample data structure for questions, organized by domains and subdomains
 const questionData = {
   "Project Management Fundamentals": {
     "Project Life Cycles": [
       { question: "What is a project charter?", options: ["Document goals", "Define scope", "Authorize PM", "Approve resources"], correctAnswer: "Authorize PM" },
-      // Add more questions here for this subdomain
+      { question: "What is the project scope?", options: ["Define goals", "Set boundaries", "Authorize PM", "Schedule tasks"], correctAnswer: "Set boundaries" },
+      // Additional questions for this subdomain
     ],
     "Project Management Planning": [
-      { question: "What is project scope?", options: ["Define goals", "Set resources", "Plan schedule", "Set project boundaries"], correctAnswer: "Set project boundaries" }
-      // Add more questions here
+      { question: "What is project management?", options: ["Setting tasks", "Organizing plans", "Defining goals", "Monitoring progress"], correctAnswer: "Defining goals" }
+      // Additional questions
     ]
   },
   "Predictive, Plan-Based Methodologies": {
     "Predictive Approach": [
-      { question: "When is the predictive approach best?", options: ["In uncertain environments", "For fixed requirements", "For agile projects", "In small teams"], correctAnswer: "For fixed requirements" }
-      // Add more questions here
-    ],
-    "Plan-Based Scheduling": [
-      { question: "What is plan-based scheduling?", options: ["Flexible", "Unstructured", "Sequential", "Iterative"], correctAnswer: "Sequential" }
-      // Add more questions here
+      { question: "When is predictive approach used?", options: ["Dynamic requirements", "Fixed requirements", "Adaptive changes", "Small teams"], correctAnswer: "Fixed requirements" }
+      // Additional questions
     ]
   },
-  "Agile Frameworks/Methodologies": {
-    "Adaptive Approaches": [
-      { question: "What is adaptive planning?", options: ["Fixed scope", "Incremental planning", "Single-phase", "Low engagement"], correctAnswer: "Incremental planning" }
-      // Add more questions here
-    ],
-    "Project Iterations": [
-      { question: "What is an iteration?", options: ["Single delivery", "Repeated cycle", "One-time plan", "Static process"], correctAnswer: "Repeated cycle" }
-      // Add more questions here
-    ]
-  },
-  "Business Analysis Frameworks": {
-    "BA Roles": [
-      { question: "What is a key role in business analysis?", options: ["Setting goals", "Identifying risks", "Defining scope", "Stakeholder communication"], correctAnswer: "Stakeholder communication" }
-      // Add more questions here
-    ],
-    "Stakeholder Communication": [
-      { question: "How often should stakeholders be updated?", options: ["Never", "Monthly", "As needed", "After project completion"], correctAnswer: "As needed" }
-      // Add more questions here
-    ]
-  }
+  // Add remaining domains and subdomains with questions here
 };
 
-// Load questions into a structured format
+// Load questions from the data structure
 function loadQuestions() {
   for (let domain in questionData) {
     for (let subdomain in questionData[domain]) {
@@ -62,51 +41,58 @@ function loadQuestions() {
   }
 }
 
-function showHome() {
-  document.getElementById('home-screen').style.display = 'block';
-  document.getElementById('quiz-screen').style.display = 'none';
-  document.getElementById('footer').style.display = 'none';
-}
-
-function showSubdomains(domain) {
-  document.getElementById('quiz-title').textContent = domain;
-  document.getElementById('home-screen').style.display = 'none';
-  document.getElementById('quiz-screen').style.display = 'block';
-  document.getElementById('footer').style.display = 'flex';
-
-  const subdomains = Object.keys(questionData[domain]);
-  document.getElementById('quiz-content').innerHTML = `
-    <h3>Select a Subdomain in ${domain}</h3>
-    ${subdomains.map(subdomain => `<button onclick="loadQuestionsForSubdomain('${domain}', '${subdomain}')">${subdomain}</button>`).join('')}
+// Display the main home screen with domain options
+function showHomeScreen() {
+  document.getElementById('screen').innerHTML = `
+    <h2>Select a Domain</h2>
+    ${Object.keys(questionData).map(domain => `<button class="domain-btn" onclick="showSubdomains('${domain}')">${domain}</button>`).join('')}
   `;
+  document.getElementById('footer').style.display = 'none'; // Hide footer on home screen
 }
 
-// Load questions for a selected subdomain and display the first question
+// Display the subdomains of a selected domain
+function showSubdomains(domain) {
+  currentDomain = domain;
+  const subdomains = Object.keys(questionData[domain]);
+
+  document.getElementById('screen').innerHTML = `
+    <h2>${domain}</h2>
+    <h3>Select a Subdomain</h3>
+    ${subdomains.map(subdomain => `<button class="subdomain-btn" onclick="loadQuestionsForSubdomain('${domain}', '${subdomain}')">${subdomain}</button>`).join('')}
+  `;
+  document.getElementById('footer').style.display = 'flex'; // Show footer after domain selection
+}
+
+// Load questions for the selected subdomain
 function loadQuestionsForSubdomain(domain, subdomain) {
+  currentSubdomain = subdomain;
   currentSubdomainQuestions = questionData[domain][subdomain];
   currentQuestionIndex = 0;
   displayQuestion();
 }
 
-// Display a specific question with navigation and progress
+// Display the current question with navigation buttons
 function displayQuestion() {
   const questionData = currentSubdomainQuestions[currentQuestionIndex];
-  document.getElementById('quiz-title').textContent = `Question ${currentQuestionIndex + 1} of ${currentSubdomainQuestions.length}`;
-  document.getElementById('quiz-content').innerHTML = `
+  document.getElementById('screen').innerHTML = `
+    <p>Question ${currentQuestionIndex + 1} of ${currentSubdomainQuestions.length}</p>
     <p>${questionData.question}</p>
-    ${questionData.options.map(option => `<button onclick="checkAnswer('${option}', '${questionData.correctAnswer}')">${option}</button>`).join('')}
+    ${questionData.options.map(option => `<button onclick="checkAnswer('${option}')">${option}</button>`).join('')}
     <p id="feedback"></p>
     <div id="navigation">
       <button onclick="prevQuestion()" ${currentQuestionIndex === 0 ? 'disabled' : ''}>Previous</button>
       <button onclick="nextQuestion()" ${currentQuestionIndex === currentSubdomainQuestions.length - 1 ? 'disabled' : ''}>Next</button>
     </div>
-    <p id="progress-count">Question ${currentQuestionIndex + 1} of ${currentSubdomainQuestions.length}</p>
+    <p>Progress: Question ${currentQuestionIndex + 1} of ${currentSubdomainQuestions.length}</p>
   `;
 }
 
-function checkAnswer(selectedOption, correctAnswer) {
+// Check if selected answer is correct, then provide feedback
+function checkAnswer(selectedOption) {
+  const questionData = currentSubdomainQuestions[currentQuestionIndex];
   const feedback = document.getElementById('feedback');
-  if (selectedOption === correctAnswer) {
+  
+  if (selectedOption === questionData.correctAnswer) {
     feedback.textContent = "Correct!";
   } else {
     feedback.textContent = "Incorrect.";
@@ -114,6 +100,7 @@ function checkAnswer(selectedOption, correctAnswer) {
   }
 }
 
+// Go to the previous question
 function prevQuestion() {
   if (currentQuestionIndex > 0) {
     currentQuestionIndex--;
@@ -121,6 +108,7 @@ function prevQuestion() {
   }
 }
 
+// Go to the next question
 function nextQuestion() {
   if (currentQuestionIndex < currentSubdomainQuestions.length - 1) {
     currentQuestionIndex++;
@@ -128,35 +116,33 @@ function nextQuestion() {
   }
 }
 
-function navigateTo(mode) {
-  document.getElementById('home-screen').style.display = 'none';
-  document.getElementById('quiz-screen').style.display = 'block';
-  document.getElementById('footer').style.display = 'flex';
-
-  if (mode === 'practice') {
+// Functions for footer navigation (Practice Mistakes, Review Mode, Flashcards, Random Quiz)
+function showPracticeMistakes() {
+  if (missedQuestions.length > 0) {
     currentSubdomainQuestions = missedQuestions;
     currentQuestionIndex = 0;
     displayQuestion();
-  } else if (mode === 'review') {
-    currentSubdomainQuestions = questions;
-    currentQuestionIndex = 0;
-    displayQuestion();
-  } else if (mode === 'flashcard') {
-    displayFlashcard();
-  } else if (mode === 'random') {
-    const randomIndex = Math.floor(Math.random() * questions.length);
-    currentSubdomainQuestions = [questions[randomIndex]];
-    currentQuestionIndex = 0;
-    displayQuestion();
+  } else {
+    document.getElementById('screen').innerHTML = "<p>No missed questions to practice.</p>";
   }
+}
+
+function showReviewMode() {
+  currentSubdomainQuestions = questions;
+  currentQuestionIndex = 0;
+  displayQuestion();
+}
+
+function showFlashcards() {
+  displayFlashcard();
 }
 
 function displayFlashcard() {
   const questionData = currentSubdomainQuestions[currentQuestionIndex];
-  document.getElementById('quiz-content').innerHTML = `
-    <p>${questionData.question}</p>
+  document.getElementById('screen').innerHTML = `
+    <p>Flashcard: ${questionData.question}</p>
     <button onclick="revealAnswer()">Reveal Answer</button>
-    <p id="answer" style="display:none;">${questionData.correctAnswer}</p>
+    <p id="answer" style="display:none;">Answer: ${questionData.correctAnswer}</p>
     <button onclick="nextFlashcard()">Next Flashcard</button>
   `;
 }
@@ -168,4 +154,11 @@ function revealAnswer() {
 function nextFlashcard() {
   currentQuestionIndex = (currentQuestionIndex + 1) % currentSubdomainQuestions.length;
   displayFlashcard();
+}
+
+function showRandomQuiz() {
+  const randomIndex = Math.floor(Math.random() * questions.length);
+  currentSubdomainQuestions = [questions[randomIndex]];
+  currentQuestionIndex = 0;
+  displayQuestion();
 }
