@@ -73,6 +73,7 @@ async function loadQuestions() {
                 });
             }
         });
+        
         console.log("Questions Loaded:", questions);
     } catch (error) {
         console.error("Error loading questions:", error);
@@ -108,7 +109,13 @@ function showSubdomains(domain) {
 function showQuestions(subdomain) {
     currentSubdomain = subdomain;
     currentQuestionIndex = 0;
+    
+    // Filter questions based on current domain and subdomain
     const filteredQuestions = questions.filter(q => q.domain === currentDomain && q.subdomain === currentSubdomain);
+    
+    console.log("Current Domain:", currentDomain);
+    console.log("Current Subdomain:", currentSubdomain);
+    console.log("Filtered Questions:", filteredQuestions);
 
     if (filteredQuestions.length > 0) {
         displayQuestion(filteredQuestions);
@@ -146,134 +153,4 @@ function displayQuestion(filteredQuestions) {
 
     document.getElementById('prevButton').disabled = currentQuestionIndex === 0;
     document.getElementById('nextButton').disabled = currentQuestionIndex === filteredQuestions.length - 1;
-}
-
-function checkAnswer(selectedOption, filteredQuestions) {
-    const questionData = filteredQuestions[currentQuestionIndex];
-    const isCorrect = selectedOption.trim() === questionData.correctAnswer.trim();
-
-    const feedback = document.getElementById('feedback');
-    feedback.textContent = isCorrect ? `Correct! ${questionData.explanation}` : `Incorrect. ${questionData.explanation}`;
-
-    if (!isCorrect) missedQuestions.push(questionData);
-    
-    // Add question and user's answer to sessionAnswers
-    sessionAnswers.push({
-        ...questionData,
-        userAnswer: selectedOption,
-        isCorrect
-    });
-}
-
-function prevQuestion(filteredQuestions) {
-    if (currentQuestionIndex > 0) {
-        currentQuestionIndex--;
-        displayQuestion(filteredQuestions);
-    }
-}
-
-function nextQuestion(filteredQuestions) {
-    if (currentQuestionIndex < filteredQuestions.length - 1) {
-        currentQuestionIndex++;
-        displayQuestion(filteredQuestions);
-    }
-}
-
-function showMissedQuestions() {
-    if (missedQuestions.length > 0) {
-        currentQuestionIndex = 0;
-        displayQuestion(missedQuestions);
-    } else {
-        document.getElementById('screen').innerHTML = `<p>No missed questions to review!</p>`;
-    }
-    document.getElementById('footer').style.display = 'flex';
-}
-
-// Updated showReviewMode function
-function showReviewMode() {
-    const screen = document.getElementById('screen');
-    if (sessionAnswers.length > 0) {
-        currentQuestionIndex = 0;
-        displayReviewQuestion();
-        document.getElementById('footer').style.display = 'flex';
-    } else {
-        screen.innerHTML = `<p>No session data to review!</p>`;
-    }
-}
-
-// Updated displayReviewQuestion function
-function displayReviewQuestion() {
-    const screen = document.getElementById('screen');
-    const questionData = sessionAnswers[currentQuestionIndex];
-    
-    screen.innerHTML = `
-        <p>Question ${currentQuestionIndex + 1} of ${sessionAnswers.length}</p>
-        <p>${questionData.question}</p>
-        <p>Your Answer: ${questionData.userAnswer} - ${questionData.isCorrect ? "Correct" : "Incorrect"}</p>
-        <p>Explanation: ${questionData.explanation}</p>
-        <div id="navigation">
-            <button id="prevButton">Previous</button>
-            <button id="nextButton">Next</button>
-        </div>
-    `;
-    
-    document.getElementById('prevButton').addEventListener('click', () => {
-        if (currentQuestionIndex > 0) {
-            currentQuestionIndex--;
-            displayReviewQuestion();
-        }
-    });
-    document.getElementById('nextButton').addEventListener('click', () => {
-        if (currentQuestionIndex < sessionAnswers.length - 1) {
-            currentQuestionIndex++;
-            displayReviewQuestion();
-        }
-    });
-
-    document.getElementById('prevButton').disabled = currentQuestionIndex === 0;
-    document.getElementById('nextButton').disabled = currentQuestionIndex === sessionAnswers.length - 1;
-}
-
-function showFlashcardMode() {
-    currentQuestionIndex = 0;
-    displayFlashcard();
-    document.getElementById('footer').style.display = 'flex';
-}
-
-function showRandomQuiz() {
-    const shuffledQuestions = [...questions].sort(() => Math.random() - 0.5);
-    currentQuestionIndex = 0;
-    displayQuestion(shuffledQuestions);
-    document.getElementById('footer').style.display = 'flex';
-}
-
-function displayFlashcard() {
-    const screen = document.getElementById('screen');
-    const questionData = questions[currentQuestionIndex];
-    screen.innerHTML = `
-        <div id="flashcard" style="padding: 20px; text-align: center;">
-            <p>Question: ${questionData.question}</p>
-            <button id="revealAnswer">Reveal Answer</button>
-            <p id="answer" style="display:none;">Answer: ${questionData.correctAnswer}<br>Explanation: ${questionData.explanation}</p>
-            <div id="navigation">
-                <button id="prevFlashcard">Previous</button>
-                <button id="nextFlashcard">Next</button>
-            </div>
-        </div>
-    `;
-    document.getElementById('revealAnswer').addEventListener('click', () => {
-        document.getElementById('answer').style.display = 'block';
-    });
-    document.getElementById('prevFlashcard').addEventListener('click', () => {
-        if (currentQuestionIndex > 0) {
-            currentQuestionIndex--;
-            displayFlashcard();
-        }
-    });
-    document.getElementById('nextFlashcard').addEventListener('click', () => {
-        if (currentQuestionIndex < questions.length - 1) {
-            currentQuestionIndex++;
-            displayFlashcard();
-        }
-    });
 }
