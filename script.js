@@ -56,7 +56,7 @@ const domainStructure = {
 // Load questions from Google Sheets
 async function loadQuestions() {
     try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbwaHaBRWiOF7kRwffa6rv4-7G9T_JDc9BwKhdbmd6Ig76FPHrDJNjim3yGeRtEH/exec');
+        const response = await fetch('https://script.google.com/macros/s/AKfycbx74zavGBC63Jinhzc9hjTcJ7mj-hB-jM19vGBUDs2wZgvlmm2Ft1eQ0-XixNxo4fM/exec');
         const data = await response.text();
         const rows = data.split('\n');
 
