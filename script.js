@@ -53,29 +53,23 @@ const domainStructure = {
     ]
 };
 
-// Load questions from Google Sheets
+// Load questions from JSON
 async function loadQuestions() {
     try {
         const response = await fetch('https://raw.githubusercontent.com/Lawrenzo1723/CAPM-Quizz/refs/heads/main/question%20in%20Json.json');
-        const data = await response.text();
+        const data = await response.json();
 
         console.log("Raw data from fetch:", data); // Debug line
 
-        const rows = data.split('\n');
-
-        rows.forEach(row => {
-            const cols = row.split(',');
-            if (cols.length >= 9) {
-                questions.push({
-                    question: cols[0],
-                    options: [cols[1], cols[2], cols[3], cols[4]],
-                    correctAnswer: cols[5].trim(),
-                    explanation: cols[6],
-                    domain: cols[7].trim(),
-                    subdomain: cols[8].trim()
-                });
-            }
-        });
+        // Process the JSON data directly
+        questions = data.map(row => ({
+            question: row["Question"],
+            options: [row["Option A"], row["Option B"], row["Option C"], row["Option D"]],
+            correctAnswer: row["Correct Answer"].trim(),
+            explanation: row["Explanation"],
+            domain: row["Domain"].trim(),
+            subdomain: row["Subdomain"].trim()
+        }));
 
         console.log("Questions Loaded:", questions);
     } catch (error) {
