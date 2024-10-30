@@ -768,5 +768,115 @@
     "Explanation": "Metrics are essential for measuring project progress and success, providing a basis for comparison against baselines and tracking planned vs. actual performance.",
     "Domain": "Project Management Fundamentals and Core Concepts",
     "Subdomain": "Project Management Planning"
+  },
+  {
+    "Question": "What does PMBOK identify as the main challenge when managing multiple project constraints simultaneously?",
+    "Option A": "Prioritizing quality over scope and time",
+    "Option B": "Balancing competing demands without compromising project objectives",
+    "Option C": "Increasing resources to meet all demands",
+    "Option D": "Limiting stakeholder influence",
+    "Correct Answer": "Balancing competing demands without compromising project objectives",
+    "Explanation": "Managing multiple constraints requires carefully balancing time, scope, cost, and quality without compromising the project’s objectives.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "When a project’s time constraint is fixed, what does PMBOK recommend adjusting to maintain project feasibility?",
+    "Option A": "Increase project quality",
+    "Option B": "Reduce scope or reallocate resources",
+    "Option C": "Limit stakeholder engagement",
+    "Option D": "Expand the budget",
+    "Correct Answer": "Reduce scope or reallocate resources",
+    "Explanation": "If time is fixed, adjusting scope or resources is often necessary to meet the timeline while maintaining feasibility.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "How does PMBOK suggest handling a project where both cost and time constraints are critical?",
+    "Option A": "Increase resource allocation",
+    "Option B": "Negotiate for more flexible constraints with stakeholders",
+    "Option C": "Strictly adhere to the initial scope",
+    "Option D": "Prioritize cost over time",
+    "Correct Answer": "Negotiate for more flexible constraints with stakeholders",
+    "Explanation": "Negotiating with stakeholders can help align expectations, allowing adjustments to constraints while maintaining project objectives.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "What effect does risk have on project constraints according to PMBOK?",
+    "Option A": "Risk management is independent of constraints",
+    "Option B": "Risk introduces the need for flexibility in constraints",
+    "Option C": "Risk only affects time",
+    "Option D": "Risk strictly limits quality",
+    "Correct Answer": "Risk introduces the need for flexibility in constraints",
+    "Explanation": "Unforeseen risks often require adjustments to scope, time, and cost to manage emergent challenges effectively.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "According to PMBOK, what is a key consideration when managing scope and quality constraints?",
+    "Option A": "Reducing quality to increase scope",
+    "Option B": "Balancing scope to meet quality standards within budget",
+    "Option C": "Increasing both scope and quality",
+    "Option D": "Limiting stakeholder feedback",
+    "Correct Answer": "Balancing scope to meet quality standards within budget",
+    "Explanation": "Balancing scope and quality ensures that the project meets expected standards without exceeding the allocated budget.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "How does PMBOK recommend addressing a fixed budget constraint in a resource-intensive project?",
+    "Option A": "Increase the timeline",
+    "Option B": "Reduce project scope",
+    "Option C": "Maintain all project deliverables",
+    "Option D": "Lower stakeholder engagement",
+    "Correct Answer": "Reduce project scope",
+    "Explanation": "When budget is a fixed constraint, reducing the scope can help the project stay within budget by limiting deliverables.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "In a resource-constrained project, which strategy does PMBOK recommend?",
+    "Option A": "Resource smoothing to avoid schedule impacts",
+    "Option B": "Expanding budget allocations",
+    "Option C": "Reducing non-essential activities",
+    "Option D": "Adjusting quality standards",
+    "Correct Answer": "Resource smoothing to avoid schedule impacts",
+    "Explanation": "Resource smoothing prioritizes critical tasks while managing non-critical ones to minimize schedule impacts without adding resources.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "How does PMBOK describe the impact of expanding scope on other project constraints?",
+    "Option A": "It decreases project risk",
+    "Option B": "It typically increases both cost and time",
+    "Option C": "It has no impact",
+    "Option D": "It improves overall project quality",
+    "Correct Answer": "It typically increases both cost and time",
+    "Explanation": "Expanding scope usually requires additional time and resources, impacting the budget and timeline of the project.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "What is the impact of stakeholder expectations on project constraints?",
+    "Option A": "It limits project scope",
+    "Option B": "It can increase demands on quality and other constraints",
+    "Option C": "It reduces project costs",
+    "Option D": "It has no effect on constraints",
+    "Correct Answer": "It can increase demands on quality and other constraints",
+    "Explanation": "High stakeholder expectations may elevate quality requirements, impacting cost, time, and scope to meet those expectations.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "How does PMBOK recommend resolving conflicts between scope and quality constraints?",
+    "Option A": "Increase the budget to meet both",
+    "Option B": "Prioritize quality over scope",
+    "Option C": "Reduce scope to maintain quality standards",
+    "Option D": "Limit stakeholder engagement",
+    "Correct Answer": "Reduce scope to maintain quality standards",
+    "Explanation": "Reducing scope can help maintain quality standards within available resources, balancing stakeholder requirements effectively.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
   }
 ]
