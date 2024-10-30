@@ -53,6 +53,15 @@ const domainStructure = {
     ]
 };
 
+// Helper function to shuffle an array
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
 // Load questions from JSON
 async function loadQuestions() {
     try {
@@ -105,7 +114,10 @@ function showQuestions(subdomain) {
     currentSubdomain = subdomain;
     currentQuestionIndex = 0;
 
-    const filteredQuestions = questions.filter(q => q.domain === currentDomain && q.subdomain === currentSubdomain);
+    // Filter and shuffle questions based on current domain and subdomain
+    const filteredQuestions = shuffleArray(
+        questions.filter(q => q.domain === currentDomain && q.subdomain === currentSubdomain)
+    );
 
     if (filteredQuestions.length > 0) {
         displayQuestion(filteredQuestions);
@@ -177,7 +189,7 @@ function nextQuestion(filteredQuestions) {
 function showMissedQuestions() {
     if (missedQuestions.length > 0) {
         currentQuestionIndex = 0;
-        displayQuestion(missedQuestions);
+        displayQuestion(shuffleArray(missedQuestions));
     } else {
         document.getElementById('screen').innerHTML = `<p>No missed questions to review!</p>`;
     }
@@ -225,12 +237,12 @@ function displayReviewQuestion() {
 // Flashcard Mode
 function showFlashcardMode() {
     currentQuestionIndex = 0;
-    displayFlashcard();
+    displayFlashcard(shuffleArray([...questions]));
 }
 
-function displayFlashcard() {
+function displayFlashcard(shuffledQuestions) {
     const screen = document.getElementById('screen');
-    const questionData = questions[currentQuestionIndex];
+    const questionData = shuffledQuestions[currentQuestionIndex];
 
     screen.innerHTML = `
         <div id="flashcard">
@@ -250,20 +262,20 @@ function displayFlashcard() {
     document.getElementById('prevFlashcard').addEventListener('click', () => {
         if (currentQuestionIndex > 0) {
             currentQuestionIndex--;
-            displayFlashcard();
+            displayFlashcard(shuffledQuestions);
         }
     });
     document.getElementById('nextFlashcard').addEventListener('click', () => {
-        if (currentQuestionIndex < questions.length - 1) {
+        if (currentQuestionIndex < shuffledQuestions.length - 1) {
             currentQuestionIndex++;
-            displayFlashcard();
+            displayFlashcard(shuffledQuestions);
         }
     });
 }
 
 // Random Quiz Mode
 function showRandomQuiz() {
-    const shuffledQuestions = [...questions].sort(() => Math.random() - 0.5);
+    const shuffledQuestions = shuffleArray([...questions]);
     currentQuestionIndex = 0;
     displayQuestion(shuffledQuestions);
 }
