@@ -1318,6 +1318,117 @@
     "Explanation": "If a constraint (e.g., limited resources) begins to hinder project progress or quality, it can become an issue that requires immediate attention.",
     "Domain": "Project Management Fundamentals and Core Concepts",
     "Subdomain": "Project Management Planning"
+  },
+  {
+    "Question": "How does PMBOK define a constraint in project management?",
+    "Option A": "A guideline that can be adjusted as needed",
+    "Option B": "A limitation that restricts project options, such as scope, budget, or schedule",
+    "Option C": "A temporary objective to test project outcomes",
+    "Option D": "A rule that governs stakeholder engagement",
+    "Correct Answer": "A limitation that restricts project options, such as scope, budget, or schedule",
+    "Explanation": "Constraints are limiting factors that affect project execution, including budget, time, scope, and resources, impacting planning flexibility.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Management Planning"
+  },
+  {
+    "Question": "According to PMBOK, how does a fixed cost constraint affect project planning?",
+    "Option A": "It allows for scope expansion without additional resources",
+    "Option B": "It limits flexibility in allocating resources, often leading to a need for prioritization",
+    "Option C": "It reduces the need for schedule planning",
+    "Option D": "It encourages changes to project objectives",
+    "Correct Answer": "It limits flexibility in allocating resources, often leading to a need for prioritization",
+    "Explanation": "A fixed budget restricts resource allocation, requiring prioritization and potentially impacting scope and schedule decisions.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Management Planning"
+  },
+  {
+    "Question": "What effect does a strict timeline constraint have on other project constraints?",
+    "Option A": "It increases flexibility in resource use",
+    "Option B": "It may lead to scope reduction to meet the timeline",
+    "Option C": "It eliminates the need for risk planning",
+    "Option D": "It allows unlimited scope changes",
+    "Correct Answer": "It may lead to scope reduction to meet the timeline",
+    "Explanation": "A fixed timeline may require reducing scope to ensure project objectives are met within the available time, affecting other constraints like cost and resources.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Management Planning"
+  },
+  {
+    "Question": "When a project faces multiple constraints, which approach does PMBOK recommend to prioritize effectively?",
+    "Option A": "Focus solely on cost reduction",
+    "Option B": "Balance and evaluate trade-offs based on project objectives and stakeholder needs",
+    "Option C": "Reduce stakeholder engagement",
+    "Option D": "Limit scope changes completely",
+    "Correct Answer": "Balance and evaluate trade-offs based on project objectives and stakeholder needs",
+    "Explanation": "Balancing constraints involves making trade-offs that align with project goals and stakeholder expectations to maintain project success.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Management Planning"
+  },
+  {
+    "Question": "What impact does a constraint on available resources typically have on project schedule planning?",
+    "Option A": "It shortens the project duration",
+    "Option B": "It may extend project timelines due to limited resource availability",
+    "Option C": "It eliminates the need for scope planning",
+    "Option D": "It reduces the need for stakeholder engagement",
+    "Correct Answer": "It may extend project timelines due to limited resource availability",
+    "Explanation": "Limited resources can delay project tasks, especially those on the critical path, potentially extending the project schedule.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Management Planning"
+  },
+  {
+    "Question": "According to PMBOK, how can a budget constraint become an issue during project execution?",
+    "Option A": "When the budget constraint no longer aligns with project scope requirements",
+    "Option B": "When the budget exceeds project needs",
+    "Option C": "When project stakeholders do not agree with budget allocation",
+    "Option D": "When the project has surplus funds",
+    "Correct Answer": "When the budget constraint no longer aligns with project scope requirements",
+    "Explanation": "A fixed budget may become a problem if project scope or resource needs increase, leading to potential issues in meeting objectives.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Management Planning"
+  },
+  {
+    "Question": "In what way do constraints affect project risk management planning?",
+    "Option A": "They eliminate the need for risk management",
+    "Option B": "They increase the need to identify and manage risks due to limited flexibility",
+    "Option C": "They reduce the impact of unforeseen events",
+    "Option D": "They allow changes to scope without additional risk",
+    "Correct Answer": "They increase the need to identify and manage risks due to limited flexibility",
+    "Explanation": "Constraints limit project flexibility, making it more important to proactively identify and mitigate risks that could impact project success.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Management Planning"
+  },
+  {
+    "Question": "How does a quality constraint impact other project planning activities according to PMBOK?",
+    "Option A": "It has no effect on schedule or cost",
+    "Option B": "It may increase costs and extend the schedule to meet quality standards",
+    "Option C": "It simplifies scope management",
+    "Option D": "It reduces the need for resource allocation",
+    "Correct Answer": "It may increase costs and extend the schedule to meet quality standards",
+    "Explanation": "Meeting high quality standards often requires more resources and time, impacting both budget and schedule planning.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Management Planning"
+  },
+  {
+    "Question": "How should project teams handle changes in constraints during project execution?",
+    "Option A": "Ignore changes to maintain the original plan",
+    "Option B": "Evaluate impacts on project scope, schedule, and cost, and adjust plans as needed",
+    "Option C": "Reduce stakeholder engagement to control scope",
+    "Option D": "Cancel the project",
+    "Correct Answer": "Evaluate impacts on project scope, schedule, and cost, and adjust plans as needed",
+    "Explanation": "When constraints change, assessing the impact on all project areas ensures that adjustments are made to keep the project on track.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Management Planning"
+  },
+  {
+    "Question": "According to PMBOK, what is the relationship between constraints and scope management?",
+    "Option A": "Constraints generally reduce flexibility in managing scope changes",
+    "Option B": "Constraints increase the options for expanding scope",
+    "Option C": "Constraints do not affect scope management",
+    "Option D": "Constraints allow for unrestricted scope changes",
+    "Correct Answer": "Constraints generally reduce flexibility in managing scope changes",
+    "Explanation": "Constraints, such as limited budget or schedule, restrict the ability to expand or alter the project scope, requiring careful management.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Management Planning"
   }
 ]
+
 
