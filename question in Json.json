@@ -878,5 +878,115 @@
     "Explanation": "Reducing scope can help maintain quality standards within available resources, balancing stakeholder requirements effectively.",
     "Domain": "Project Management Fundamentals and Core Concepts",
     "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "According to PMBOK, what is a fundamental purpose of project governance?",
+    "Option A": "To assign specific project tasks",
+    "Option B": "To ensure alignment of project goals with organizational objectives",
+    "Option C": "To control stakeholder interactions",
+    "Option D": "To create project charters",
+    "Correct Answer": "To ensure alignment of project goals with organizational objectives",
+    "Explanation": "Project governance provides oversight to align the project’s goals and outcomes with the broader strategic objectives of the organization.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "What role does governance play in project risk management?",
+    "Option A": "It directly manages risks on behalf of the project team",
+    "Option B": "It provides frameworks for identifying, assessing, and managing risks",
+    "Option C": "It only addresses risks that affect project costs",
+    "Option D": "It delegates all risk management to stakeholders",
+    "Correct Answer": "It provides frameworks for identifying, assessing, and managing risks",
+    "Explanation": "Governance establishes frameworks and guidelines that help ensure consistent and effective risk management throughout the project life cycle.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "In project governance, what is the purpose of a 'stage gate' review?",
+    "Option A": "To reallocate project resources",
+    "Option B": "To assess project progress against predetermined criteria before moving to the next phase",
+    "Option C": "To evaluate team performance",
+    "Option D": "To conclude the project",
+    "Correct Answer": "To assess project progress against predetermined criteria before moving to the next phase",
+    "Explanation": "Stage gate reviews are checkpoints where the project’s progress and performance are evaluated to ensure alignment with goals before advancing to the next phase.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "What type of project decisions does governance typically oversee?",
+    "Option A": "Routine operational decisions",
+    "Option B": "Strategic decisions affecting project scope, budget, or objectives",
+    "Option C": "All daily team tasks",
+    "Option D": "Only resource allocations",
+    "Correct Answer": "Strategic decisions affecting project scope, budget, or objectives",
+    "Explanation": "Governance is responsible for overseeing key strategic decisions that impact the project's alignment with organizational goals.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "How does project governance contribute to stakeholder engagement?",
+    "Option A": "By eliminating the need for stakeholder feedback",
+    "Option B": "By setting policies that ensure stakeholder interests are represented in decision-making",
+    "Option C": "By focusing solely on executive stakeholders",
+    "Option D": "By restricting stakeholder access to project information",
+    "Correct Answer": "By setting policies that ensure stakeholder interests are represented in decision-making",
+    "Explanation": "Governance frameworks establish policies that consider and address stakeholder interests, helping to maintain alignment and satisfaction.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "What is the role of governance in project change control according to PMBOK?",
+    "Option A": "To prevent any changes to the project plan",
+    "Option B": "To establish a formal process for reviewing and approving changes",
+    "Option C": "To allow only minor changes without approval",
+    "Option D": "To enable unrestricted change requests",
+    "Correct Answer": "To establish a formal process for reviewing and approving changes",
+    "Explanation": "Governance provides a structured process for evaluating and approving changes, ensuring they align with project and organizational objectives.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "How does governance affect project transparency and accountability?",
+    "Option A": "It limits visibility into project performance",
+    "Option B": "It enhances transparency and accountability by requiring regular performance reporting",
+    "Option C": "It allows project managers to determine reporting frequency",
+    "Option D": "It only requires reporting at project closure",
+    "Correct Answer": "It enhances transparency and accountability by requiring regular performance reporting",
+    "Explanation": "Governance frameworks mandate regular reporting to ensure stakeholders have visibility into project progress and performance, enhancing accountability.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "What does governance provide to ensure effective decision-making in projects?",
+    "Option A": "Unlimited authority for the project manager",
+    "Option B": "Clear decision-making authority and escalation procedures",
+    "Option C": "Elimination of stakeholder input",
+    "Option D": "Focus solely on operational efficiency",
+    "Correct Answer": "Clear decision-making authority and escalation procedures",
+    "Explanation": "Governance provides clear structures for decision-making and escalation, helping resolve issues and making aligned project decisions efficiently.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "How does project governance handle ethical considerations within a project?",
+    "Option A": "It delegates all ethical concerns to the project manager",
+    "Option B": "It establishes policies to ensure ethical standards are upheld",
+    "Option C": "It only addresses ethics during project closure",
+    "Option D": "It assumes all team members are inherently ethical",
+    "Correct Answer": "It establishes policies to ensure ethical standards are upheld",
+    "Explanation": "Governance frameworks include ethical policies to ensure that projects are conducted in an ethical and responsible manner.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
+  },
+  {
+    "Question": "What is the relationship between project governance and organizational strategy?",
+    "Option A": "Governance focuses solely on project efficiency, not strategy",
+    "Option B": "Governance aligns projects with the broader organizational strategy",
+    "Option C": "Governance operates independently of organizational goals",
+    "Option D": "Governance primarily concerns stakeholder management",
+    "Correct Answer": "Governance aligns projects with the broader organizational strategy",
+    "Explanation": "Project governance ensures that project decisions and objectives are aligned with the organization's overarching strategic goals.",
+    "Domain": "Project Management Fundamentals and Core Concepts",
+    "Subdomain": "Project Life Cycles and Processes"
   }
 ]
