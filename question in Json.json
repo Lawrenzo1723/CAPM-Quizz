@@ -4298,7 +4298,7 @@
     "Correct Answer": "A potential event with uncertain occurrence that could positively or negatively impact project objectives",
     "Explanation": "Risk refers to a possible future event that may or may not occur, affecting project outcomes if it does.",
     "Domain": "Project Management Fundamentals and Core Concepts",
-    "Subdomain": "common problem-solving tools and techniques"
+    "Subdomain": "Common Problem-Solving Tools and Techniques"
   },
   {
     "Question": "In project management, how does an 'issue' differ from a 'risk'?",
@@ -4309,7 +4309,7 @@
     "Correct Answer": "An issue is an existing problem requiring resolution, while a risk is a potential future event with uncertain impact",
     "Explanation": "Issues are current challenges that need attention, while risks are uncertain future events that may affect the project.",
     "Domain": "Project Management Fundamentals and Core Concepts",
-    "Subdomain": "common problem-solving tools and techniques"
+    "Subdomain": "Common Problem-Solving Tools and Techniques"
   },
   {
     "Question": "What is the main function of a 'risk mitigation strategy'?",
@@ -4320,7 +4320,7 @@
     "Correct Answer": "To reduce the likelihood or impact of a potential risk event",
     "Explanation": "Risk mitigation involves steps to lower the probability or impact of identified risks to protect project objectives.",
     "Domain": "Project Management Fundamentals and Core Concepts",
-    "Subdomain": "common problem-solving tools and techniques"
+    "Subdomain": "Common Problem-Solving Tools and Techniques"
   },
   {
     "Question": "How are 'assumptions' validated in the project planning phase?",
@@ -4331,7 +4331,7 @@
     "Correct Answer": "Through stakeholder feedback and empirical evidence",
     "Explanation": "Assumptions need validation through stakeholder feedback and evidence to confirm their reliability for planning.",
     "Domain": "Project Management Fundamentals and Core Concepts",
-    "Subdomain": "common problem-solving tools and techniques"
+    "Subdomain": "Common Problem-Solving Tools and Techniques"
   },
   {
     "Question": "What is a primary characteristic that distinguishes a 'constraint' from an 'assumption' in project management?",
@@ -4342,7 +4342,7 @@
     "Correct Answer": "Constraints are external limitations on the project, while assumptions are accepted as true for planning",
     "Explanation": "Constraints represent fixed limitations like time or budget, while assumptions are considered accurate for planning but require validation.",
     "Domain": "Project Management Fundamentals and Core Concepts",
-    "Subdomain": "common problem-solving tools and techniques"
+    "Subdomain": "Common Problem-Solving Tools and Techniques"
   },
   {
     "Question": "In risk management, what is the role of a 'fallback plan'?",
@@ -4353,7 +4353,7 @@
     "Correct Answer": "To implement an alternative if the primary risk response is ineffective",
     "Explanation": "Fallback plans provide a backup response for risks if the initial mitigation strategy fails, ensuring continued project progress.",
     "Domain": "Project Management Fundamentals and Core Concepts",
-    "Subdomain": "common problem-solving tools and techniques"
+    "Subdomain": "Common Problem-Solving Tools and Techniques"
   },
   {
     "Question": "How do project constraints influence issue resolution strategies?",
@@ -4364,7 +4364,7 @@
     "Correct Answer": "They limit the options available for resolving issues within the project scope, schedule, or budget",
     "Explanation": "Constraints restrict the range of solutions that can be applied to resolve issues without impacting the project’s overall plan.",
     "Domain": "Project Management Fundamentals and Core Concepts",
-    "Subdomain": "common problem-solving tools and techniques"
+    "Subdomain": "Common Problem-Solving Tools and Techniques"
   },
   {
     "Question": "How should project managers approach assumptions that may become risks?",
@@ -4375,7 +4375,7 @@
     "Correct Answer": "By regularly monitoring and reassessing assumptions to ensure they remain valid",
     "Explanation": "Assumptions should be continually reviewed to verify that they hold true; otherwise, they may become risks impacting the project.",
     "Domain": "Project Management Fundamentals and Core Concepts",
-    "Subdomain": "common problem-solving tools and techniques"
+    "Subdomain": "Common Problem-Solving Tools and Techniques"
   },
   {
     "Question": "What is the most effective way to handle constraints that limit available project resources?",
@@ -4386,7 +4386,7 @@
     "Correct Answer": "To optimize resource allocation and adjust the project plan to work within the defined constraints",
     "Explanation": "Project managers must adapt plans and allocate resources strategically to operate within constraints, maintaining project alignment.",
     "Domain": "Project Management Fundamentals and Core Concepts",
-    "Subdomain": "common problem-solving tools and techniques"
+    "Subdomain": "Common Problem-Solving Tools and Techniques"
   },
   {
     "Question": "How does identifying assumptions help in the management of project risks?",
@@ -4397,7 +4397,7 @@
     "Correct Answer": "It provides clarity on factors that could potentially become risks if assumptions are invalidated",
     "Explanation": "Understanding assumptions helps in monitoring their validity, as incorrect assumptions can create new risks within the project.",
     "Domain": "Project Management Fundamentals and Core Concepts",
-    "Subdomain": "common problem-solving tools and techniques"
+    "Subdomain": "Common Problem-Solving Tools and Techniques"
   }
 ]
 
