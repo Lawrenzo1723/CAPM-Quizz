@@ -16,31 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
     randomQuizButton.addEventListener('click', showRandomQuiz);
 });
 
-// Helper function to load user progress from localStorage
-function loadProgress() {
-    const progressData = localStorage.getItem('quizProgress');
-    if (progressData) {
-        return JSON.parse(progressData);
-    }
-    return {
-        completedQuestions: [],
-        missedQuestions: [],
-        score: 0
-    };
-}
-
-// Helper function to save user progress to localStorage
-function saveProgress() {
-    localStorage.setItem('quizProgress', JSON.stringify(userProgress));
-}
-
-// Initialize user progress
-let userProgress = loadProgress();
-
 let questions = [];
 let currentDomain = "";
 let currentSubdomain = "";
 let currentQuestionIndex = 0;
+let missedQuestions = [];
 let sessionAnswers = []; // Array to store answered questions for review
 
 const domainStructure = {
@@ -134,9 +114,9 @@ function showQuestions(subdomain) {
     currentSubdomain = subdomain;
     currentQuestionIndex = 0;
 
+    // Filter and shuffle questions based on current domain and subdomain
     const filteredQuestions = shuffleArray(
-        questions.filter(q => q.domain === currentDomain && q.subdomain === currentSubdomain && 
-        !userProgress.completedQuestions.includes(q.question))
+        questions.filter(q => q.domain === currentDomain && q.subdomain === currentSubdomain)
     );
 
     if (filteredQuestions.length > 0) {
@@ -171,7 +151,7 @@ function displayQuestion(filteredQuestions) {
         const button = document.createElement('button');
         button.textContent = option;
         button.classList.add('option-btn');
-        button.addEventListener('click', () => checkAnswer(option, questionData, filteredQuestions));
+        button.addEventListener('click', () => checkAnswer(option, questionData));
         optionsDiv.appendChild(button);
     });
 
@@ -182,20 +162,19 @@ function displayQuestion(filteredQuestions) {
     document.getElementById('nextButton').disabled = currentQuestionIndex === filteredQuestions.length - 1;
 }
 
-function checkAnswer(selectedOption, questionData, filteredQuestions) {
+function checkAnswer(selectedOption, questionData) {
     const isCorrect = selectedOption.trim() === questionData.correctAnswer.trim();
     const feedback = document.getElementById('feedback');
     feedback.textContent = isCorrect ? `Correct! ${questionData.explanation}` : `Incorrect. ${questionData.explanation}`;
 
-    if (!isCorrect && !userProgress.missedQuestions.includes(questionData.question)) {
-        userProgress.missedQuestions.push(questionData.question);
-    }
+    if (!isCorrect) missedQuestions.push(questionData);
 
-    if (!userProgress.completedQuestions.includes(questionData.question)) {
-        userProgress.completedQuestions.push(questionData.question);
-    }
-
-    saveProgress();
+    // Add to sessionAnswers for Review Mode
+    sessionAnswers.push({
+        ...questionData,
+        userAnswer: selectedOption,
+        isCorrect
+    });
 }
 
 function prevQuestion(filteredQuestions) {
@@ -214,10 +193,9 @@ function nextQuestion(filteredQuestions) {
 
 // Practice Mistakes Mode
 function showMissedQuestions() {
-    const missed = questions.filter(q => userProgress.missedQuestions.includes(q.question));
-    if (missed.length > 0) {
+    if (missedQuestions.length > 0) {
         currentQuestionIndex = 0;
-        displayQuestion(shuffleArray(missed));
+        displayQuestion(shuffleArray(missedQuestions));
     } else {
         document.getElementById('screen').innerHTML = `<p>No missed questions to review!</p>`;
     }
