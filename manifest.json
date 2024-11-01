@@ -1,6 +1,6 @@
 {
-  "name": "Quiz App",
-  "short_name": "Quiz",
+  "name": "CAPM Quiz App",
+  "short_name": "CAPM Quiz",
   "description": "A fun and interactive quiz application.",
   "start_url": "./index.html",
   "display": "standalone",
