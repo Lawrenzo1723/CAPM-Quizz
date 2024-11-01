@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     loadQuestions();
+    loadProgress();
     showHomeScreen();
 
     // Navigation Buttons
@@ -82,6 +83,18 @@ async function loadQuestions() {
     } catch (error) {
         console.error("Error loading questions:", error);
     }
+}
+
+// Save progress to localStorage
+function saveProgress() {
+    localStorage.setItem('missedQuestions', JSON.stringify(missedQuestions));
+    localStorage.setItem('sessionAnswers', JSON.stringify(sessionAnswers));
+}
+
+// Load progress from localStorage
+function loadProgress() {
+    missedQuestions = JSON.parse(localStorage.getItem('missedQuestions') || '[]');
+    sessionAnswers = JSON.parse(localStorage.getItem('sessionAnswers') || '[]');
 }
 
 function showHomeScreen() {
@@ -175,6 +188,9 @@ function checkAnswer(selectedOption, questionData) {
         userAnswer: selectedOption,
         isCorrect
     });
+
+    // Save progress after each answer
+    saveProgress();
 }
 
 function prevQuestion(filteredQuestions) {
