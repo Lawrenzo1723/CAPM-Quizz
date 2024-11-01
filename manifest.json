@@ -1,0 +1,21 @@
+{
+  "name": "Quiz App",
+  "short_name": "Quiz",
+  "description": "A fun and interactive quiz application.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/Lawrenzo1723/CAPM-Quizz/024a8749126f8e1e54a270aa11128e6eb7cfdc04/capm%20quizz%20logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/Lawrenzo1723/CAPM-Quizz/024a8749126f8e1e54a270aa11128e6eb7cfdc04/capm%20quizz%20logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
