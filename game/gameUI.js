@@ -1,6 +1,3 @@
-import { checkAnswer } from './gameLogic.js';
-import { playBackgroundMusic } from './gameSounds.js';
-
 document.addEventListener('DOMContentLoaded', () => {
     playBackgroundMusic();  // Start background music when game loads
     startBombAnimation();   // Initialize bomb animations
@@ -14,10 +11,9 @@ document.querySelectorAll('.bomb').forEach(bomb => {
     });
 });
 
-// Function to handle bomb animations
-export function startBombAnimation() {
+function startBombAnimation() {
     document.querySelectorAll('.bomb').forEach(bomb => {
-        bomb.style.animationDuration = `${speed / 1000}s`;  // Adjust speed based on game speed
-        bomb.classList.add('bomb-animation');  // Add animation class to bombs
+        bomb.style.animationDuration = `${speed / 1000}s`;
+        bomb.classList.add('bomb-animation');
     });
 }
