@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz App</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="game/gameStyles.css">
     
     <!-- Web App Manifest -->
     <link rel="manifest" href="manifest.json">
@@ -13,7 +14,22 @@
     <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Lawrenzo1723/CAPM-Quizz/024a8749126f8e1e54a270aa11128e6eb7cfdc04/capm%20quizz%20logo.png">
 </head>
 <body>
-    <div id="screen"></div> <!-- Main Content Area -->
+    <div id="screen">
+        <!-- Main Content Area -->
+        <div id="game-container">
+            <!-- Question Display -->
+            <p id="question-text"></p>
+            
+            <!-- Bombs as answer options -->
+            <div id="bombs">
+                <img id="bomb-a" class="bomb" src="game/assets/images/Bomb_A.png" alt="Bomb A">
+                <img id="bomb-b" class="bomb" src="game/assets/images/Bomb_B.png" alt="Bomb B">
+                <img id="bomb-c" class="bomb" src="game/assets/images/Bomb_C.png" alt="Bomb C">
+                <img id="bomb-d" class="bomb" src="game/assets/images/Bomb_D.png" alt="Bomb D">
+            </div>
+        </div>
+    </div>
+
     <div id="footer">
         <!-- Footer Navigation Buttons -->
         <button id="homeButton">Home</button>
@@ -22,6 +38,13 @@
         <button id="flashcardButton">Flashcards</button>
         <button id="randomQuizButton">Random Quiz</button>
     </div>
+
+    <!-- Main App Script -->
     <script src="script.js"></script>
+
+    <!-- Game Scripts -->
+    <script src="game/gameLogic.js"></script>
+    <script src="game/gameUI.js"></script>
+    <script src="game/gameSounds.js"></script>
 </body>
 </html>
