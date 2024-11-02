@@ -26,10 +26,9 @@ function loadQuestion() {
     document.getElementById('bomb-d').dataset.answer = question.options[3];
 }
 
-export function checkAnswer(selectedAnswer) {
+function checkAnswer(selectedAnswer) {
     const question = questions[currentQuestionIndex];
     if (selectedAnswer === question.correctAnswer) {
-        // Play correct answer sound and load the next question
         playCorrectSound();
         currentQuestionIndex++;
         
@@ -54,3 +53,6 @@ function resetGame() {
 
 // Initialize game by loading questions from the JSON file
 loadQuestions();
+
+// Attach functions to window for global access
+window.checkAnswer = checkAnswer;
