@@ -16,7 +16,12 @@
 <body>
     <div id="screen">
         <!-- Main Content Area -->
-        <div id="game-container">
+        
+        <!-- Play Game Button -->
+        <button id="playGameButton">Play Quiz Game</button>
+        
+        <!-- Game Container (initially hidden) -->
+        <div id="game-container" style="display: none;">
             <!-- Question Display -->
             <p id="question-text"></p>
             
@@ -46,5 +51,18 @@
     <script src="game/gameLogic.js"></script>
     <script src="game/gameUI.js"></script>
     <script src="game/gameSounds.js"></script>
+
+    <script>
+        // Add event listener for the Play Game Button
+        document.getElementById("playGameButton").addEventListener("click", () => {
+            // Hide the main content area and show the game container
+            document.getElementById("screen").style.display = "none";
+            document.getElementById("game-container").style.display = "block";
+
+            // Start the game by loading questions and animations
+            loadQuestions();
+            startBombAnimation();
+        });
+    </script>
 </body>
 </html>
