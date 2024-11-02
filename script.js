@@ -9,14 +9,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const reviewButton = document.getElementById('reviewButton');
     const flashcardButton = document.getElementById('flashcardButton');
     const randomQuizButton = document.getElementById('randomQuizButton');
-    const playGameButton = document.getElementById('playGameButton');  // New Play Game button
 
     homeButton.addEventListener('click', showHomeScreen);
     practiceButton.addEventListener('click', showMissedQuestions);
     reviewButton.addEventListener('click', showReviewMode);
     flashcardButton.addEventListener('click', showFlashcardMode);
     randomQuizButton.addEventListener('click', showRandomQuiz);
-    playGameButton.addEventListener('click', startInteractiveGame);  // Event listener for the new game
 });
 
 let questions = [];
@@ -55,38 +53,6 @@ const domainStructure = {
         "Validating Requirements through Product Delivery"
     ]
 };
-
-// New function to start the interactive bomb game
-function startInteractiveGame() {
-    // Hide the main content and show the game container
-    document.getElementById("screen").style.display = "none";
-    document.getElementById("game-container").style.display = "block";
-    document.getElementById("footer").style.display = "none";  // Hide footer during the game
-
-    // Start the game-specific loading and animation
-    loadQuestions();  // This loads questions for the interactive game
-    startBombAnimation();  // This initiates bomb animations in the game
-}
-
-// Show the home screen and restore visibility for main content and footer
-function showHomeScreen() {
-    const screen = document.getElementById('screen');
-    if (!screen) {
-        console.error("Element with ID 'screen' not found.");
-        return;
-    }
-
-    screen.innerHTML = `<h2>Select a Domain</h2>
-        ${Object.keys(domainStructure).map(domain => `<button class="domain-btn">${domain}</button>`).join('')}`;
-    document.querySelectorAll('.domain-btn').forEach((btn, index) => {
-        btn.addEventListener('click', () => showSubdomains(Object.keys(domainStructure)[index]));
-    });
-    
-    // Show main content and hide game container
-    document.getElementById("screen").style.display = "block";
-    document.getElementById("game-container").style.display = "none";
-    document.getElementById("footer").style.display = "flex";  // Restore footer visibility
-}
 
 // Helper function to shuffle an array
 function shuffleArray(array) {
@@ -131,6 +97,16 @@ function loadProgress() {
     sessionAnswers = JSON.parse(localStorage.getItem('sessionAnswers') || '[]');
 }
 
+function showHomeScreen() {
+    const screen = document.getElementById('screen');
+    screen.innerHTML = `<h2>Select a Domain</h2>
+        ${Object.keys(domainStructure).map(domain => `<button class="domain-btn">${domain}</button>`).join('')}`;
+    document.querySelectorAll('.domain-btn').forEach((btn, index) => {
+        btn.addEventListener('click', () => showSubdomains(Object.keys(domainStructure)[index]));
+    });
+    document.getElementById('footer').style.display = 'flex';
+}
+
 function showSubdomains(domain) {
     currentDomain = domain;
     const screen = document.getElementById('screen');
@@ -147,5 +123,181 @@ function showSubdomains(domain) {
     document.getElementById('footer').style.display = 'flex';
 }
 
-// Further content for the other quiz functionalities here...
-// I've left the rest of the quiz mode functions unchanged for clarity.
+function showQuestions(subdomain) {
+    currentSubdomain = subdomain;
+    currentQuestionIndex = 0;
+
+    // Filter and shuffle questions based on current domain and subdomain
+    const filteredQuestions = shuffleArray(
+        questions.filter(q => q.domain === currentDomain && q.subdomain === currentSubdomain)
+    );
+
+    if (filteredQuestions.length > 0) {
+        displayQuestion(filteredQuestions);
+    } else {
+        document.getElementById('screen').innerHTML = `<p>No questions available for this subdomain.</p>`;
+    }
+}
+
+function displayQuestion(filteredQuestions) {
+    const screen = document.getElementById('screen');
+    const questionData = filteredQuestions[currentQuestionIndex];
+
+    if (!questionData) {
+        screen.innerHTML = `<p>Question data not found.</p>`;
+        return;
+    }
+
+    screen.innerHTML = `
+        <p>Question ${currentQuestionIndex + 1} of ${filteredQuestions.length}</p>
+        <p>${questionData.question}</p>
+        <div id="options"></div>
+        <p id="feedback"></p>
+        <div id="navigation">
+            <button id="prevButton">Previous</button>
+            <button id="nextButton">Next</button>
+        </div>
+    `;
+
+    const optionsDiv = document.getElementById('options');
+    questionData.options.forEach(option => {
+        const button = document.createElement('button');
+        button.textContent = option;
+        button.classList.add('option-btn');
+        button.addEventListener('click', () => checkAnswer(option, questionData));
+        optionsDiv.appendChild(button);
+    });
+
+    document.getElementById('prevButton').addEventListener('click', () => prevQuestion(filteredQuestions));
+    document.getElementById('nextButton').addEventListener('click', () => nextQuestion(filteredQuestions));
+
+    document.getElementById('prevButton').disabled = currentQuestionIndex === 0;
+    document.getElementById('nextButton').disabled = currentQuestionIndex === filteredQuestions.length - 1;
+}
+
+function checkAnswer(selectedOption, questionData) {
+    const isCorrect = selectedOption.trim() === questionData.correctAnswer.trim();
+    const feedback = document.getElementById('feedback');
+    feedback.textContent = isCorrect ? `Correct! ${questionData.explanation}` : `Incorrect. ${questionData.explanation}`;
+
+    if (!isCorrect) missedQuestions.push(questionData);
+
+    // Add to sessionAnswers for Review Mode
+    sessionAnswers.push({
+        ...questionData,
+        userAnswer: selectedOption,
+        isCorrect
+    });
+
+    // Save progress after each answer
+    saveProgress();
+}
+
+function prevQuestion(filteredQuestions) {
+    if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        displayQuestion(filteredQuestions);
+    }
+}
+
+function nextQuestion(filteredQuestions) {
+    if (currentQuestionIndex < filteredQuestions.length - 1) {
+        currentQuestionIndex++;
+        displayQuestion(filteredQuestions);
+    }
+}
+
+// Practice Mistakes Mode
+function showMissedQuestions() {
+    if (missedQuestions.length > 0) {
+        currentQuestionIndex = 0;
+        displayQuestion(shuffleArray(missedQuestions));
+    } else {
+        document.getElementById('screen').innerHTML = `<p>No missed questions to review!</p>`;
+    }
+}
+
+// Review Mode
+function showReviewMode() {
+    if (sessionAnswers.length > 0) {
+        currentQuestionIndex = 0;
+        displayReviewQuestion();
+    } else {
+        document.getElementById('screen').innerHTML = `<p>No session data to review!</p>`;
+    }
+}
+
+function displayReviewQuestion() {
+    const screen = document.getElementById('screen');
+    const questionData = sessionAnswers[currentQuestionIndex];
+
+    screen.innerHTML = `
+        <p>Question ${currentQuestionIndex + 1} of ${sessionAnswers.length}</p>
+        <p>${questionData.question}</p>
+        <p>Your Answer: ${questionData.userAnswer} - ${questionData.isCorrect ? "Correct" : "Incorrect"}</p>
+        <p>Explanation: ${questionData.explanation}</p>
+        <div id="navigation">
+            <button id="prevButton">Previous</button>
+            <button id="nextButton">Next</button>
+        </div>
+    `;
+    
+    document.getElementById('prevButton').addEventListener('click', () => {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            displayReviewQuestion();
+        }
+    });
+    document.getElementById('nextButton').addEventListener('click', () => {
+        if (currentQuestionIndex < sessionAnswers.length - 1) {
+            currentQuestionIndex++;
+            displayReviewQuestion();
+        }
+    });
+}
+
+// Flashcard Mode
+function showFlashcardMode() {
+    currentQuestionIndex = 0;
+    displayFlashcard(shuffleArray([...questions]));
+}
+
+function displayFlashcard(shuffledQuestions) {
+    const screen = document.getElementById('screen');
+    const questionData = shuffledQuestions[currentQuestionIndex];
+
+    screen.innerHTML = `
+        <div id="flashcard">
+            <p>Question: ${questionData.question}</p>
+            <button id="revealAnswer">Reveal Answer</button>
+            <p id="answer" style="display:none;">Answer: ${questionData.correctAnswer}<br>Explanation: ${questionData.explanation}</p>
+            <div id="navigation">
+                <button id="prevFlashcard">Previous</button>
+                <button id="nextFlashcard">Next</button>
+            </div>
+        </div>
+    `;
+    document.getElementById('revealAnswer').addEventListener('click', () => {
+        document.getElementById('answer').style.display = 'block';
+    });
+
+    document.getElementById('prevFlashcard').addEventListener('click', () => {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            displayFlashcard(shuffledQuestions);
+        }
+    });
+    document.getElementById('nextFlashcard').addEventListener('click', () => {
+        if (currentQuestionIndex < shuffledQuestions.length - 1) {
+            currentQuestionIndex++;
+            displayFlashcard(shuffledQuestions);
+        }
+    });
+}
+
+// Random Quiz Mode
+function showRandomQuiz() {
+    const shuffledQuestions = shuffleArray([...questions]);
+    currentQuestionIndex = 0;
+    displayQuestion(shuffledQuestions);
+}
