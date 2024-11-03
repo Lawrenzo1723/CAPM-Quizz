@@ -6,48 +6,26 @@
     <title>Quiz App</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="game/gameStyles.css">
-    
-    <!-- Web App Manifest -->
-    <link rel="manifest" href="manifest.json">
-
-    <!-- Apple Touch Icon for iOS -->
-    <link rel="apple-touch-icon" href="game/capm%20quizz%20logo.png">
 </head>
 <body>
     <div id="screen">
-        <!-- Main Content Area -->
-
-        <!-- Play Game Button -->
-        <button id="playGameButton">Play Quiz Game</button>
-        
-        <!-- Game Container (initially hidden) -->
-        <div id="game-container" style="display: none;">
-            <!-- Question Display -->
-            <p id="question-text"></p>
-            
-            <!-- Bombs as answer options -->
-            <div id="bombs">
-                <img id="bomb-a" class="bomb" src="game/assets/images/Bomb_A.png" alt="Bomb A">
-                <img id="bomb-b" class="bomb" src="game/assets/images/Bomb_B.png" alt="Bomb B">
-                <img id="bomb-c" class="bomb" src="game/assets/images/Bomb_C.png" alt="Bomb C">
-                <img id="bomb-d" class="bomb" src="game/assets/images/Bomb_D.png" alt="Bomb D">
-            </div>
-        </div>
+        <!-- Quiz or game content will go here -->
     </div>
 
     <div id="footer">
-        <!-- Footer Navigation Buttons -->
+        <!-- Footer navigation buttons -->
         <button id="homeButton">Home</button>
         <button id="practiceButton">Practice Mistakes</button>
         <button id="reviewButton">Review Mode</button>
         <button id="flashcardButton">Flashcards</button>
         <button id="randomQuizButton">Random Quiz</button>
+        <button id="playGameButton">Play Quiz Game</button> <!-- Added for the game mode -->
     </div>
 
-    <!-- Main App Script -->
+    <!-- Main app script -->
     <script src="script.js"></script>
 
-    <!-- Game Scripts -->
+    <!-- Game mode scripts -->
     <script src="game/gameLogic.js"></script>
     <script src="game/gameUI.js"></script>
     <script src="game/gameSounds.js"></script>
