@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const reviewButton = document.getElementById('reviewButton');
     const flashcardButton = document.getElementById('flashcardButton');
     const randomQuizButton = document.getElementById('randomQuizButton');
-    const playGameButton = document.getElementById('playGameButton'); // New Play Game button
+    const playGameButton = document.getElementById('playGameButton'); // Play Game button
 
     homeButton.addEventListener('click', showHomeScreen);
     practiceButton.addEventListener('click', showMissedQuestions);
@@ -121,5 +121,10 @@ async function loadQuestions() {
     }
 }
 
-// Rest of the code remains unchanged, with functions such as displayQuestion, showSubdomains, showQuestions, etc., handling various quiz functionalities.
-// I've left these unchanged as they were already provided and functional.
+// Function to load progress (define this if it’s missing)
+function loadProgress() {
+    missedQuestions = JSON.parse(localStorage.getItem('missedQuestions') || '[]');
+    sessionAnswers = JSON.parse(localStorage.getItem('sessionAnswers') || '[]');
+}
+
+// Other quiz-related functions like displayQuestion, showSubdomains, and showQuestions are left unchanged
