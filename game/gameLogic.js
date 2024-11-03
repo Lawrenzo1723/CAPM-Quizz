@@ -1,58 +1,28 @@
-let currentQuestionIndex = 0;
-let speed = 2000;  // Starting speed in milliseconds
-let questions = [];
-
-// Fetch questions from the JSON file on GitHub
-async function loadQuestions() {
-    try {
-        const response = await fetch('https://raw.githubusercontent.com/Lawrenzo1723/CAPM-Quizz/22490a63a18f2916d07f121220dfa1bc8449662a/question%20in%20Json.json');
-        questions = await response.json();
-        loadQuestion();  // Start with the first question after loading
-    } catch (error) {
-        console.error("Failed to load questions:", error);
-    }
+// Load questions specifically for game mode
+function loadGameQuestions() {
+    // Assuming questions are loaded from the same source, but could be game-specific
+    console.log("Loading questions for game mode...");
 }
 
-function loadQuestion() {
-    if (questions.length === 0) return;
-    
-    const question = questions[currentQuestionIndex];
-    document.getElementById('question-text').innerText = question.text;
-    
-    // Display answer options on the bombs
-    document.getElementById('bomb-a').dataset.answer = question.options[0];
-    document.getElementById('bomb-b').dataset.answer = question.options[1];
-    document.getElementById('bomb-c').dataset.answer = question.options[2];
-    document.getElementById('bomb-d').dataset.answer = question.options[3];
-}
-
-function checkAnswer(selectedAnswer) {
-    const question = questions[currentQuestionIndex];
-    if (selectedAnswer === question.correctAnswer) {
-        playCorrectSound();
-        currentQuestionIndex++;
-        
-        if (currentQuestionIndex < questions.length) {
-            speed = Math.max(speed - 100, 500);  // Increase game speed
-            loadQuestion();
-        } else {
-            alert('You completed the quiz!');
-        }
+// Verify the answer and handle game-specific logic
+function verifyAnswer(selectedAnswer, correctAnswer) {
+    if (selectedAnswer === correctAnswer) {
+        playCorrectAnswerSound();
+        updateGameScore();
     } else {
         playExplosionSound();
-        alert('Incorrect! Game Over.');
-        resetGame();
+        // Additional logic for incorrect answer
     }
 }
 
-function resetGame() {
-    currentQuestionIndex = 0;
-    speed = 2000;
-    loadQuestion();
+// Increase the speed as game progresses
+function increaseGameSpeed() {
+    // Implement speed increase logic here
 }
 
-// Initialize game by loading questions from the JSON file
-loadQuestions();
+function updateGameScore() {
+    // Implement score update logic here
+}
 
-// Attach functions to window for global access
-window.checkAnswer = checkAnswer;
+// Export functions to be used by game UI or main script
+export { loadGameQuestions, verifyAnswer, increaseGameSpeed, updateGameScore };
