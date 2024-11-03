@@ -1,21 +1,19 @@
-const backgroundMusic = new Audio('./assets/sounds/Sound_GameMusic.wav');
-const explosionSound = new Audio('./assets/sounds/Sound_Explosion.wav');
-const correctSound = new Audio('./assets/sounds/Sound_Correct_Answer.wav');
+const backgroundMusic = new Audio('game/assets/sounds/Sound_GameMusic.wav');
+const explosionSound = new Audio('game/assets/sounds/Sound_Explosion.wav');
+const correctSound = new Audio('game/assets/sounds/Sound_Correct_Answer.wav');
 
 function playBackgroundMusic() {
     backgroundMusic.loop = true;
-    backgroundMusic.play();
+    backgroundMusic.play().catch(error => console.log("Background music play failed due to autoplay policy"));
 }
 
 function playExplosionSound() {
     explosionSound.play();
 }
 
-function playCorrectSound() {
+function playCorrectAnswerSound() {
     correctSound.play();
 }
 
-// Attach functions to window for global access
-window.playBackgroundMusic = playBackgroundMusic;
-window.playExplosionSound = playExplosionSound;
-window.playCorrectSound = playCorrectSound;
+// Export sound functions
+export { playBackgroundMusic, playExplosionSound, playCorrectAnswerSound };
