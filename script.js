@@ -54,68 +54,30 @@ const domainStructure = {
     ]
 };
 
-// Helper function to shuffle an array
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-}
-
-// Load questions from JSON
-async function loadQuestions() {
-    try {
-        const response = await fetch('https://raw.githubusercontent.com/Lawrenzo1723/CAPM-Quizz/refs/heads/main/question%20in%20Json.json');
-        const data = await response.json();
-
-        // Process the JSON data directly
-        questions = data.map(row => ({
-            question: row["Question"],
-            options: [row["Option A"], row["Option B"], row["Option C"], row["Option D"]],
-            correctAnswer: row["Correct Answer"].trim(),
-            explanation: row["Explanation"],
-            domain: row["Domain"].trim(),
-            subdomain: row["Subdomain"].trim()
-        }));
-
-        console.log("Questions Loaded:", questions);
-    } catch (error) {
-        console.error("Error loading questions:", error);
-    }
-}
-
-// Save progress to localStorage
-function saveProgress() {
-    localStorage.setItem('missedQuestions', JSON.stringify(missedQuestions));
-    localStorage.setItem('sessionAnswers', JSON.stringify(sessionAnswers));
-}
-
-// Load progress from localStorage
-function loadProgress() {
-    missedQuestions = JSON.parse(localStorage.getItem('missedQuestions') || '[]');
-    sessionAnswers = JSON.parse(localStorage.getItem('sessionAnswers') || '[]');
-}
-
-// Display home screen with domains and Game Mode button
+// Function to display the home screen with domains and Game Mode button
 function showHomeScreen() {
     const screen = document.getElementById('screen');
     screen.innerHTML = `<h2>Select a Domain</h2>
         ${Object.keys(domainStructure).map(domain => `<button class="domain-btn">${domain}</button>`).join('')}
         <button id="gameModeButton" class="domain-btn">Game Mode</button> <!-- New Game Mode button -->
     `;
-
+    
     // Add event listeners for domain buttons
     document.querySelectorAll('.domain-btn').forEach((btn, index) => {
         if (btn.id !== "gameModeButton") { // Only add listener to domain buttons, not Game Mode button
             btn.addEventListener('click', () => showSubdomains(Object.keys(domainStructure)[index]));
         }
     });
-
+    
     // Add event listener for the Game Mode button
     document.getElementById('gameModeButton').addEventListener('click', showGameMode);
-
+    
     document.getElementById('footer').style.display = 'flex';
+}
+
+// Function to navigate to the Game Mode page on GitHub Pages
+function showGameMode() {
+    window.location.href = 'https://lawrenzo1723.github.io/CAPM-Quizz/game/index.html';
 }
 
 // Display subdomains for the selected domain
@@ -319,9 +281,23 @@ function showRandomQuiz() {
     displayQuestion(shuffledQuestions);
 }
 
-// Game Mode - Placeholder for actual functionality
-function showGameMode() {
-    const screen = document.getElementById('screen');
-    screen.innerHTML = `<h2>Game Mode</h2><p>Welcome to Game Mode! Here’s where you can play...</p>`;
-    // Add more logic here to define the actual game mode functionality.
+// Helper function to shuffle an array
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+// Save progress to localStorage
+function saveProgress() {
+    localStorage.setItem('missedQuestions', JSON.stringify(missedQuestions));
+    localStorage.setItem('sessionAnswers', JSON.stringify(sessionAnswers));
+}
+
+// Load progress from localStorage
+function loadProgress() {
+    missedQuestions = JSON.parse(localStorage.getItem('missedQuestions') || '[]');
+    sessionAnswers = JSON.parse(localStorage.getItem('sessionAnswers') || '[]');
 }
