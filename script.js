@@ -97,16 +97,28 @@ function loadProgress() {
     sessionAnswers = JSON.parse(localStorage.getItem('sessionAnswers') || '[]');
 }
 
+// Display home screen with domains and Game Mode button
 function showHomeScreen() {
     const screen = document.getElementById('screen');
     screen.innerHTML = `<h2>Select a Domain</h2>
-        ${Object.keys(domainStructure).map(domain => `<button class="domain-btn">${domain}</button>`).join('')}`;
+        ${Object.keys(domainStructure).map(domain => `<button class="domain-btn">${domain}</button>`).join('')}
+        <button id="gameModeButton" class="domain-btn">Game Mode</button> <!-- New Game Mode button -->
+    `;
+
+    // Add event listeners for domain buttons
     document.querySelectorAll('.domain-btn').forEach((btn, index) => {
-        btn.addEventListener('click', () => showSubdomains(Object.keys(domainStructure)[index]));
+        if (btn.id !== "gameModeButton") { // Only add listener to domain buttons, not Game Mode button
+            btn.addEventListener('click', () => showSubdomains(Object.keys(domainStructure)[index]));
+        }
     });
+
+    // Add event listener for the Game Mode button
+    document.getElementById('gameModeButton').addEventListener('click', showGameMode);
+
     document.getElementById('footer').style.display = 'flex';
 }
 
+// Display subdomains for the selected domain
 function showSubdomains(domain) {
     currentDomain = domain;
     const screen = document.getElementById('screen');
@@ -123,6 +135,7 @@ function showSubdomains(domain) {
     document.getElementById('footer').style.display = 'flex';
 }
 
+// Display questions for the selected subdomain
 function showQuestions(subdomain) {
     currentSubdomain = subdomain;
     currentQuestionIndex = 0;
@@ -139,6 +152,7 @@ function showQuestions(subdomain) {
     }
 }
 
+// Display a question from the filtered questions
 function displayQuestion(filteredQuestions) {
     const screen = document.getElementById('screen');
     const questionData = filteredQuestions[currentQuestionIndex];
@@ -175,6 +189,7 @@ function displayQuestion(filteredQuestions) {
     document.getElementById('nextButton').disabled = currentQuestionIndex === filteredQuestions.length - 1;
 }
 
+// Check if the answer is correct
 function checkAnswer(selectedOption, questionData) {
     const isCorrect = selectedOption.trim() === questionData.correctAnswer.trim();
     const feedback = document.getElementById('feedback');
@@ -193,6 +208,7 @@ function checkAnswer(selectedOption, questionData) {
     saveProgress();
 }
 
+// Show the previous question
 function prevQuestion(filteredQuestions) {
     if (currentQuestionIndex > 0) {
         currentQuestionIndex--;
@@ -200,6 +216,7 @@ function prevQuestion(filteredQuestions) {
     }
 }
 
+// Show the next question
 function nextQuestion(filteredQuestions) {
     if (currentQuestionIndex < filteredQuestions.length - 1) {
         currentQuestionIndex++;
@@ -300,4 +317,11 @@ function showRandomQuiz() {
     const shuffledQuestions = shuffleArray([...questions]);
     currentQuestionIndex = 0;
     displayQuestion(shuffledQuestions);
+}
+
+// Game Mode - Placeholder for actual functionality
+function showGameMode() {
+    const screen = document.getElementById('screen');
+    screen.innerHTML = `<h2>Game Mode</h2><p>Welcome to Game Mode! Here’s where you can play...</p>`;
+    // Add more logic here to define the actual game mode functionality.
 }
