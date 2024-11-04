@@ -118,9 +118,9 @@ function showHomeScreen() {
     document.getElementById('footer').style.display = 'flex';
 }
 
-// Function to navigate to the Game Mode page on GitHub Pages
+// Function to navigate to the raw GitHub link for the game HTML file
 function showGameMode() {
-    window.location.href = 'https://lawrenzo1723.github.io/CAPM-Quizz/game/index.html';
+    window.location.href = 'https://raw.githubusercontent.com/Lawrenzo1723/CAPM-Quizz/4d11f495b3498945805c05b5e39a46df136adc1f/game/index.html';
 }
 
 // Display subdomains for the selected domain
