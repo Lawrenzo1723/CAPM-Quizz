@@ -5,29 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz App</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="game/gameStyles.css">
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Apple Touch Icon for iOS -->
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Lawrenzo1723/CAPM-Quizz/024a8749126f8e1e54a270aa11128e6eb7cfdc04/capm%20quizz%20logo.png">
 </head>
 <body>
-    <div id="screen">
-        <!-- Quiz or game content will go here -->
-    </div>
-
+    <div id="screen"></div> <!-- Main Content Area -->
     <div id="footer">
-        <!-- Footer navigation buttons -->
+        <!-- Footer Navigation Buttons -->
         <button id="homeButton">Home</button>
         <button id="practiceButton">Practice Mistakes</button>
         <button id="reviewButton">Review Mode</button>
         <button id="flashcardButton">Flashcards</button>
         <button id="randomQuizButton">Random Quiz</button>
-        <button id="playGameButton">Play Quiz Game</button> <!-- Added for the game mode -->
     </div>
-
-    <!-- Main app script -->
     <script src="script.js"></script>
-
-    <!-- Game mode scripts -->
-    <script src="game/gameLogic.js"></script>
-    <script src="game/gameUI.js"></script>
-    <script src="game/gameSounds.js"></script>
 </body>
 </html>
