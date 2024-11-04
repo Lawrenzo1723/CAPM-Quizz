@@ -54,24 +54,67 @@ const domainStructure = {
     ]
 };
 
-// Function to display the home screen with domains and Game Mode button
+// Helper function to shuffle an array
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+// Load questions from JSON
+async function loadQuestions() {
+    try {
+        const response = await fetch('https://raw.githubusercontent.com/Lawrenzo1723/CAPM-Quizz/refs/heads/main/question%20in%20Json.json');
+        const data = await response.json();
+
+        // Process the JSON data directly
+        questions = data.map(row => ({
+            question: row["Question"],
+            options: [row["Option A"], row["Option B"], row["Option C"], row["Option D"]],
+            correctAnswer: row["Correct Answer"].trim(),
+            explanation: row["Explanation"],
+            domain: row["Domain"].trim(),
+            subdomain: row["Subdomain"].trim()
+        }));
+
+        console.log("Questions Loaded:", questions);
+    } catch (error) {
+        console.error("Error loading questions:", error);
+    }
+}
+
+// Save progress to localStorage
+function saveProgress() {
+    localStorage.setItem('missedQuestions', JSON.stringify(missedQuestions));
+    localStorage.setItem('sessionAnswers', JSON.stringify(sessionAnswers));
+}
+
+// Load progress from localStorage
+function loadProgress() {
+    missedQuestions = JSON.parse(localStorage.getItem('missedQuestions') || '[]');
+    sessionAnswers = JSON.parse(localStorage.getItem('sessionAnswers') || '[]');
+}
+
+// Show the home screen with domains and Game Mode button
 function showHomeScreen() {
     const screen = document.getElementById('screen');
     screen.innerHTML = `<h2>Select a Domain</h2>
         ${Object.keys(domainStructure).map(domain => `<button class="domain-btn">${domain}</button>`).join('')}
         <button id="gameModeButton" class="domain-btn">Game Mode</button> <!-- New Game Mode button -->
     `;
-    
+
     // Add event listeners for domain buttons
     document.querySelectorAll('.domain-btn').forEach((btn, index) => {
         if (btn.id !== "gameModeButton") { // Only add listener to domain buttons, not Game Mode button
             btn.addEventListener('click', () => showSubdomains(Object.keys(domainStructure)[index]));
         }
     });
-    
+
     // Add event listener for the Game Mode button
     document.getElementById('gameModeButton').addEventListener('click', showGameMode);
-    
+
     document.getElementById('footer').style.display = 'flex';
 }
 
@@ -114,7 +157,6 @@ function showQuestions(subdomain) {
     }
 }
 
-// Display a question from the filtered questions
 function displayQuestion(filteredQuestions) {
     const screen = document.getElementById('screen');
     const questionData = filteredQuestions[currentQuestionIndex];
@@ -151,7 +193,6 @@ function displayQuestion(filteredQuestions) {
     document.getElementById('nextButton').disabled = currentQuestionIndex === filteredQuestions.length - 1;
 }
 
-// Check if the answer is correct
 function checkAnswer(selectedOption, questionData) {
     const isCorrect = selectedOption.trim() === questionData.correctAnswer.trim();
     const feedback = document.getElementById('feedback');
@@ -170,7 +211,6 @@ function checkAnswer(selectedOption, questionData) {
     saveProgress();
 }
 
-// Show the previous question
 function prevQuestion(filteredQuestions) {
     if (currentQuestionIndex > 0) {
         currentQuestionIndex--;
@@ -178,7 +218,6 @@ function prevQuestion(filteredQuestions) {
     }
 }
 
-// Show the next question
 function nextQuestion(filteredQuestions) {
     if (currentQuestionIndex < filteredQuestions.length - 1) {
         currentQuestionIndex++;
@@ -279,25 +318,4 @@ function showRandomQuiz() {
     const shuffledQuestions = shuffleArray([...questions]);
     currentQuestionIndex = 0;
     displayQuestion(shuffledQuestions);
-}
-
-// Helper function to shuffle an array
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-}
-
-// Save progress to localStorage
-function saveProgress() {
-    localStorage.setItem('missedQuestions', JSON.stringify(missedQuestions));
-    localStorage.setItem('sessionAnswers', JSON.stringify(sessionAnswers));
-}
-
-// Load progress from localStorage
-function loadProgress() {
-    missedQuestions = JSON.parse(localStorage.getItem('missedQuestions') || '[]');
-    sessionAnswers = JSON.parse(localStorage.getItem('sessionAnswers') || '[]');
 }
